@@ -1,0 +1,28 @@
+.input_search {
+  width: 100%;
+  background: url('https://api.iconify.design/uil/search.svg') no-repeat top 50%
+      left 1rem,
+    #f9f9f9;
+  /* border: 1px solid #63738120; */
+  padding-left: 2.5rem;
+  box-shadow: none;
+  @apply font-semibold;
+}
+
+@media (min-width: 640px) {
+  .input_search {
+    background: url('https://api.iconify.design/uil/search.svg') no-repeat top
+        50% left 2rem,
+      #f9f9f9;
+    padding-left: 3.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .input_search {
+    background: url('https://api.iconify.design/uil/search.svg') no-repeat top
+        50% left 2rem,
+      #f9f9f9;
+    padding-left: 4rem;
+  }
+}
