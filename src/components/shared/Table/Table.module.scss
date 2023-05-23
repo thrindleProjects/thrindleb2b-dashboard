@@ -1,0 +1,21 @@
+.container {
+  @apply relative w-full overflow-x-auto;
+}
+
+.table {
+  @apply min-w-full text-left text-sm;
+
+  &__header {
+    &_row {
+      @apply text-[#767778];
+    }
+
+    &_cell {
+      @apply whitespace-nowrap p-4;
+    }
+  }
+
+  &__cell {
+    @apply whitespace-nowrap p-4;
+  }
+}
