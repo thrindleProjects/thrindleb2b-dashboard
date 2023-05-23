@@ -57,3 +57,42 @@ export const dashboardData = [
     status: 'in-progress',
   },
 ];
+
+export const mockData = [
+  {
+    name: 'Critters Vet',
+    phone: '09015756788',
+    altPhone: '09015756788',
+    email: 'example@example.com',
+  },
+  {
+    name: 'Critters Vet',
+    phone: '09015756788',
+    altPhone: '09015756788',
+    email: 'example@example.com',
+  },
+  {
+    name: 'Critters Vet',
+    phone: '09015756788',
+    altPhone: '09015756788',
+    email: 'example@example.com',
+  },
+  {
+    name: 'Critters Vet',
+    phone: '09015756788',
+    altPhone: '09015756788',
+    email: 'example@example.com',
+  },
+  {
+    name: 'Critters Vet',
+    phone: '09015756788',
+    altPhone: '09015756788',
+    email: 'example@example.com',
+  },
+  {
+    name: 'Critters Vet',
+    phone: '09015756788',
+    altPhone: '09015756788',
+    email: 'example@example.com',
+  },
+];
