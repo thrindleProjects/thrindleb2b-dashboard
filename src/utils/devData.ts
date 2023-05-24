@@ -96,3 +96,38 @@ export const mockData = [
     email: 'example@example.com',
   },
 ];
+
+export const listData = [
+  {
+    id: 1,
+    name: 'Office Chairs',
+    desc: 'Lorem ipsum dolor sit amet consectetur. Viverra dictum sagittis turpis senectus.Proin tellus nibh',
+    date: 'Order Created 21st March 2023',
+    quantity: '500 Pieces',
+    status: 'Price Added',
+  },
+  {
+    id: 2,
+    name: 'Office Chairs',
+    desc: 'Lorem ipsum dolor sit amet consectetur. Viverra dictum sagittis turpis senectus.Proin tellus nibh',
+    date: 'Order Created 21st March 2023',
+    quantity: '500 Pieces',
+    status: 'Price Added',
+  },
+  {
+    id: 3,
+    name: 'Office Chairs',
+    desc: 'Lorem ipsum dolor sit amet consectetur. Viverra dictum sagittis turpis senectus.Proin tellus nibh',
+    date: 'Order Created 21st March 2023',
+    quantity: '500 Pieces',
+    status: 'Price Added',
+  },
+  {
+    id: 4,
+    name: 'Office Chairs',
+    desc: 'Lorem ipsum dolor sit amet consectetur. Viverra dictum sagittis turpis senectus.Proin tellus nibh',
+    date: 'Order Created 21st March 2023',
+    quantity: '500 Pieces',
+    status: 'Price Added',
+  },
+];

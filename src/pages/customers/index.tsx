@@ -1,8 +1,7 @@
 import { NextPage } from 'next';
 
+import CustomersLayout from '@/components/layout/pages-layout/customers/CustomersLayout';
 import PaddedContainer from '@/components/shared/PaddedContainer';
-
-import CustomersLayout from '@/pages-layout/customers/CustomersLayout';
 
 const Customers: NextPage = () => {
   return (
