@@ -131,3 +131,48 @@ export const listData = [
     status: 'Price Added',
   },
 ];
+
+export const profileTableData = [
+  {
+    name: 'Abayomi Tosin',
+    role: 'Admin 2',
+    email: 'abayomi.tosin2017@gmail.com',
+    phone: 'abayomi.tosin2017@gmail.com',
+  },
+  {
+    name: 'Abayomi Tosin',
+    role: 'Admin 2',
+    email: 'abayomi.tosin2017@gmail.com',
+    phone: 'abayomi.tosin2017@gmail.com',
+  },
+  {
+    name: 'Abayomi Tosin',
+    role: 'Admin 2',
+    email: 'abayomi.tosin2017@gmail.com',
+    phone: 'abayomi.tosin2017@gmail.com',
+  },
+  {
+    name: 'Abayomi Tosin',
+    role: 'Admin 2',
+    email: 'abayomi.tosin2017@gmail.com',
+    phone: 'abayomi.tosin2017@gmail.com',
+  },
+  {
+    name: 'Abayomi Tosin',
+    role: 'Admin 2',
+    email: 'abayomi.tosin2017@gmail.com',
+    phone: 'abayomi.tosin2017@gmail.com',
+  },
+  {
+    name: 'Abayomi Tosin',
+    role: 'Admin 2',
+    email: 'abayomi.tosin2017@gmail.com',
+    phone: 'abayomi.tosin2017@gmail.com',
+  },
+  {
+    name: 'Abayomi Tosin',
+    role: 'Admin 2',
+    email: 'abayomi.tosin2017@gmail.com',
+    phone: 'abayomi.tosin2017@gmail.com',
+  },
+];
