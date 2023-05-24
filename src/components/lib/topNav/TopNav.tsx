@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react';
+import Link from 'next/link';
 
 import InputSearch from '@/components/shared/InputSearch/InputSearch';
 
@@ -10,12 +11,14 @@ const TopNav: React.FC = () => {
       </div>
 
       <div className='flex flex-row items-center gap-4'>
-        <button
+        <Link
           className='text-primary-blue rounded-lg p-2 text-sm underline outline-none focus:ring xl:text-base'
           type='button'
+          href='https://dasboard-thrindle.netlify.app/login'
+          target='_blank'
         >
           Switch to thrindle.com
-        </button>
+        </Link>
         <button
           type='button'
           className='text-primary-black bg-primary-grey grid aspect-square w-12  place-items-center rounded-full text-sm outline-none focus:ring xl:text-base'
