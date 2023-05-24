@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 import Sidebar from '@/components/lib/sidebar';
-import TopNav from '@/components/lib/topNav/TopNav';
+import TopNav from '@/components/lib/topNav';
 
 type AuthenticatedLayoutType = React.FC<PropsWithChildren>;
 
