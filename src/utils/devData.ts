@@ -35,7 +35,7 @@ export const dashboardData = [
   {
     orderId: '#45465',
     company: 'Critters Vet',
-    item: 4,
+    item: 30,
     date: '23rd March',
     amount: 50000,
     status: 'pending',
@@ -43,7 +43,7 @@ export const dashboardData = [
   {
     orderId: '#45465',
     company: 'Critters Vet',
-    item: 4,
+    item: 19,
     date: '23rd March',
     amount: 50000,
     status: 'completed',
@@ -51,7 +51,7 @@ export const dashboardData = [
   {
     orderId: '#45465',
     company: 'Critters Vet',
-    item: 4,
+    item: 12,
     date: '23rd March',
     amount: 50000,
     status: 'in-progress',

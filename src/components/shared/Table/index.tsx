@@ -5,7 +5,7 @@ import styles from './Table.module.scss';
 const Table: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className={styles.container}>
-      <table className={`gfg ${styles.table}`}>{children}</table>
+      <table className={` ${styles.table}`}>{children}</table>
     </div>
   );
 };
