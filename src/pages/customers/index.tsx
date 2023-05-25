@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 
 import PaddedContainer from '@/components/shared/PaddedContainer';
 
-import CustomersLayout from '@/pages-layout/customers/CustomersLayout';
+import CustomersLayout from '@/layouts/customers/CustomersLayout';
 
 const Customers: NextPage = () => {
   return (

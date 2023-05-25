@@ -13,3 +13,5 @@ export const dashboardTableHeaderData = [
   'Amount',
   'Status',
 ];
+
+export const profileTab = ['General', 'Security', 'Users & Permission'];
