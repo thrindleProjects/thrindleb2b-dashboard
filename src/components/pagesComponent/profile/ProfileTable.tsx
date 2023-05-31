@@ -1,8 +1,10 @@
 import { Icon } from '@iconify/react';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 
 import Button from '@/components/buttons/Button';
+import AddUserForm from '@/components/lib/addUser/AddUser';
+import GenModal from '@/components/shared/modal/Modal';
 import Table from '@/components/shared/Table';
 import TableBody from '@/components/shared/Table/TableBody';
 import TableCell from '@/components/shared/Table/TableCell';
@@ -14,13 +16,20 @@ import { profileTableData } from '@/utils/devData';
 
 const ProfileTable = () => {
   const router = useRouter();
+  const [addUserModal, setAddUserModal] = useState(false);
+
+  const toggleModal = () => {
+    setAddUserModal((prev) => !prev);
+  };
   return (
     <WhiteCard className='mt-6 px-10  py-8'>
       <div className='mb-6 flex items-center justify-between'>
         <h6 className='font-clash-grotesk font-medium text-black/60 lg:text-xs xl:text-sm'>
           Users
         </h6>
-        <Button className='w-[153px]'>Add New User</Button>
+        <Button onClick={toggleModal} className='w-[153px]'>
+          Add New User
+        </Button>
       </div>
       <Table>
         <TableHeader
@@ -69,6 +78,9 @@ const ProfileTable = () => {
         </TableBody>
       </Table>
       <p className='mt-6 text-right'>Pagination</p>
+      <GenModal handleCloseModal={toggleModal} isOpen={addUserModal}>
+        <AddUserForm />
+      </GenModal>
     </WhiteCard>
   );
 };
