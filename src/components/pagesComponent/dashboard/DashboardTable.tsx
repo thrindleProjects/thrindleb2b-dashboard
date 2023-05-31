@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
+import useOrderStatusHook from '@/hooks/useStatusHook';
 
 import { TabContainer } from '@/components/shared/statusTab';
+import Table from '@/components/shared/Table';
+import TableBody from '@/components/shared/Table/TableBody';
+import TableCell from '@/components/shared/Table/TableCell';
+import TableHeader from '@/components/shared/Table/TableHeader';
+import TableRow from '@/components/shared/Table/TableRow';
 import { WhiteCard } from '@/components/shared/whiteCard';
 
 import { orderStatus } from '@/@types/appTypes';
@@ -13,6 +20,14 @@ const DashboardTable = () => {
   const changeTab = (val: orderStatus) => {
     setActiveTab(val);
   };
+
+  const colorPicker = (status: orderStatus) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return useOrderStatusHook({
+      orderStatus: status,
+    }).orderStyle.textColor;
+  };
+
   return (
     <section className='mt-10 w-full'>
       <WhiteCard>
@@ -30,33 +45,32 @@ const DashboardTable = () => {
           </div>
         </div>
         {/* Table */}
-        <div className='mt-10 w-full'>
-          <table className='w-full'>
-            <thead className='mb-20 w-full text-left'>
-              <tr>
-                {dashboardTableHeaderData.map((item, index) => (
-                  <td
-                    className='font-clash-grotesk text-left text-base font-medium text-black/60'
-                    key={index}
-                  >
-                    {item}
-                  </td>
-                ))}
-              </tr>
-            </thead>
-            <tbody className=' w-full text-left'>
+        <div className='mt-5 w-full'>
+          <Table>
+            <TableHeader items={dashboardTableHeaderData} />
+            <TableBody>
               {dashboardData.map((item, index) => (
-                <tr key={index} className='w-full py-10'>
-                  <td className='font-clash-grotesk text-sm font-medium text-black/60'>
-                    {item?.orderId}
-                  </td>
-                  <td className='font-clash-grotesk text-sm font-medium text-black/60'>
-                    {item?.orderId}
-                  </td>
-                </tr>
+                <TableRow key={index}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{item.orderId}</TableCell>
+                  <TableCell>{item.company}</TableCell>
+                  <TableCell>{item.item}</TableCell>
+                  <TableCell>{item.date}</TableCell>
+                  <TableCell>{item.amount}</TableCell>
+                  <TableCell>
+                    <p className={`${colorPicker(item.status as orderStatus)}`}>
+                      {
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
+                        useOrderStatusHook({
+                          orderStatus: item.status as orderStatus,
+                        }).orderStyle.text
+                      }
+                    </p>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       </WhiteCard>
     </section>

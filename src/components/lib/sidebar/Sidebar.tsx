@@ -48,7 +48,7 @@ type SidebarType = React.FC;
 
 const Sidebar: SidebarType = () => {
   return (
-    <aside className='bg-primary-blue col-span-1 col-start-1 flex h-full flex-col gap-20 pb-24 pt-8 text-white'>
+    <aside className='bg-primary-blue no-scrollbar col-span-1 col-start-1 flex h-full flex-col gap-20 overflow-y-auto pb-24 pt-8 text-white'>
       <div className='px-6'>
         <ThrindleLogo variant='white' />
       </div>

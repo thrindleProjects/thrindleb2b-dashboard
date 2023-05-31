@@ -102,3 +102,13 @@ body,
   @apply col-span-1 col-start-2 h-full w-full;
   @apply grid grid-cols-1 grid-rows-[auto_1fr];
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for WebKit-based browsers */
+}
+
+.no-scrollbar {
+  overflow: -moz-scrollbars-none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for Edge and IE */
+  scrollbar-width: none; /* Hide scrollbar for non-WebKit-based browsers */
+}
