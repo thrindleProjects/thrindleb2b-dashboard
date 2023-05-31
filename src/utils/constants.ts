@@ -17,3 +17,8 @@ export const CONFIRM_PASSWORD = 'confirmPassword';
 export const GENERAL = 'General';
 export const SECURITY = 'Security';
 export const USERS = 'Users & Permission';
+
+export const FULLNAME = 'fullName';
+export const EMAIL_ADDRESS = 'emailAddress';
+export const PHONE_NUMBER = 'phoneNumber';
+export const ROLE = 'role';
