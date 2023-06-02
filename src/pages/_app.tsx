@@ -2,12 +2,14 @@ import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { ReactElement, ReactNode } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 import '@/styles/globals.css';
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 import '@/styles/colors.css';
 
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
+import { toastOptions } from '@/utils/toastConfig';
 
 /**
  * !STARTERCONF info
@@ -31,7 +33,12 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout =
     Component.getLayout ??
     ((page) => <AuthenticatedLayout>{page}</AuthenticatedLayout>);
-  return <>{getLayout(<Component {...pageProps} key={router.pathname} />)}</>;
+  return (
+    <>
+      {getLayout(<Component {...pageProps} key={router.pathname} />)}{' '}
+      <Toaster position='top-right' toastOptions={toastOptions} />
+    </>
+  );
 }
 
 export default MyApp;

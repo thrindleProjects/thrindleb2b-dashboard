@@ -5,6 +5,7 @@ export const orderStatues = [
   { status: 'Completed', slug: 'completed' },
 ];
 export const dashboardTableHeaderData = [
+  '#',
   'Order Id',
   'Customer Name',
   'Items',
