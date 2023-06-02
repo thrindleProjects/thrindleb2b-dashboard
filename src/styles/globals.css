@@ -112,3 +112,30 @@ body,
   -ms-overflow-style: none; /* Hide scrollbar for Edge and IE */
   scrollbar-width: none; /* Hide scrollbar for non-WebKit-based browsers */
 }
+
+.blue-gradient {
+  background: linear-gradient(
+      0deg,
+      rgba(6, 93, 167, 0.08),
+      rgba(6, 93, 167, 0.08)
+    ),
+    #ffffff;
+}
+
+.green-gradient {
+  background: linear-gradient(
+      0deg,
+      rgba(16, 203, 12, 0.09),
+      rgba(16, 203, 12, 0.09)
+    ),
+    #ffffff;
+}
+
+.yellow-gradient {
+  background: linear-gradient(
+      0deg,
+      rgba(254, 162, 24, 0.08),
+      rgba(254, 162, 24, 0.08)
+    ),
+    #ffffff;
+}

@@ -8,7 +8,7 @@ export const MainInput = styled.input<{
 }>`
   border-color: transparent;
   border-radius: 8px;
-  background-color: ${(props: { error: any }) =>
+  background-color: ${(props) =>
     props.error ? 'rgba(252, 165, 165, 0.1)' : '#F9F9F9'};
   box-shadow: none;
   &:focus {
@@ -24,7 +24,7 @@ export const MainInput = styled.input<{
       -moz-appearance: none;
       position: relative;
     `}
-  ${(props: { error: any; value: string | any[] }) =>
+  ${(props) =>
     (props.error ||
       !props.value ||
       (props.value &&
@@ -46,7 +46,7 @@ export const PasswordInput = styled.div<{ error?: boolean | string }>`
     box-shadow: none;
   }
   border-color: transparent;
-  background-color: ${(props: { error: any }) =>
+  background-color: ${(props) =>
     props.error ? 'rgba(252, 165, 165, 0.1)' : '#F9F9F9'};
   box-shadow: none;
   border-radius: 8px;
