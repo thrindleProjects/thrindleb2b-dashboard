@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { OrderNavType } from '@/layouts/ordersLayout';
-import useCheckLinkActive from '@/utils/hooks/useCheckLinkActive';
+import { useCheckLinkActive } from '@/utils/hooks';
 
 type OrderNavItemType = React.FC<OrderNavType>;
 

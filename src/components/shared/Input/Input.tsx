@@ -50,7 +50,7 @@ const Input: React.FC<InputProps> = ({
               placeholder={placeholder}
               id={id}
               name={name}
-              className={`h-full w-11/12 border-none bg-transparent px-0  py-[0.85rem] text-xs outline-none placeholder:text-xs focus:outline-none  lg:text-sm xl:placeholder:text-sm ${
+              className={`h-full w-11/12 border-none bg-transparent px-0 py-[0.85rem] text-xs outline-none placeholder:text-xs focus:outline-none  lg:text-sm xl:placeholder:text-sm ${
                 className ? className : ''
               }`}
               {...rest}
