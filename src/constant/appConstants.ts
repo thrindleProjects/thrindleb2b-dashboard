@@ -18,3 +18,13 @@ export const LOGIN_USER_PATH = '/user/signin' as const;
 // GLOBAL API REDUCER PATH START
 export const GLOBAL_API_REDUCER_PATH = 'globalApi';
 // GLOBAL API REDUCER PATH END
+
+// ORDERS API ENDPOINTS START
+export const ORDERS_PER_PAGE = 10;
+
+export const GET_ORDERS_BASE_PATH = '/admin/order/getAllOrders' as const;
+
+export const GET_RECURRENT_ORDERS_PATH =
+  '/admin/recurrent/getAllOrders' as const;
+
+// ORDERS API ENDPOINTS END

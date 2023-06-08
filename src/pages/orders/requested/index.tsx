@@ -1,11 +1,10 @@
-import RequestedOrderTable from '@/components/lib/requestedOrderTable/RequestedOrderTable';
+import OrdersTable from '@/components/lib/ordersTable';
 
 import OrdersLayout from '@/layouts/ordersLayout/OrdersLayout';
 import { NextPageWithLayout } from '@/pages/_app';
-import { orders } from '@/pages/orders';
 
 const RequestedOrders: NextPageWithLayout = () => {
-  return <RequestedOrderTable orders={orders} />;
+  return <OrdersTable title='Requested' />;
 };
 
 RequestedOrders.getLayout = function (page) {

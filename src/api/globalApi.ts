@@ -1,5 +1,7 @@
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import { getSession, signOut } from 'next-auth/react';
+import { toast } from 'react-hot-toast';
 
 // import { getSession, signOut } from 'next-auth/react';
 import {
@@ -26,17 +28,17 @@ const axiosBaseQuery =
     unknown
   > =>
   async ({ url, method, data, params }) => {
-    // const session = await getSession();
-    // const token = session && session.token;
+    const session = await getSession();
+    const token = session && session.token;
     try {
       const result = await axios({
         url: baseUrl + url,
         method,
         data,
         params,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         timeout: AXIOS_TIMEOUT_TIME,
         timeoutErrorMessage: AXIOS_TIMEOUT_MSG,
       });
@@ -46,8 +48,8 @@ const axiosBaseQuery =
       const err = axiosError as AxiosError;
 
       if (err?.response?.status === 401) {
-        // toast.error('Session expired. Please login again.');
-        // signOut();
+        toast.error('Session expired. Please login again.');
+        signOut();
       }
       return {
         error: {

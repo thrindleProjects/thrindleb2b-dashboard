@@ -31,13 +31,20 @@ const sidebarLinks: SingleSidebarLink[] = [
   },
   {
     id: 3,
+    link: '/recurrent',
+    title: 'Recurrent',
+    activeIcon: 'ph:clock-fill',
+    icon: 'ph:clock',
+  },
+  {
+    id: 4,
     link: '/customers',
     title: 'Customers',
     activeIcon: 'ph:users-three-fill',
     icon: 'ph:users-three',
   },
   {
-    id: 4,
+    id: 5,
     link: '/profile',
     title: 'Profile',
     activeIcon: 'ph:user-circle-fill',
