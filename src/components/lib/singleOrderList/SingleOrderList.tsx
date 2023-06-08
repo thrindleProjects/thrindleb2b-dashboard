@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import SingleOrderListItem from '@/components/lib/singleOrderListItem/SingleOrderListItem';
+import SingleOrderListItem from '@/components/lib/singleOrderListItem';
 
 import { useGetOrderByIdQuery } from '@/api/orders';
 
