@@ -6,7 +6,7 @@ const InputLabel: React.FC<InputLabelProps> = ({ id = '', label }) => {
   }
   return (
     <label
-      className='text-xs  font-normal text-[#767778] md:text-sm'
+      className='text-primary-black/60 text-xs font-medium md:text-sm'
       htmlFor={id}
     >
       {label}

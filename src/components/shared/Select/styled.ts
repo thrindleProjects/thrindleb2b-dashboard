@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 export const SelectInput = styled.select<{ error?: boolean | string }>`
   border-color: transparent;
-  /* background-color: ${(props: { error: any }) =>
-    props.error ? 'rgba(252, 165, 165, 0.1)' : '#ffffff20'}; */
   box-shadow: none;
   &:focus,
   &:focus-within {
@@ -14,8 +12,7 @@ export const SelectInput = styled.select<{ error?: boolean | string }>`
   }
   background: url('https://api.iconify.design/ic/outline-arrow-drop-down-circle.svg')
       no-repeat center right 1rem / 1.5rem auto,
-    ${(props: { error: any }) =>
-      props.error ? 'rgba(252, 165, 165, 0.1)' : '#ffffff20'};
+    ${(props) => (props.error ? 'rgba(252, 165, 165, 0.1)' : '#ffffff20')};
   content: url('https://api.iconify.design/ic/outline-arrow-drop-down-circle.svg');
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -34,7 +31,7 @@ export const SelectWrapper = styled.div<{
 
   .react-select {
     border-color: #1b1c1e10;
-    background-color: ${(props: { error: any }) =>
+    background-color: ${(props) =>
       props.error ? 'rgba(252, 165, 165, 0.1)' : '#ffffff20'};
     box-shadow: none;
     &:focus {

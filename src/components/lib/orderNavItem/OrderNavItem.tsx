@@ -1,17 +1,18 @@
 import Link from 'next/link';
 
 import { OrderNavType } from '@/layouts/ordersLayout';
-import useCheckLinkActive from '@/utils/hooks/useCheckLinkActive';
+import { useCheckLinkActive } from '@/utils/hooks';
 
 type OrderNavItemType = React.FC<OrderNavType>;
 
-const OrderNavItem: OrderNavItemType = ({ index, link, title }) => {
+const OrderNavItem: OrderNavItemType = ({ index, link, title, label }) => {
   const isActive = useCheckLinkActive(link, link, index);
 
   return (
     <li className='inline-flex'>
       <Link
         href={link}
+        title={label}
         className={`focus-visible:ring-primary-blue rounded-lg px-5 py-3 text-xs font-medium outline-none focus-visible:ring xl:text-sm ${
           isActive
             ? 'bg-primary-blue text-white'

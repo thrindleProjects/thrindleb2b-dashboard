@@ -12,6 +12,7 @@ export type OrderNavType = {
   title: string;
   link: string;
   index?: boolean;
+  label: string;
 };
 
 const ordersNav: OrderNavType[] = [
@@ -20,21 +21,25 @@ const ordersNav: OrderNavType[] = [
     title: 'Pending',
     link: '/orders',
     index: true,
+    label: 'Customer has paid but we have not delivered',
   },
   {
     id: 2,
     title: 'Requested',
     link: '/orders/requested',
+    label: 'Any order that we have not given quotation to',
   },
   {
     id: 3,
-    title: 'Recurrent',
-    link: '/orders/recurrent',
+    title: 'In Progress',
+    link: '/orders/in-progress',
+    label: 'Payment has not been made',
   },
   {
     id: 4,
     title: 'Completed',
     link: '/orders/completed',
+    label: 'Successful Orders',
   },
 ];
 

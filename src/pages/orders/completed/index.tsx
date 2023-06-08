@@ -1,11 +1,10 @@
-import CompletedOrderTable from '@/components/lib/completedOrderTable';
+import OrdersTable from '@/components/lib/ordersTable/OrdersTable';
 
 import OrdersLayout from '@/layouts/ordersLayout/OrdersLayout';
 import { NextPageWithLayout } from '@/pages/_app';
-import { orders } from '@/pages/orders';
 
 const CompletedOrders: NextPageWithLayout = () => {
-  return <CompletedOrderTable orders={orders} />;
+  return <OrdersTable title='Completed' />;
 };
 
 CompletedOrders.getLayout = function (page) {

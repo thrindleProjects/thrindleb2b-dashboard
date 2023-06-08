@@ -14,6 +14,7 @@ export default {
         'primary-red': '#E94848',
         'primary-grey': '#F9F9F9',
         'primary-green': '#10CB0C',
+        'secondary-grey': '#F7F7F7',
       },
       keyframes: {
         flicker: {
