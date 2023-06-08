@@ -1,5 +1,5 @@
-import SingleOrderControls from '@/components/lib/singleOrderControls/SingleOrderControls';
-import SingleOrderList from '@/components/lib/singleOrderList/SingleOrderList';
+import SingleOrderControls from '@/components/lib/singleOrderControls';
+import SingleOrderList from '@/components/lib/singleOrderList';
 
 const SingleOrderDetails = () => {
   return (
