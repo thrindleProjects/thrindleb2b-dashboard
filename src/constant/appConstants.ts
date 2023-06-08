@@ -22,9 +22,20 @@ export const GLOBAL_API_REDUCER_PATH = 'globalApi';
 // ORDERS API ENDPOINTS START
 export const ORDERS_PER_PAGE = 10;
 
-export const GET_ORDERS_BASE_PATH = '/admin/order/getAllOrders' as const;
+export const ORDERS_BASE_PATH = '/admin/order' as const;
 
-export const GET_RECURRENT_ORDERS_PATH =
-  '/admin/recurrent/getAllOrders' as const;
+export const GET_ALL_ORDERS_PATH = `${ORDERS_BASE_PATH}/getAllOrders` as const;
+
+export const GET_RECURRENT_ORDERS_BASE_PATH = '/admin/recurrent' as const;
+
+export const GET_ALL_RECURRENT_ORDERS_PATH =
+  `${GET_RECURRENT_ORDERS_BASE_PATH}/getAllOrders` as const;
+
+export const ADD_PRICE_TO_ITEM_PATH =
+  `${ORDERS_BASE_PATH}/addPriceToItem` as const;
 
 // ORDERS API ENDPOINTS END
+
+// IMAGE BASE URL START
+export const IMAGE_BASE_URL = `${process.env.NEXT_PUBLIC_DEV_URL}/images`;
+// IMAGE BASE URL END

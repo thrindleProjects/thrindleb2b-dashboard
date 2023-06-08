@@ -1,10 +1,39 @@
+import { useRouter } from 'next/router';
+import { ImSpinner2 } from 'react-icons/im';
+
+import SingleOrderDetails from '@/components/lib/singleOrderDetails/SingleOrderDetails';
 import SingleOrderHeader from '@/components/lib/singleOrderHeader';
 import PaddedContainer from '@/components/shared/PaddedContainer/PaddedContainer';
 
-const SingleOrderPageLayout = () => {
+import { useGetOrderByIdQuery } from '@/api/orders';
+
+const SingleOrderPageLayout: React.FC = () => {
+  const { query } = useRouter();
+
+  const { orderId } = query;
+
+  const { data, isLoading, error } = useGetOrderByIdQuery(orderId as string, {
+    skip: !orderId,
+  });
+
   return (
     <PaddedContainer>
-      <SingleOrderHeader />
+      {data && !isLoading && !error && (
+        <>
+          <SingleOrderHeader />
+          <SingleOrderDetails />
+        </>
+      )}
+      {!data && isLoading && !error && (
+        <div className='grid h-full w-full place-items-center'>
+          <ImSpinner2 className='text-primary-blue animate-spin text-3xl' />
+        </div>
+      )}
+      {!data && !isLoading && !!error && (
+        <div className='text-primary-red/80 grid h-full w-full place-items-center text-center text-3xl font-semibold'>
+          Something went wrong
+        </div>
+      )}
     </PaddedContainer>
   );
 };

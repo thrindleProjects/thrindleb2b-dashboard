@@ -41,6 +41,12 @@ const ordersNav: OrderNavType[] = [
     link: '/orders/completed',
     label: 'Successful Orders',
   },
+  {
+    id: 5,
+    title: 'VIP',
+    link: '/orders/vip',
+    label: 'Delivery made, but payment expected on a later date',
+  },
 ];
 
 const OrdersLayout: OrdersLayoutType = ({ children }) => {

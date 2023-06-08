@@ -5,12 +5,13 @@ import { ImSpinner2 } from 'react-icons/im';
 
 import Pagination from '@/components/shared/Pagination';
 
+import { GeneralOrderStatus } from '@/@types/appTypes';
 import { useGetOrdersQuery } from '@/api/orders';
 import { ORDERS_PER_PAGE } from '@/constant';
 import { formatDate } from '@/utils/functions';
 
 interface OrdersTableProps {
-  title: 'In Progress' | 'Completed' | 'Pending' | 'Requested';
+  title: 'In Progress' | 'Completed' | 'Pending' | 'Requested' | 'VIP';
 }
 
 type OrdersTableType = React.FC<OrdersTableProps>;
@@ -23,11 +24,9 @@ const OrdersTable: OrdersTableType = ({ title }) => {
   const currentPage: number = useMemo(() => Number(page) || 1, [page]);
 
   const status = useMemo(() => {
-    return title.toLowerCase().split(' ').join('-') as
-      | 'in-progress'
-      | 'completed'
-      | 'pending'
-      | 'requested';
+    if (title === 'VIP') return 'owing';
+
+    return title.toLowerCase().split(' ').join('-') as GeneralOrderStatus;
   }, [title]);
 
   const {
@@ -118,7 +117,9 @@ const OrdersTable: OrdersTableType = ({ title }) => {
           </div>
         )}
         {orders && !orders.data.data.length && !isLoading && !error && (
-          <div>Nothing to see here</div>
+          <div className='text-primary-blue/80 text-center text-3xl font-semibold'>
+            Nothing to see here
+          </div>
         )}
       </div>
     </section>

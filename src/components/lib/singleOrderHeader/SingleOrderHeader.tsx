@@ -1,62 +1,90 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 
 import OrderStatusInfo from '@/components/lib/orderStatusInfo/OrderStatusInfo';
 
-const SingleOrderHeader: React.FC = () => {
-  const { query, isReady } = useRouter();
+import { useGetOrderByIdQuery } from '@/api/orders';
 
-  if (!isReady) {
+const SingleOrderHeader: React.FC = () => {
+  const { query } = useRouter();
+
+  const { orderId } = query;
+  const { data } = useGetOrderByIdQuery(orderId as string, { skip: !orderId });
+
+  const numberOfItems = useMemo(() => {
+    return data?.data.listItems.length;
+  }, [data?.data.listItems.length]);
+
+  const allItemsValid = useMemo(() => {
+    return data?.data.listItems.every((item) => !!item.price);
+  }, [data?.data.listItems]);
+
+  const totalCostOfItems: string = useMemo(() => {
+    return (
+      data?.data.listItems
+        .reduce((acc, curr) => {
+          acc += (curr.price || 0) * curr.quantity;
+          return acc;
+        }, 0)
+        .toLocaleString() || '0'
+    );
+  }, [data?.data.listItems]);
+
+  if (!data) {
     return <></>;
   }
 
-  const { orderId } = query;
+  const { data: order } = data;
 
   return (
     <>
       <OrderStatusInfo
-        sent={Number(orderId) > 1}
-        paid={Number(orderId) > 2}
-        scheduled={Number(orderId) > 3}
-        price={500000}
-        date={new Date().toISOString()}
+        status={order.orderStatus}
+        price={order.paymentTotal}
+        date={order.paymentDate}
       />
       <nav className='text-primary-black flex flex-row gap-2 text-sm font-semibold xl:text-base'>
         <Link href='/orders' className='text-primary-black/60'>
           Orders
         </Link>
         {' / '}
-        <span>Order #{orderId}</span>
+        <span>Order #{order.orderRefCode}</span>
       </nav>
 
       <section
         className={`mt-6 flex items-center justify-between ${
-          Number(orderId) % 2
-            ? 'bg-transparent'
-            : 'rounded-lg bg-white px-6 py-4'
+          allItemsValid ? 'rounded-lg bg-white px-6 py-4' : 'bg-transparent'
         }`}
       >
         <div className='flex flex-col gap-2'>
           <h4 className='text-primary-black text-xl font-semibold xl:text-2xl'>
-            Order {orderId}
+            Order {order.orderRefCode}
           </h4>
           <p className='text-primary-black/80 text-sm font-medium xl:text-base'>
-            Criters Vet
+            {order.company.companyName || 'N/A'}
           </p>
           <p className='text-primary-black/80 text-sm font-semibold xl:text-base'>
-            3 Items
+            {numberOfItems}
+            {!!numberOfItems && numberOfItems > 1 ? ' Items' : ' Item'}
           </p>
-          <p className='text-primary-black/60 text-sm font-semibold xl:text-base'>
-            Total Amount
-          </p>
-          <p className='text-primary-black/60 text-xl font-semibold xl:text-2xl'>
-            #500,000
-          </p>
+          {allItemsValid && (
+            <>
+              <p className='text-primary-black/60 text-sm font-semibold xl:text-base'>
+                Total Amount
+              </p>
+              <p className='text-primary-black/60 text-xl font-semibold xl:text-2xl'>
+                &#8358;{totalCostOfItems}
+              </p>
+            </>
+          )}
         </div>
 
-        <button className='bg-primary-blue rounded-lg px-10 py-4 text-sm font-semibold text-white outline-none focus:ring xl:text-base'>
-          Send Price List
-        </button>
+        {allItemsValid && (
+          <button className='bg-primary-blue rounded-lg px-10 py-4 text-sm font-semibold text-white outline-none focus:ring xl:text-base'>
+            Send Price List
+          </button>
+        )}
       </section>
     </>
   );

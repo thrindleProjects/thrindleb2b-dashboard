@@ -67,7 +67,6 @@ const Sidebar: SidebarType = () => {
 
       <nav className='pl-6'>
         <ul className='flex flex-col gap-6'>
-          {/* <li className='text-blue text-primary-blue w-full rounded-l-lg bg-white px-4 py-3'> */}
           {sidebarLinks.map((item) => {
             return (
               <li key={item.id}>
@@ -78,17 +77,19 @@ const Sidebar: SidebarType = () => {
         </ul>
       </nav>
 
-      <button
-        className='focus:text-primary-blue hover:text-primary-blue group mx-auto mt-auto flex flex-row items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold outline-none hover:bg-white hover:ring-white focus:bg-white focus:ring focus:ring-white xl:text-base'
-        onClick={handleLogout}
-      >
-        <span className='transition-transform duration-500 group-hover:-rotate-45 group-focus-visible:-rotate-45'>
-          <Icon icon='ph:sign-out' />
-        </span>
-        <span className='transition-transform duration-500 group-hover:translate-x-1 group-focus-visible:translate-x-1'>
-          Log Out
-        </span>
-      </button>
+      <div className='pl-6'>
+        <button
+          className='focus:text-primary-blue hover:text-primary-blue group mt-auto flex w-full flex-row items-center gap-2 rounded-l-lg px-6 py-3 text-sm font-semibold outline-none hover:bg-white hover:ring-white focus:bg-white focus:ring focus:ring-white xl:text-base'
+          onClick={handleLogout}
+        >
+          <span className='transition-transform duration-500 group-hover:-rotate-45 group-focus-visible:-rotate-45'>
+            <Icon icon='ph:sign-out' />
+          </span>
+          <span className='transition-transform duration-500 group-hover:translate-x-1 group-focus-visible:translate-x-1'>
+            Log Out
+          </span>
+        </button>
+      </div>
     </aside>
   );
 };
