@@ -18,6 +18,8 @@ export type OrdersType = {
 export type GetOrdersResponse<T> = {
   data: T[];
   count: number;
+  total?: number;
+  totalVIPCustomers?: number;
   currentpage: number;
   nextpage: null | number;
   prevpage: null | number;
