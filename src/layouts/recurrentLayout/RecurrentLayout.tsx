@@ -41,6 +41,12 @@ const ordersNav: RecurrentOrderNavType[] = [
     link: '/recurrent/completed',
     label: 'Successful Orders',
   },
+  {
+    id: 5,
+    title: 'VIP',
+    link: '/recurrent/vip',
+    label: 'Delivery made, but payment expected on a later date',
+  },
 ];
 
 const RecurrentOrdersLayout: RecurrentLayoutType = ({ children }) => {

@@ -1,7 +1,8 @@
 import { default as MaterialUIPagination } from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import { useRouter } from 'next/router';
-import type { ParsedUrlQuery } from 'querystring';
+
+import { getQueryParams } from '@/utils/functions';
 
 import { PaginationWrapper } from './styled';
 
@@ -9,17 +10,6 @@ type PaginationProps = React.FC<{
   count: number;
   className?: string;
 }>;
-
-function getQueryParams(query: string): ParsedUrlQuery {
-  const urlSearchParams = Array.from(new URLSearchParams(query));
-  const queryParams: ParsedUrlQuery = {};
-
-  for (const [key, value] of urlSearchParams) {
-    queryParams[key] = value;
-  }
-
-  return queryParams;
-}
 
 const Pagination: PaginationProps = ({ count, className }) => {
   const router = useRouter();

@@ -14,3 +14,10 @@ export type Company = {
   token: string;
   tokenExpiry: string;
 };
+
+export type GeneralOrderStatus =
+  | 'in-progress'
+  | 'requested'
+  | 'pending'
+  | 'completed'
+  | 'owing';

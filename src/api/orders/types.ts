@@ -1,8 +1,8 @@
-import { Company } from '@/@types/appTypes';
+import { Company, GeneralOrderStatus } from '@/@types/appTypes';
 
 export type OrdersType = {
   id: string;
-  orderStatus: 'pending' | 'completed' | 'in-progress' | 'requested';
+  orderStatus: 'pending' | 'completed' | 'in-progress' | 'requested' | 'owing';
   orderRefCode: string;
   company: Company;
   priceUpdated: boolean;
@@ -26,7 +26,7 @@ export type GetOrdersResponse<T> = {
 
 export type RecurrentOrderType = {
   id: string;
-  orderStatus: 'pending' | 'completed' | 'in-progress' | 'requested';
+  orderStatus: GeneralOrderStatus;
   orderRefCode: string;
   company: Company;
   priceUpdated: boolean;

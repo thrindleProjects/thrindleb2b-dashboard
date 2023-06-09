@@ -1,14 +1,19 @@
+import { GeneralOrderStatus } from '@/@types/appTypes';
 import { globalApi } from '@/api/globalApi';
 import type {
   GetOrdersResponse,
   OrdersType,
   RecurrentOrderType,
+  SingleOrder,
 } from '@/api/orders/types';
 import {
+  ADD_PRICE_TO_ITEM_PATH,
+  GET_ALL_ORDERS_PATH,
+  GET_ALL_RECURRENT_ORDERS_PATH,
   GET_METHOD,
-  GET_ORDERS_BASE_PATH,
-  GET_RECURRENT_ORDERS_PATH,
+  ORDERS_BASE_PATH,
   ORDERS_PER_PAGE,
+  PUT_METHOD,
 } from '@/constant';
 import { INetworkSuccessResponse } from '@/utils/appTypes';
 const OrdersApi = globalApi.injectEndpoints({
@@ -18,11 +23,11 @@ const OrdersApi = globalApi.injectEndpoints({
       {
         page: number;
         limit?: number;
-        status: 'in-progress' | 'requested' | 'pending' | 'completed';
+        status: GeneralOrderStatus;
       }
     >({
       query: ({ page, limit, status }) => ({
-        url: `${GET_ORDERS_BASE_PATH}?limit=${limit || ORDERS_PER_PAGE}&page=${
+        url: `${GET_ALL_ORDERS_PATH}?limit=${limit || ORDERS_PER_PAGE}&page=${
           page || 1
         }&status=${status}`,
         method: GET_METHOD,
@@ -34,24 +39,42 @@ const OrdersApi = globalApi.injectEndpoints({
       {
         page: number;
         limit?: number;
-        status: 'in-progress' | 'requested' | 'pending' | 'completed';
+        status: GeneralOrderStatus;
       }
     >({
       query: ({ page, limit, status }) => ({
-        url: `${GET_RECURRENT_ORDERS_PATH}?limit=${
+        url: `${GET_ALL_RECURRENT_ORDERS_PATH}?limit=${
           limit || ORDERS_PER_PAGE
         }&page=${page || 1}&status=${status}`,
         method: GET_METHOD,
       }),
     }),
 
-    getOrderById: build.query<INetworkSuccessResponse<unknown>, string>({
-      query: () => ({
-        url: '',
+    getOrderById: build.query<INetworkSuccessResponse<SingleOrder>, string>({
+      query: (id) => ({
+        url: `${ORDERS_BASE_PATH}/${id}`,
         method: GET_METHOD,
       }),
+      providesTags: ['SingleOrder'],
+    }),
+
+    addPriceToItem: build.mutation<
+      INetworkSuccessResponse<unknown>,
+      { id: string; payload: { pricePerItem: number } }
+    >({
+      query: ({ id, payload }) => ({
+        url: `${ADD_PRICE_TO_ITEM_PATH}/${id}`,
+        method: PUT_METHOD,
+        data: payload,
+      }),
+      invalidatesTags: ['SingleOrder'],
     }),
   }),
 });
 
-export const { useGetOrdersQuery, useGetRecurrentOrdersQuery } = OrdersApi;
+export const {
+  useGetOrdersQuery,
+  useGetRecurrentOrdersQuery,
+  useGetOrderByIdQuery,
+  useAddPriceToItemMutation,
+} = OrdersApi;

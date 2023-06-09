@@ -5,12 +5,13 @@ import { ImSpinner2 } from 'react-icons/im';
 
 import Pagination from '@/components/shared/Pagination';
 
+import { GeneralOrderStatus } from '@/@types/appTypes';
 import { useGetRecurrentOrdersQuery } from '@/api/orders';
 import { ORDERS_PER_PAGE } from '@/constant';
 import { getPositionSuffix } from '@/utils/functions';
 
 interface RecurrentTableProps {
-  title: 'In Progress' | 'Completed' | 'Pending' | 'Requested';
+  title: 'In Progress' | 'Completed' | 'Pending' | 'Requested' | 'VIP';
 }
 
 type RecurrentTableType = React.FC<RecurrentTableProps>;
@@ -23,11 +24,9 @@ const RecurrentTable: RecurrentTableType = ({ title }) => {
   const currentPage: number = useMemo(() => Number(page) || 1, [page]);
 
   const status = useMemo(() => {
-    return title.toLowerCase().split(' ').join('-') as
-      | 'in-progress'
-      | 'completed'
-      | 'pending'
-      | 'requested';
+    if (title === 'VIP') return 'owing';
+
+    return title.toLowerCase().split(' ').join('-') as GeneralOrderStatus;
   }, [title]);
 
   const {

@@ -3,12 +3,12 @@ import RecurrentTable from '@/components/lib/recurrentTable/RecurrentTable';
 import RecurrentOrdersLayout from '@/layouts/recurrentLayout/RecurrentLayout';
 import { NextPageWithLayout } from '@/pages/_app';
 
-const RequestedRecurrentOrders: NextPageWithLayout = () => {
-  return <RecurrentTable title='Requested' />;
+const VipOrders: NextPageWithLayout = () => {
+  return <RecurrentTable title='VIP' />;
 };
 
-RequestedRecurrentOrders.getLayout = function (page) {
+VipOrders.getLayout = function (page) {
   return <RecurrentOrdersLayout>{page}</RecurrentOrdersLayout>;
 };
 
-export default RequestedRecurrentOrders;
+export default VipOrders;
