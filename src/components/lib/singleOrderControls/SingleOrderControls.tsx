@@ -38,7 +38,7 @@ const SingleOrderControls: React.FC = () => {
   }
 
   return (
-    <section className='text-primary-black flex h-full w-full flex-col gap-6 rounded-lg bg-white p-8'>
+    <section className='text-primary-black no-scrollbar flex h-full w-full flex-col gap-6 overflow-y-auto rounded-lg bg-white p-8'>
       <h3 className='text-primary-black text-base font-medium xl:text-lg'>
         {item.name}
       </h3>

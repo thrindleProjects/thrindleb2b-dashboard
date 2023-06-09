@@ -67,7 +67,6 @@ const OrdersTable: OrdersTableType = ({ title }) => {
               <th className='py-5 font-medium'></th>
             </tr>
           </thead>
-
           <tbody>
             {orders &&
               !!orders.data.data.length &&
