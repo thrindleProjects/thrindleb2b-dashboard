@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import {
   BarElement,
   CategoryScale,
@@ -12,6 +11,8 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 
 import { WhiteCard } from '@/components/shared/whiteCard';
+
+import { useGetGraphDataQuery } from '@/api/customers';
 
 ChartJS.register(
   CategoryScale,
@@ -36,10 +37,6 @@ export const options = {
 };
 
 const labels = [
-  'January',
-  'February',
-  'March',
-  'April',
   'May',
   'June',
   'July',
@@ -48,22 +45,29 @@ const labels = [
   'October',
   'November',
   'December',
+  'January',
+  'February',
+  'March',
+  'April',
 ];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: ' Jan - Dec',
-      data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
-      backgroundColor: '#065DA7',
-    },
-  ],
-};
-
 export function BarChart() {
+  const { data: graphData } = useGetGraphDataQuery();
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'May 2033 - April 2024',
+
+        data: graphData?.data.monthCount.map((item) => item.count),
+        backgroundColor: '#065DA7',
+      },
+    ],
+  };
+
   return (
-    <WhiteCard className='h-full w-[70%] '>
+    <WhiteCard className='h-[415px] w-[70%] '>
       <Bar options={options} data={data} />
     </WhiteCard>
   );

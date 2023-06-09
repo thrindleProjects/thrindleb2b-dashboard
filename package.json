@@ -26,6 +26,7 @@
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
     "clsx": "^1.2.1",
+    "flowbite-react": "^0.4.7",
     "formik": "^2.4.0",
     "framer-motion": "^10.12.16",
     "next": "13.4.3",

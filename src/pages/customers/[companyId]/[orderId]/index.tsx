@@ -1,11 +1,26 @@
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
+import SpinnerLoader from '@/components/lib/loader/Loader';
 import CardDetails from '@/components/pagesComponent/customers/CardDetails';
-import List from '@/components/pagesComponent/customers/List';
+import ListCard from '@/components/pagesComponent/customers/ListCard';
 import OrderDetailsCard from '@/components/pagesComponent/customers/OrderDetailsCard';
 import PaddedContainer from '@/components/shared/PaddedContainer/PaddedContainer';
+import { WhiteCard } from '@/components/shared/whiteCard';
+
+import { useGetOrderByIdQuery } from '@/api/orders';
 
 const OrderId = () => {
+  const router = useRouter();
+  const { data, isLoading } = useGetOrderByIdQuery(
+    router.query.orderId as string
+  );
+  const [active, setActive] = useState('');
+
+  if (isLoading) {
+    return <SpinnerLoader type='fullScreen' />;
+  }
+
   return (
     <PaddedContainer>
       <div>
@@ -14,10 +29,16 @@ const OrderId = () => {
           <span className='text-black'>/ Order #45465</span>
         </p>
       </div>
-      <OrderDetailsCard />
+      <OrderDetailsCard data={data?.data} />
       <div className='mt-8 flex justify-between'>
-        <List />
-        <CardDetails />
+        <WhiteCard className=' h-[600px] w-[48%] overflow-y-auto px-6'>
+          <p className='text-[18px] font-[500]'>My List</p>
+          <hr className='mt-2' />
+          <ListCard active={active} setActive={setActive} />
+        </WhiteCard>
+        <div className='h-[600px] w-[48%]'>
+          <CardDetails active={active} setActive={setActive} />
+        </div>
       </div>
     </PaddedContainer>
   );

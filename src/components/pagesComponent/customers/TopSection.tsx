@@ -2,7 +2,19 @@ import React from 'react';
 
 import { WhiteCard } from '@/components/shared/whiteCard';
 
-const TopSection = () => {
+import { useGetGraphDataQuery } from '@/api/customers';
+import { ICompanyData } from '@/api/customers/type';
+import { GetOrdersResponse } from '@/api/orders/types';
+
+export interface ICustomers {
+  data: GetOrdersResponse<ICompanyData> | undefined;
+  loading?: boolean;
+  error?: boolean;
+}
+
+const TopSection: React.FC<ICustomers> = ({ data }) => {
+  const { data: graphData } = useGetGraphDataQuery();
+
   return (
     <div className='w-[30%]'>
       <WhiteCard className='h-[200px] px-10 py-8'>
@@ -10,10 +22,10 @@ const TopSection = () => {
           Total Customer
         </h6>
         <p className='text-primary-blue font-clash-grotesk pt-5 text-4xl font-medium'>
-          10
+          {data?.total}
         </p>
         <p className='text-primary-green font-clash-grotesk pt-5 text-[14px] font-medium'>
-          24% up from last month
+          {graphData?.data.percentageIncrease.toFixed(2)}% up from last month
         </p>
       </WhiteCard>
       <WhiteCard className='mt-4 h-[200px] px-10 py-8'>
@@ -21,7 +33,7 @@ const TopSection = () => {
           Vip Customers
         </h6>
         <p className='text-primary-blue font-clash-grotesk mt-16 text-4xl font-medium'>
-          2
+          {data?.totalVIPCustomers}
         </p>
       </WhiteCard>
     </div>
