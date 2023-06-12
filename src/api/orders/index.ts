@@ -8,11 +8,13 @@ import type {
 } from '@/api/orders/types';
 import {
   ADD_PRICE_TO_ITEM_PATH,
+  ADD_SUBSTITUTE_TO_ITEM_PATH,
   GET_ALL_ORDERS_PATH,
   GET_ALL_RECURRENT_ORDERS_PATH,
   GET_METHOD,
   ORDERS_BASE_PATH,
   ORDERS_PER_PAGE,
+  POST_METHOD,
   PUT_METHOD,
 } from '@/constant';
 import { INetworkSuccessResponse } from '@/utils/appTypes';
@@ -69,6 +71,18 @@ const OrdersApi = globalApi.injectEndpoints({
       }),
       invalidatesTags: ['SingleOrder'],
     }),
+
+    addSubstitutesToItem: build.mutation<
+      INetworkSuccessResponse<unknown>,
+      { id: string; payload: FormData }
+    >({
+      query: ({ id, payload }) => ({
+        url: `${ADD_SUBSTITUTE_TO_ITEM_PATH}/${id}`,
+        method: POST_METHOD,
+        data: payload,
+      }),
+      invalidatesTags: ['SingleOrder'],
+    }),
   }),
 });
 
@@ -77,4 +91,5 @@ export const {
   useGetRecurrentOrdersQuery,
   useGetOrderByIdQuery,
   useAddPriceToItemMutation,
+  useAddSubstitutesToItemMutation,
 } = OrdersApi;

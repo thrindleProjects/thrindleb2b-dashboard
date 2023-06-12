@@ -13,4 +13,5 @@ export interface InputProps
   label?: string;
   errorText?: string;
   type: InputPasswordType | InputTextType | InputEmailType | InputDateType;
+  variant?: 'primary' | 'secondary';
 }

@@ -20,6 +20,7 @@ export const GLOBAL_API_REDUCER_PATH = 'globalApi';
 // GLOBAL API REDUCER PATH END
 
 // ORDERS API ENDPOINTS START
+
 export const ORDERS_PER_PAGE = 10;
 
 export const ORDERS_BASE_PATH = '/admin/order' as const;
@@ -33,6 +34,8 @@ export const GET_ALL_RECURRENT_ORDERS_PATH =
 
 export const ADD_PRICE_TO_ITEM_PATH =
   `${ORDERS_BASE_PATH}/addPriceToItem` as const;
+
+export const ADD_SUBSTITUTE_TO_ITEM_PATH = '/order/addSubstitute' as const;
 
 // ORDERS API ENDPOINTS END
 

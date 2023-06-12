@@ -1,17 +1,23 @@
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 
-import SingleOrderListItemForm from '@/components/lib/singleOrderListItemForm/SingleOrderListItemForm';
-import ImageComponent from '@/components/shared/ImageComponent/ImageComponent';
+import clsxm from '@/lib/clsxm';
+
+import SingleOrderListItemForm from '@/components/lib/singleOrderListItemForm';
+import SingleOrderSuggestedOptions from '@/components/lib/singleOrderSuggestedOptions';
+import ImageComponent from '@/components/shared/ImageComponent';
 
 import { useGetOrderByIdQuery } from '@/api/orders';
 import { ListItemType } from '@/api/orders/types';
 import { IMAGE_BASE_URL } from '@/constant';
+import { useDisclosure } from '@/utils/hooks';
 
 const SingleOrderControls: React.FC = () => {
+  const { toggle, isOpen: seeMore } = useDisclosure();
+
   const { query } = useRouter();
 
-  const { orderId, s: activeItem } = query;
+  const { orderId, itemId } = query;
 
   const { data } = useGetOrderByIdQuery(orderId as string, {
     skip: !orderId,
@@ -24,10 +30,10 @@ const SingleOrderControls: React.FC = () => {
       return undefined;
     }
 
-    if (!activeItem) return data.data.listItems[0];
+    if (!itemId) return data.data.listItems[0];
 
-    return data.data.listItems.find((item) => item.id === activeItem);
-  }, [activeItem, data]);
+    return data.data.listItems.find((item) => item.id === itemId);
+  }, [itemId, data]);
 
   if (!item) {
     return (
@@ -54,14 +60,29 @@ const SingleOrderControls: React.FC = () => {
           {item.name}
         </p>
         <p className='text-primary-black/60 text-xs font-medium xl:text-sm'>
-          {item.description}
+          {seeMore || item.description.length < 300
+            ? item.description
+            : `${item.description.substring(0, 300)}...`}{' '}
+          {item.description.length > 300 && (
+            <button
+              className={clsxm(
+                'text-primary-blue px-1 text-[0.85em] font-bold',
+                [seeMore && 'block']
+              )}
+              onClick={toggle}
+              type='button'
+            >
+              {seeMore ? 'See less' : 'See more'}
+            </button>
+          )}
         </p>
         <p className='text-primary/60 text-sm font-semibold xl:text-base'>
           {item.quantity} {item.quantity > 1 ? 'Pieces' : 'Piece'}
         </p>
       </div>
+      <SingleOrderListItemForm {...item} />
 
-      <SingleOrderListItemForm price={item.price} id={item.id} />
+      <SingleOrderSuggestedOptions id={item.id} />
     </section>
   );
 };

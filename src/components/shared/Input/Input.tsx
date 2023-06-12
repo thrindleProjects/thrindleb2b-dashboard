@@ -23,6 +23,7 @@ const Input: React.FC<InputProps> = ({
   errorText,
   id,
   name,
+  variant,
   ...rest
 }) => {
   const [hidden, setHidden] = useState<boolean>(true);
@@ -37,6 +38,7 @@ const Input: React.FC<InputProps> = ({
         {type === PASSWORD && (
           <PasswordInput
             error={error}
+            variant={variant}
             className='flex w-full flex-row items-center border-b-2 px-2 transition-all duration-300 ease-in md:px-4'
           >
             <input
@@ -50,7 +52,7 @@ const Input: React.FC<InputProps> = ({
               placeholder={placeholder}
               id={id}
               name={name}
-              className={`h-full w-11/12 border-none bg-transparent px-0 py-[0.85rem] text-xs outline-none placeholder:text-xs focus:outline-none  lg:text-sm xl:placeholder:text-sm ${
+              className={`h-full w-11/12 border-none bg-transparent px-0 py-[0.85rem] text-xs outline-none placeholder:text-xs focus:outline-none lg:text-sm xl:placeholder:text-sm ${
                 className ? className : ''
               }`}
               {...rest}
@@ -101,22 +103,35 @@ const Input: React.FC<InputProps> = ({
         {[TEXT, EMAIL, DATE].includes(type) && (
           <MainInput
             value={value}
-            onChange={onChange}
-            onFocus={onFocus}
-            disabled={disabled}
-            required={required}
-            onBlur={onBlur}
-            error={error}
-            placeholder={placeholder}
+            error={error?.toString()}
             type={type}
-            maxLength={maxLength}
-            id={id}
-            name={name}
-            className={`w-full border-x-0 border-b-2 border-t-0 px-2 py-[0.85rem] text-xs outline-none transition-all duration-300 ease-in placeholder:text-xs md:px-3 lg:text-sm xl:placeholder:text-sm ${
-              className ? className : ''
-            }`}
+            variant={variant}
+            // className={`w-full border-x-0 border-b-2 border-t-0 px-2 py-[0.85rem] text-xs outline-none transition-all duration-300 ease-in placeholder:text-xs md:px-3 lg:text-sm xl:placeholder:text-sm ${
+            //   className ? className : ''
+            // }`}
             {...rest}
-          />
+          >
+            <input
+              type={type}
+              value={value}
+              onChange={onChange}
+              onFocus={onFocus}
+              disabled={disabled}
+              required={required}
+              onBlur={onBlur}
+              placeholder={placeholder}
+              maxLength={maxLength}
+              id={id}
+              name={name}
+              // className={`h-full w-full border-none bg-transparent px-0 py-[0.85rem] text-xs outline-none placeholder:text-xs focus:outline-none  lg:text-sm xl:placeholder:text-sm ${
+              //   className ? className : ''
+              // }`}
+              className={`w-full border-x-0 border-b-2 border-t-0 px-2 py-[0.85rem] text-xs outline-none transition-all duration-300 ease-in placeholder:text-xs md:px-3 lg:text-sm xl:placeholder:text-sm ${
+                className ? className : ''
+              }`}
+              {...rest}
+            />
+          </MainInput>
         )}
       </div>
 

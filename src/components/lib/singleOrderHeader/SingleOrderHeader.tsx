@@ -17,7 +17,9 @@ const SingleOrderHeader: React.FC = () => {
   }, [data?.data.listItems.length]);
 
   const allItemsValid = useMemo(() => {
-    return data?.data.listItems.every((item) => !!item.price);
+    return data?.data.listItems.every(
+      (item) => !!item.price || !!item.substitutes.length
+    );
   }, [data?.data.listItems]);
 
   const totalCostOfItems: string = useMemo(() => {

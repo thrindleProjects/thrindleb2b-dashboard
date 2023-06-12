@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { MouseEvent, useMemo } from 'react';
+import { KeyboardEvent, useMemo } from 'react';
 
 import clsxm from '@/lib/clsxm';
 
@@ -8,6 +8,7 @@ import ImageComponent from '@/components/shared/ImageComponent/ImageComponent';
 import { ListItemType } from '@/api/orders/types';
 import { IMAGE_BASE_URL } from '@/constant';
 import { formatDateWithYear, getQueryParams } from '@/utils/functions';
+import { useDisclosure } from '@/utils/hooks';
 
 interface SingleOrderListItemProps extends ListItemType {
   index: number;
@@ -26,43 +27,48 @@ const SingleOrderListItem: SingleOrderListItemType = ({
   substitutes,
   quantity,
 }) => {
+  const { toggle, isOpen: seeMore } = useDisclosure();
+
   const router = useRouter();
 
-  const { s: activeItem } = router.query;
+  const { itemId } = router.query;
 
   const isActive: boolean = useMemo(() => {
-    if (!index && !activeItem) return true;
+    if (!index && !itemId) return true;
 
-    return activeItem === id;
-  }, [activeItem, index, id]);
+    return itemId === id;
+  }, [itemId, index, id]);
 
   const image: string = useMemo(() => {
     return images ? images[0] || '' : '';
   }, [images]);
 
-  const handleClick = (
-    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
-    e.preventDefault();
-
+  const handleClick = () => {
     const [asPathUrl, asPathQuery] = router.asPath.split('?');
     const resolvedQuery = getQueryParams(asPathQuery ?? '');
 
     router.replace(
       {
         pathname: asPathUrl,
-        query: { ...resolvedQuery, s: id },
+        query: { ...resolvedQuery, itemId: id },
       },
       {
         pathname: asPathUrl,
-        query: { ...resolvedQuery, s: id },
+        query: { ...resolvedQuery, itemId: id },
       },
       { shallow: true }
     );
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.code === 'Space') {
+      e.preventDefault();
+      handleClick();
+    }
+  };
+
   return (
-    <button
+    <div
       className={clsxm(
         'outline-primary-black/10 w-full rounded-lg outline',
         'p-3',
@@ -70,6 +76,9 @@ const SingleOrderListItem: SingleOrderListItemType = ({
         [isActive && 'outline-primary-blue']
       )}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      role='button'
+      tabIndex={0}
     >
       <span className='flex justify-between text-left'>
         <span className='flex flex-col gap-2'>
@@ -89,7 +98,20 @@ const SingleOrderListItem: SingleOrderListItemType = ({
           </span>
 
           <span className='text-primary-black/60 text-xs font-medium'>
-            {description}
+            {seeMore || description.length < 150
+              ? description
+              : `${description.substring(0, 150)}...`}{' '}
+            {description.length > 150 && (
+              <button
+                className={clsxm(
+                  'text-primary-blue px-1 text-[0.85em] font-bold',
+                  [seeMore && 'block']
+                )}
+                onClick={toggle}
+              >
+                {seeMore ? 'See less' : 'See more'}
+              </button>
+            )}
           </span>
 
           <span className='text-primary-blue blue-gradient h-max w-max rounded-lg px-3 py-2 text-sm font-semibold xl:text-base'>
@@ -97,13 +119,21 @@ const SingleOrderListItem: SingleOrderListItemType = ({
           </span>
         </span>
 
-        {(!!price || !!substitutes.length) && (
-          <span className='text-primary-green border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium'>
-            Price Addded
-          </span>
-        )}
+        <span className='flex flex-col items-end gap-1'>
+          {!!price && (
+            <span className='text-primary-green border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0'>
+              Price Added
+            </span>
+          )}
+
+          {substitutes && substitutes.length > 0 && (
+            <span className='text-primary-green border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0'>
+              Substitutes Added
+            </span>
+          )}
+        </span>
       </span>
-    </button>
+    </div>
   );
 };
 
