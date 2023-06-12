@@ -24,12 +24,15 @@ const SingleOrderListItemForm: SingleOrderListItemFormType = ({
   const [addPrice, { isLoading }] = useAddPriceToItemMutation();
 
   const formik = useFormik({
-    initialValues: { ...initialValues, pricePerItem: price || 0 },
+    initialValues: { ...initialValues, pricePerItem: price || '' },
     validationSchema,
     onSubmit: async (values) => {
       // logic here
       try {
-        await addPrice({ id, payload: values }).unwrap();
+        await addPrice({
+          id,
+          payload: { pricePerItem: Number(values.pricePerItem) },
+        }).unwrap();
         toast.success('Price updated successfully');
       } catch (error) {
         logger(error);

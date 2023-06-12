@@ -39,13 +39,26 @@ export type RecurrentOrderType = {
   recurringDeliveryDay: null | number;
 };
 
+export type SubstituteItemType = {
+  id: string;
+  name: string;
+  description: string;
+  images: string[];
+  price: number;
+  quantity: number;
+  volumeDiscount: boolean;
+  volumeDiscountAmt: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type ListItemType = {
   id: string;
   name: string;
   description: string;
   images: string[];
   isSubstitute: boolean;
-  substitutes: unknown[];
+  substitutes: SubstituteItemType[];
   price: null | number;
   recurrent: boolean;
   isAvailable: boolean;

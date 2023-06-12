@@ -20,6 +20,7 @@ export const GLOBAL_API_REDUCER_PATH = 'globalApi';
 // GLOBAL API REDUCER PATH END
 
 // ORDERS API ENDPOINTS START
+
 export const ORDERS_PER_PAGE = 10;
 
 export const ORDERS_BASE_PATH = '/admin/order' as const;
@@ -34,14 +35,17 @@ export const GET_ALL_RECURRENT_ORDERS_PATH =
 export const ADD_PRICE_TO_ITEM_PATH =
   `${ORDERS_BASE_PATH}/addPriceToItem` as const;
 
-// CUSTOMERS ENDPOINTS
+export const ADD_SUBSTITUTE_TO_ITEM_PATH = '/order/addSubstitute' as const;
+
+// ORDERS API ENDPOINTS END
+
+// CUSTOMERS ENDPOINTS START
 export const GET_ALL_CUSTOMERS = '/admin/company/getAllCompanies';
 export const GET_GRAPH_DATA = '/admin/company/getOnboardingData';
 export const GET_COMPANY_ORDERS = '/admin/order/getCompanyOrders';
 export const MAKE_COMPANY_VIP = '/admin/company/updateVIP';
 export const GET_COMPANY_DETAILS = '/admin/company';
-
-// ORDERS API ENDPOINTS END
+// CUSTOMERS ENDPOINTS END
 
 // IMAGE BASE URL START
 export const IMAGE_BASE_URL = `${process.env.NEXT_PUBLIC_DEV_URL}/images`;

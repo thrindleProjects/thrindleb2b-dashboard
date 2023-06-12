@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const initialValues: { pricePerItem: number } = { pricePerItem: 0 };
+export const initialValues: { pricePerItem: string } = { pricePerItem: '' };
 
 export const validationSchema = Yup.object({
   pricePerItem: Yup.number()
