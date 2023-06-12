@@ -39,6 +39,19 @@ export const ADD_SUBSTITUTE_TO_ITEM_PATH = '/order/addSubstitute' as const;
 
 // ORDERS API ENDPOINTS END
 
+// CUSTOMERS ENDPOINTS START
+export const GET_ALL_CUSTOMERS = '/admin/company/getAllCompanies';
+export const GET_GRAPH_DATA = '/admin/company/getOnboardingData';
+export const GET_COMPANY_ORDERS = '/admin/order/getCompanyOrders';
+export const MAKE_COMPANY_VIP = '/admin/company/updateVIP';
+export const GET_COMPANY_DETAILS = '/admin/company';
+// CUSTOMERS ENDPOINTS END
+
 // IMAGE BASE URL START
 export const IMAGE_BASE_URL = `${process.env.NEXT_PUBLIC_DEV_URL}/images`;
 // IMAGE BASE URL END
+
+// Images
+const IMAGES_SUB_LINK = '/images';
+
+export const IMAGE_URL = `${process.env.NEXT_PUBLIC_DEV_URL}${IMAGES_SUB_LINK}`;

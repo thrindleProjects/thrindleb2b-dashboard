@@ -8,7 +8,7 @@ import Pagination from '@/components/shared/Pagination';
 import { GeneralOrderStatus } from '@/@types/appTypes';
 import { useGetOrdersQuery } from '@/api/orders';
 import { ORDERS_PER_PAGE } from '@/constant';
-import { formatDate } from '@/utils/functions';
+import { formatDateWithYear } from '@/utils/functions';
 
 interface OrdersTableProps {
   title: 'In Progress' | 'Completed' | 'Pending' | 'Requested' | 'VIP';
@@ -91,7 +91,7 @@ const OrdersTable: OrdersTableType = ({ title }) => {
                         order.company.alternateContactPhone ||
                         'N/A'}
                     </td>
-                    <td>{formatDate(order.createdAt)}</td>
+                    <td>{formatDateWithYear(order.createdAt)}</td>
                     <td className='flex'>
                       <Link
                         href={`/orders/${order.id}`}

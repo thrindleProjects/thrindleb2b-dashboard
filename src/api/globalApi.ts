@@ -65,5 +65,5 @@ export const globalApi = createApi({
   }),
   reducerPath: GLOBAL_API_REDUCER_PATH,
   endpoints: () => ({}),
-  tagTypes: ['SingleOrder'],
+  tagTypes: ['SingleOrder', 'Company'],
 });
