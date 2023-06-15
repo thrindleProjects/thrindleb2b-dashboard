@@ -1,13 +1,14 @@
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 
+import { useDisclosure } from '@/hooks';
+
 import SingleOrderSuggestedItemList from '@/components/lib/singleOrderSuggestedItemList/SingleOrderSuggestedItemList';
 import SingleOrderSuggestedItemModal from '@/components/lib/singleOrderSuggestedItemModal';
 
 import { useGetOrderByIdQuery } from '@/api/orders';
 import { ListItemType } from '@/api/orders/types';
 import { getQueryParams } from '@/utils/functions';
-import { useDisclosure } from '@/utils/hooks';
 
 interface SingleOrderSuggestOptionsProps {
   id: string;

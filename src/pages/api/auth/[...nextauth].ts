@@ -5,9 +5,9 @@ import Credentials from 'next-auth/providers/credentials';
 
 import logger from '@/lib/logger';
 
+import { INetworkSuccessResponse } from '@/@types';
 import { UserLoginResponse } from '@/api/auth/types';
 import { LOGIN_USER_PATH } from '@/constant';
-import { INetworkSuccessResponse } from '@/utils/appTypes';
 
 export const authOptions: NextAuthOptions = {
   providers: [

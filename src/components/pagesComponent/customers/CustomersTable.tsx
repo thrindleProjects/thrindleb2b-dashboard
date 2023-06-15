@@ -11,12 +11,12 @@ import TableHeader from '@/components/shared/Table/TableHeader';
 import TableRow from '@/components/shared/Table/TableRow';
 import { WhiteCard } from '@/components/shared/whiteCard';
 
-import { ICompanyData } from '@/api/customers/type';
+import { Company } from '@/@types';
 import { GetOrdersResponse } from '@/api/orders/types';
-import { IMAGE_URL } from '@/constant';
+import { IMAGE_BASE_URL } from '@/constant';
 
 export interface ICustomers {
-  data: GetOrdersResponse<ICompanyData> | undefined;
+  data: GetOrdersResponse<Company> | undefined;
   loading?: boolean;
   error?: boolean;
 }
@@ -68,7 +68,7 @@ const CustomersTable: React.FC<ICustomers> = ({ data, error, loading }) => {
                   <div className='relative h-[40px] w-[40px]'>
                     <Image
                       className='rounded-full'
-                      src={`${IMAGE_URL}/${item.logo}`}
+                      src={`${IMAGE_BASE_URL}/${item.logo}`}
                       alt='logo'
                       fill
                     />

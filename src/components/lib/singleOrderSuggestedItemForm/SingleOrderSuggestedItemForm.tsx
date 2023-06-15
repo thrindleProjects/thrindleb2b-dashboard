@@ -148,11 +148,10 @@ const SingleOrderSuggestedItemForm: React.FC = () => {
           showPreview={true}
           multiple={true}
         />
-        {!formik.errors.image && (
-          <p className='text-primary-blue/60 mt-1 text-xs font-medium'>
-            You can upload multiple images
-          </p>
-        )}
+
+        <p className='text-primary-blue/60 mt-1 text-xs font-medium'>
+          You can upload multiple images
+        </p>
       </div>
 
       <Button

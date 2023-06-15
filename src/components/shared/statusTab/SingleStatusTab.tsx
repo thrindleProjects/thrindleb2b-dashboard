@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { orderStatus } from '@/@types/appTypes';
+import { orderStatus } from '@/@types';
 
 const SingleStatusTab = ({
   status,

@@ -1,7 +1,7 @@
 import { FormikErrors, FormikValues } from 'formik';
 import { FocusEventHandler } from 'react';
 
-import { InputFileType } from '@/utils/appTypes';
+import { InputFileType } from '@/@types';
 
 export interface InputFileProps<T> {
   value?: (string | File)[] | File[];

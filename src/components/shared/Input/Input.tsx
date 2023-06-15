@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
-import { DATE, EMAIL, PASSWORD, TEXT } from '@/utils/constants';
+import { DATE, EMAIL, PASSWORD, TEXT } from '@/constant';
 
 import { MainInput, PasswordInput } from './styled';
 import { InputProps } from './types';

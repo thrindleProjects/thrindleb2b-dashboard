@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 
-import useCheckLinkActive from '@/utils/hooks/useCheckLinkActive';
+import useCheckLinkActive from '@/hooks/useCheckLinkActive';
 
 import { SingleSidebarLink } from '../sidebar/Sidebar';
 type SidebarLinkProps = SingleSidebarLink;

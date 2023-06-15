@@ -5,7 +5,7 @@ import { ImSpinner2 } from 'react-icons/im';
 
 import Pagination from '@/components/shared/Pagination';
 
-import { GeneralOrderStatus } from '@/@types/appTypes';
+import { GeneralOrderStatus } from '@/@types';
 import { useGetOrdersQuery } from '@/api/orders';
 import { ORDERS_PER_PAGE } from '@/constant';
 import { formatDateWithYear } from '@/utils/functions';

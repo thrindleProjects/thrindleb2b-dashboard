@@ -1,7 +1,7 @@
+import { useMediaQuery } from '@/hooks';
+
 import LoginForm from '@/components/lib/loginForm';
 import ThrindleLogo from '@/components/shared/ThrindleLogo';
-
-import { useMediaQuery } from '@/utils/hooks';
 
 const LoginLayout = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');

@@ -5,9 +5,7 @@ import ProfileForm from '@/components/lib/profileForm/ProfileForm';
 import ProfileTab from '@/components/lib/profileTab/ProfileTab';
 import ProfileTable from '@/components/pagesComponent/profile/ProfileTable';
 
-import { GENERAL, USERS } from '@/utils/constants';
-
-import { SECURITY } from '../../utils/constants';
+import { GENERAL, SECURITY, USERS } from '@/constant';
 
 const ProfileLayout = () => {
   const [active, setActive] = useState('General');

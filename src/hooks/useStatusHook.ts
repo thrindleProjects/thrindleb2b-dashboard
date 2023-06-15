@@ -1,4 +1,4 @@
-import { orderStatus as orderStatusType } from '@/@types/appTypes';
+import { orderStatus as orderStatusType } from '@/@types';
 
 const useOrderStatusHook = ({
   orderStatus,

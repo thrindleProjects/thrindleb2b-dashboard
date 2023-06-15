@@ -1,8 +1,8 @@
 import { NextPageWithLayout } from '@/pages/_app';
-import SingleOrderPageLayout from '@/pages-layout/singleOrderPageLayout/SingleOrderPageLayout';
+import SingleRecurrentOrderPageLayout from '@/pages-layout/singleRecurrentOrderPageLayout';
 
 const SingleOrderPage: NextPageWithLayout = () => {
-  return <SingleOrderPageLayout />;
+  return <SingleRecurrentOrderPageLayout />;
 };
 
 export default SingleOrderPage;

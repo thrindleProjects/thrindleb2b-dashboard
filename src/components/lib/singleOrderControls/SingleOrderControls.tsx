@@ -2,15 +2,16 @@ import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 
 import clsxm from '@/lib/clsxm';
+import { useDisclosure } from '@/hooks';
 
-import SingleOrderListItemForm from '@/components/lib/singleOrderListItemForm';
+import SingleOrderListItemAvailableSwitch from '@/components/lib/singleOrderListItemAvailableSwitch';
+import SingleOrderListItemForm from '@/components/lib/singleOrderListItemForm/SingleOrderListItemForm';
 import SingleOrderSuggestedOptions from '@/components/lib/singleOrderSuggestedOptions';
 import ImageComponent from '@/components/shared/ImageComponent';
 
 import { useGetOrderByIdQuery } from '@/api/orders';
 import { ListItemType } from '@/api/orders/types';
 import { IMAGE_BASE_URL } from '@/constant';
-import { useDisclosure } from '@/utils/hooks';
 
 const SingleOrderControls: React.FC = () => {
   const { toggle, isOpen: seeMore } = useDisclosure();
@@ -81,7 +82,7 @@ const SingleOrderControls: React.FC = () => {
         </p>
       </div>
       <SingleOrderListItemForm {...item} />
-
+      <SingleOrderListItemAvailableSwitch {...item} />
       <SingleOrderSuggestedOptions id={item.id} />
     </section>
   );
