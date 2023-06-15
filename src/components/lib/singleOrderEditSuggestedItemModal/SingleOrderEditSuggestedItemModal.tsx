@@ -9,7 +9,10 @@ import InputFile from '@/components/shared/InputFile/InputFile';
 import GenModal from '@/components/shared/modal';
 import MultiLineInput from '@/components/shared/multilineInput/MultiLineInput';
 
-import { useUpdateSingleSubstituteMutation } from '@/api/orders';
+import {
+  useDeleteImageForSubstituteItemMutation,
+  useUpdateSingleSubstituteMutation,
+} from '@/api/orders';
 import { SubstituteItemType } from '@/api/orders/types';
 
 import {
@@ -29,6 +32,8 @@ type SingleOrderEditSuggestedItemModalType =
 const SingleOrderEditSuggestedItemModal: SingleOrderEditSuggestedItemModalType =
   ({ isOpen, onClose, id, ...rest }) => {
     const [updateItem, { isLoading }] = useUpdateSingleSubstituteMutation();
+
+    const [deleteImage] = useDeleteImageForSubstituteItemMutation();
 
     const formik = useFormik({
       initialValues: {
@@ -88,6 +93,14 @@ const SingleOrderEditSuggestedItemModal: SingleOrderEditSuggestedItemModalType =
     const handleClose = () => {
       formik.resetForm();
       onClose();
+    };
+
+    const handleDeleteImage = async (imageKey: string) => {
+      try {
+        await deleteImage({ id: id, payload: { imageKey } }).unwrap();
+      } catch (error) {
+        logger(error);
+      }
     };
 
     return (
@@ -152,6 +165,7 @@ const SingleOrderEditSuggestedItemModal: SingleOrderEditSuggestedItemModalType =
                 extensions='image/*'
                 showPreview={true}
                 multiple={true}
+                onDelete={handleDeleteImage}
               />
 
               <p className='text-primary-blue/60 mt-1 text-xs font-medium'>

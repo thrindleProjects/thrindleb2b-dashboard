@@ -10,6 +10,7 @@ import type {
 import {
   ADD_PRICE_TO_ITEM_PATH,
   ADD_SUBSTITUTE_TO_ITEM_PATH,
+  DELETE_IMAGE_FOR_SUBSTITUTE_ITEM_PATH,
   DELETE_METHOD,
   DELETE_SUBSTITUTE_ITEM_PATH,
   GET_ALL_ORDERS_PATH,
@@ -111,7 +112,7 @@ const OrdersApi = globalApi.injectEndpoints({
         method: POST_METHOD,
         data: payload,
       }),
-      invalidatesTags: ['SingleOrder'],
+      invalidatesTags: ['SingleOrder', 'SingleRecurrentOrder'],
     }),
 
     deleteSubstitute: build.mutation<INetworkSuccessResponse<null>, string>({
@@ -119,7 +120,7 @@ const OrdersApi = globalApi.injectEndpoints({
         url: `${DELETE_SUBSTITUTE_ITEM_PATH}/${id}`,
         method: DELETE_METHOD,
       }),
-      invalidatesTags: ['SingleOrder'],
+      invalidatesTags: ['SingleOrder', 'SingleRecurrentOrder'],
     }),
 
     updateItemAvailability: build.mutation<
@@ -131,7 +132,7 @@ const OrdersApi = globalApi.injectEndpoints({
         method: PUT_METHOD,
         data: payload,
       }),
-      invalidatesTags: ['SingleOrder'],
+      invalidatesTags: ['SingleOrder', 'SingleRecurrentOrder'],
     }),
 
     updateSingleSubstitute: build.mutation<
@@ -143,7 +144,7 @@ const OrdersApi = globalApi.injectEndpoints({
         method: PUT_METHOD,
         data: payload,
       }),
-      invalidatesTags: ['SingleOrder'],
+      invalidatesTags: ['SingleOrder', 'SingleRecurrentOrder'],
     }),
 
     sendOrderPriceList: build.mutation<
@@ -153,6 +154,18 @@ const OrdersApi = globalApi.injectEndpoints({
       query: (id) => ({
         url: `${SEND_ORDER_PRICE_LIST_PATH}/${id}`,
         method: GET_METHOD,
+      }),
+      invalidatesTags: ['SingleOrder'],
+    }),
+
+    deleteImageForSubstituteItem: build.mutation<
+      INetworkSuccessResponse<unknown>,
+      { id: string; payload: { imageKey: string } }
+    >({
+      query: ({ id, payload }) => ({
+        url: `${DELETE_IMAGE_FOR_SUBSTITUTE_ITEM_PATH}/${id}`,
+        method: PUT_METHOD,
+        data: payload,
       }),
       invalidatesTags: ['SingleOrder'],
     }),
@@ -171,4 +184,5 @@ export const {
   useUpdateItemAvailabilityMutation,
   useUpdateSingleSubstituteMutation,
   useSendOrderPriceListMutation,
+  useDeleteImageForSubstituteItemMutation,
 } = OrdersApi;

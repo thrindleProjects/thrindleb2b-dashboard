@@ -127,7 +127,7 @@ const SingleOrderListItem: SingleOrderListItemType = ({
             </span>
           )}
 
-          {substitutes && substitutes.length > 0 && (
+          {substitutes && !!substitutes.length && (
             <span className='text-primary-green border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0'>
               Substitutes Added
             </span>
