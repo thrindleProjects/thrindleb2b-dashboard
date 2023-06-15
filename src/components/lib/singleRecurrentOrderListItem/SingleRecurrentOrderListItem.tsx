@@ -5,18 +5,19 @@ import clsxm from '@/lib/clsxm';
 
 import ImageComponent from '@/components/shared/ImageComponent';
 
-import { ListItemType } from '@/api/orders/types';
+import { RecurrentOrderListItemType } from '@/api/orders/types';
 import { IMAGE_BASE_URL } from '@/constant';
 import { formatDateWithYear, getQueryParams } from '@/utils/functions';
 import { useDisclosure } from '@/utils/hooks';
 
-interface SingleOrderListItemProps extends ListItemType {
+interface SingleRecurrentOrderListItemProps extends RecurrentOrderListItemType {
   index: number;
 }
 
-type SingleOrderListItemType = React.FC<SingleOrderListItemProps>;
+type SingleRecurrentOrderListItemType =
+  React.FC<SingleRecurrentOrderListItemProps>;
 
-const SingleOrderListItem: SingleOrderListItemType = ({
+const SingleRecurrentOrderListItem: SingleRecurrentOrderListItemType = ({
   images,
   name,
   createdAt,
@@ -24,9 +25,9 @@ const SingleOrderListItem: SingleOrderListItemType = ({
   id,
   description,
   price,
-  substitutes,
+  // TODO show substitutes
+  // substitutes,
   quantity,
-  isAvailable,
 }) => {
   const { toggle, isOpen: seeMore } = useDisclosure();
 
@@ -127,21 +128,16 @@ const SingleOrderListItem: SingleOrderListItemType = ({
             </span>
           )}
 
-          {substitutes && substitutes.length > 0 && (
+          {/* TODO: fix substitutes */}
+          {/* {substitutes && substitutes.length > 0 && (
             <span className='text-primary-green border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0'>
               Substitutes Added
             </span>
-          )}
-
-          {!isAvailable && (
-            <span className='text-primary-red border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0'>
-              Unavailable
-            </span>
-          )}
+          )} */}
         </span>
       </span>
     </div>
   );
 };
 
-export default SingleOrderListItem;
+export default SingleRecurrentOrderListItem;

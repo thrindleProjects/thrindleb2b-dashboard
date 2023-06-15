@@ -13,6 +13,7 @@ export type OrdersType = {
   createdAt: string;
   updatedAt: string;
   paymentDate: string | null;
+  serviceCharge: null | number;
 };
 
 export type GetOrdersResponse<T> = {
@@ -72,4 +73,34 @@ export type ListItemType = {
 
 export type SingleOrder = Omit<OrdersType, 'listItems'> & {
   listItems: ListItemType[];
+};
+
+export type RecurrentOrderListItemType = {
+  id: string;
+  name: string;
+  description: string;
+  images: null | string[];
+  isSubstitute: boolean;
+  price: null | number;
+  recurrent: boolean;
+  isAvailable: boolean;
+  companyId: string;
+  quantity: number;
+  volumeDiscount: boolean;
+  volumeDiscountAmt: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type SingleRecurrentOrder = {
+  id: string;
+  orderStatus: GeneralOrderStatus;
+  orderRefCode: string;
+  company: Company;
+  priceUpdated: boolean;
+  listItems: RecurrentOrderListItemType[];
+  createdAt: string;
+  updatedAt: string;
+  recurringPaymentAmount: null | number;
+  recurringDeliveryDay: number;
 };

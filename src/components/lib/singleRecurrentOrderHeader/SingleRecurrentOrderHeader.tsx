@@ -1,47 +1,27 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import { toast } from 'react-hot-toast';
 
-import logger from '@/lib/logger';
-
-import Button from '@/components/buttons/Button';
 import OrderStatusInfo from '@/components/lib/orderStatusInfo';
 
-import {
-  useGetOrderByIdQuery,
-  useSendOrderPriceListMutation,
-} from '@/api/orders';
+import { useGetRecurrentOrderByIdQuery } from '@/api/orders';
 
-const SingleOrderHeader: React.FC = () => {
+const SingleRecurrentOrderHeader: React.FC = () => {
   const { query } = useRouter();
 
-  const { orderId } = query;
-  const { data } = useGetOrderByIdQuery(orderId as string, { skip: !orderId });
-  const [sendOrder, { isLoading }] = useSendOrderPriceListMutation();
+  const { recurrentId } = query;
+  const { data } = useGetRecurrentOrderByIdQuery(recurrentId as string, {
+    skip: !recurrentId,
+  });
 
   const numberOfItems = useMemo(() => {
     return data?.data.listItems.length;
   }, [data?.data.listItems.length]);
 
   const allItemsValid = useMemo(() => {
-    return data?.data.listItems.every((item) => {
-      if (item.isAvailable) {
-        return (
-          !!item.price &&
-          (item.substitutes.length
-            ? item.substitutes.every((sub) => !!sub.price)
-            : true)
-        );
-      }
+    //  || !!item.substitutes.length
 
-      return (
-        !item.price &&
-        (item.substitutes.length
-          ? item.substitutes.every((sub) => !!sub.price)
-          : true)
-      );
-    });
+    return data?.data.listItems.every((item) => !!item.price);
   }, [data?.data.listItems]);
 
   const totalCostOfItems: string = useMemo(() => {
@@ -61,25 +41,18 @@ const SingleOrderHeader: React.FC = () => {
 
   const { data: order } = data;
 
-  const handleSendOrder = async () => {
-    try {
-      await sendOrder(data.data.id).unwrap();
-      toast.success('Price list sent successfully');
-    } catch (error) {
-      logger(error);
-    }
-  };
-
   return (
     <>
       <OrderStatusInfo
         status={order.orderStatus}
-        price={order.paymentTotal}
-        date={order.paymentDate}
+        price={order.recurringPaymentAmount || 0}
+        // TODO fix the date of this order
+        date={order.updatedAt}
       />
+
       <nav className='text-primary-black flex flex-row gap-2 text-sm font-semibold xl:text-base'>
         <Link
-          href={`/orders${
+          href={`/recurrent${
             order.orderStatus === 'pending'
               ? ''
               : order.orderStatus === 'owing'
@@ -88,7 +61,7 @@ const SingleOrderHeader: React.FC = () => {
           }`}
           className='text-primary-black/60'
         >
-          Orders
+          Recurrent Orders
         </Link>
         {' / '}
         <span>Order #{order.orderRefCode}</span>
@@ -122,18 +95,14 @@ const SingleOrderHeader: React.FC = () => {
           )}
         </div>
 
-        {allItemsValid && data.data.orderStatus === 'requested' && (
-          <Button
-            className='bg-primary-blue rounded-lg px-10 py-4 text-sm font-semibold text-white outline-none focus:ring xl:text-base'
-            onClick={handleSendOrder}
-            isLoading={isLoading}
-          >
+        {allItemsValid && (
+          <button className='bg-primary-blue rounded-lg px-10 py-4 text-sm font-semibold text-white outline-none focus:ring xl:text-base'>
             Send Price List
-          </Button>
+          </button>
         )}
       </section>
     </>
   );
 };
 
-export default SingleOrderHeader;
+export default SingleRecurrentOrderHeader;

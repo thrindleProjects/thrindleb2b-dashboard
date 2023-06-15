@@ -27,15 +27,26 @@ export const ORDERS_BASE_PATH = '/admin/order' as const;
 
 export const GET_ALL_ORDERS_PATH = `${ORDERS_BASE_PATH}/getAllOrders` as const;
 
-export const GET_RECURRENT_ORDERS_BASE_PATH = '/admin/recurrent' as const;
+export const RECURRENT_ORDERS_BASE_PATH = '/admin/recurrent' as const;
 
 export const GET_ALL_RECURRENT_ORDERS_PATH =
-  `${GET_RECURRENT_ORDERS_BASE_PATH}/getAllOrders` as const;
+  `${RECURRENT_ORDERS_BASE_PATH}/getAllOrders` as const;
 
 export const ADD_PRICE_TO_ITEM_PATH =
   `${ORDERS_BASE_PATH}/addPriceToItem` as const;
 
 export const ADD_SUBSTITUTE_TO_ITEM_PATH = '/order/addSubstitute' as const;
+
+export const DELETE_SUBSTITUTE_ITEM_PATH = '/order/substitute' as const;
+
+export const UPDATE_ITEM_AVAILABILITY_PATH =
+  `${ORDERS_BASE_PATH}/updateItemAvailability` as const;
+
+export const UPDATE_SINGLE_SUBSTITUTE_ITEM_PATH =
+  '/admin/order/substitute' as const;
+
+export const SEND_ORDER_PRICE_LIST_PATH =
+  `${ORDERS_BASE_PATH}/sendPriceList` as const;
 
 // ORDERS API ENDPOINTS END
 

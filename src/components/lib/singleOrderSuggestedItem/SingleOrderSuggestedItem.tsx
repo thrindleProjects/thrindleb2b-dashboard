@@ -1,9 +1,14 @@
 import { Icon } from '@iconify/react';
+import { toast } from 'react-hot-toast';
+import { ImSpinner2 } from 'react-icons/im';
 
 import clsxm from '@/lib/clsxm';
+import logger from '@/lib/logger';
 
+import SingleOrderEditSuggestedItemModal from '@/components/lib/singleOrderEditSuggestedItemModal';
 import ImageComponent from '@/components/shared/ImageComponent/ImageComponent';
 
+import { useDeleteSubstituteMutation } from '@/api/orders';
 import { SubstituteItemType } from '@/api/orders/types';
 import { IMAGE_BASE_URL } from '@/constant';
 import { useDisclosure } from '@/utils/hooks';
@@ -12,14 +17,27 @@ type SingleOrderSuggestedItemProps = SubstituteItemType;
 
 type SingleOrderSuggestedItemType = React.FC<SingleOrderSuggestedItemProps>;
 
-const SingleOrderSuggestedItem: SingleOrderSuggestedItemType = ({
-  id,
-  name,
-  images,
-  description,
-  price,
-}) => {
+const SingleOrderSuggestedItem: SingleOrderSuggestedItemType = (props) => {
+  const { id, name, images, description, price } = props;
+
   const { toggle, isOpen: seeMore } = useDisclosure();
+
+  const {
+    isOpen: isEditModalOpen,
+    close: closeEditModal,
+    open: openEditModal,
+  } = useDisclosure();
+
+  const [deleteItem, { isLoading }] = useDeleteSubstituteMutation();
+
+  const handleDelete = async () => {
+    try {
+      await deleteItem(id).unwrap();
+      toast.success('Substitute deleted successfully');
+    } catch (error) {
+      logger(error);
+    }
+  };
 
   return (
     <div
@@ -54,11 +72,32 @@ const SingleOrderSuggestedItem: SingleOrderSuggestedItemType = ({
           &#8358;{price?.toLocaleString()}
         </p>
       </section>
-      <div className='flex h-full items-start'>
-        <button className='text-primary-red h-max text-lg' type='button'>
-          <Icon icon='ph:x' />
+      <div className='flex h-full flex-col items-center gap-8'>
+        <button
+          className='text-primary-red h-max text-lg'
+          type='button'
+          onClick={handleDelete}
+        >
+          {isLoading ? (
+            <ImSpinner2 className='animate-spin' />
+          ) : (
+            <Icon icon='ph:x' />
+          )}
+        </button>
+
+        <button
+          className='text-primary-blue text-base font-medium xl:text-lg'
+          onClick={openEditModal}
+        >
+          <Icon icon='ph:pencil' />
         </button>
       </div>
+
+      <SingleOrderEditSuggestedItemModal
+        {...props}
+        isOpen={isEditModalOpen}
+        onClose={closeEditModal}
+      />
     </div>
   );
 };

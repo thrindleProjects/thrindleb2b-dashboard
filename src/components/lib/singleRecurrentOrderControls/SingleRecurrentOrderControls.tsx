@@ -3,30 +3,29 @@ import { useMemo } from 'react';
 
 import clsxm from '@/lib/clsxm';
 
-import SingleOrderListItemAvailableSwitch from '@/components/lib/singleOrderListItemAvailableSwitch';
-import SingleOrderListItemForm from '@/components/lib/singleOrderListItemForm/SingleOrderListItemForm';
-import SingleOrderSuggestedOptions from '@/components/lib/singleOrderSuggestedOptions';
+import SingleRecurrentOrderListItemForm from '@/components/lib/singleRecurrentOrderListItemForm';
+import SingleRecurrentOrderSuggestedOptions from '@/components/lib/singleRecurrentOrderSuggestedOptions';
 import ImageComponent from '@/components/shared/ImageComponent';
 
-import { useGetOrderByIdQuery } from '@/api/orders';
-import { ListItemType } from '@/api/orders/types';
+import { useGetRecurrentOrderByIdQuery } from '@/api/orders';
+import { RecurrentOrderListItemType } from '@/api/orders/types';
 import { IMAGE_BASE_URL } from '@/constant';
 import { useDisclosure } from '@/utils/hooks';
 
-const SingleOrderControls: React.FC = () => {
+const SingleRecurrentOrderControls: React.FC = () => {
   const { toggle, isOpen: seeMore } = useDisclosure();
 
   const { query } = useRouter();
 
-  const { orderId, itemId } = query;
+  const { recurrentId, itemId } = query;
 
-  const { data } = useGetOrderByIdQuery(orderId as string, {
-    skip: !orderId,
+  const { data } = useGetRecurrentOrderByIdQuery(recurrentId as string, {
+    skip: !recurrentId,
     refetchOnFocus: false,
     refetchOnMountOrArgChange: false,
   });
 
-  const item: undefined | ListItemType = useMemo(() => {
+  const item: undefined | RecurrentOrderListItemType = useMemo(() => {
     if (!data) {
       return undefined;
     }
@@ -81,11 +80,11 @@ const SingleOrderControls: React.FC = () => {
           {item.quantity} {item.quantity > 1 ? 'Pieces' : 'Piece'}
         </p>
       </div>
-      <SingleOrderListItemForm {...item} />
-      <SingleOrderListItemAvailableSwitch {...item} />
-      <SingleOrderSuggestedOptions id={item.id} />
+      <SingleRecurrentOrderListItemForm {...item} />
+
+      <SingleRecurrentOrderSuggestedOptions id={item.id} />
     </section>
   );
 };
 
-export default SingleOrderControls;
+export default SingleRecurrentOrderControls;

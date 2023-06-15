@@ -13,6 +13,7 @@ import { initialValues, validationSchema } from './validation';
 interface SingleOrderListItemFormProps {
   price: null | number;
   id: string;
+  isAvailable: boolean;
 }
 
 type SingleOrderListItemFormType = React.FC<SingleOrderListItemFormProps>;
@@ -20,6 +21,7 @@ type SingleOrderListItemFormType = React.FC<SingleOrderListItemFormProps>;
 const SingleOrderListItemForm: SingleOrderListItemFormType = ({
   price,
   id,
+  isAvailable,
 }) => {
   const [addPrice, { isLoading }] = useAddPriceToItemMutation();
 
@@ -40,6 +42,10 @@ const SingleOrderListItemForm: SingleOrderListItemFormType = ({
     },
     enableReinitialize: true,
   });
+
+  if (!isAvailable) {
+    return <></>;
+  }
 
   return (
     <form onSubmit={formik.handleSubmit} className='flex flex-col gap-3'>
