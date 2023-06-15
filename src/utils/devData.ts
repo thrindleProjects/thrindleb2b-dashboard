@@ -1,12 +1,3 @@
-export const dashboardNumbersData = [
-  { title: 'Total Orders', value: 100 },
-  { title: 'Total Customers', value: 400 },
-  { title: 'Total Delivered Orders', value: 500 },
-  { title: 'Total Requested Orders', value: 1000 },
-  { title: 'Total Pending Orders', value: 50 },
-  { title: 'Total Recurrent Orders', value: 250 },
-];
-
 export const dashboardData = [
   {
     orderId: '#45465',

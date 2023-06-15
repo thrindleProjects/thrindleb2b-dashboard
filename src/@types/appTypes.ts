@@ -1,4 +1,15 @@
-export type orderStatus = 'all' | 'pending' | 'in-progress' | 'completed';
+export interface INetworkResponse<T> {
+  message: string;
+  status: boolean;
+  data: T;
+}
+
+export type orderStatus =
+  | 'all'
+  | 'pending'
+  | 'in-progress'
+  | 'completed'
+  | 'requested';
 
 export type Company = {
   id: string;
@@ -16,8 +27,18 @@ export type Company = {
 };
 
 export type GeneralOrderStatus =
+  | 'all'
   | 'in-progress'
   | 'requested'
   | 'pending'
   | 'completed'
   | 'owing';
+
+export interface IDashboardNumbers {
+  recurrentOrders: number;
+  totalCustomer: number;
+  totalDeliveredOrders: number;
+  totalOrders: number;
+  totalPendingOrders: number;
+  totalRequestedOrders: number;
+}

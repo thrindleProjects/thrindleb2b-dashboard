@@ -26,6 +26,12 @@ const useOrderStatusHook = ({
       textColor: 'text-[#FEA218]',
       text: 'In-Progress',
     };
+  } else if (orderStatus === 'requested') {
+    orderStyle = {
+      bgColor: 'bg-orange-50',
+      textColor: 'text-orange-500',
+      text: 'Requested',
+    };
   } else {
     orderStyle = {
       bgColor: 'bg-yellow-50',

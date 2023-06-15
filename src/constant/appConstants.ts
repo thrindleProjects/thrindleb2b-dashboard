@@ -55,3 +55,6 @@ export const IMAGE_BASE_URL = `${process.env.NEXT_PUBLIC_DEV_URL}/images`;
 const IMAGES_SUB_LINK = '/images';
 
 export const IMAGE_URL = `${process.env.NEXT_PUBLIC_DEV_URL}${IMAGES_SUB_LINK}`;
+
+// Dashboard API PATHS
+export const GET_DASHBOARD_NUMBERS_API_URL = '/admin/order/getDashboardNumbers';
