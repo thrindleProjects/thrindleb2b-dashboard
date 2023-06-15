@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 import { useDisclosure } from '@/hooks';
 
-import SingleOrderSuggestedItemList from '@/components/lib/singleOrderSuggestedItemList/SingleOrderSuggestedItemList';
+import SingleOrderSuggestedItemList from '@/components/lib/singleOrderSuggestedItemList';
 import SingleOrderSuggestedItemModal from '@/components/lib/singleOrderSuggestedItemModal';
 
 import { useGetOrderByIdQuery } from '@/api/orders';

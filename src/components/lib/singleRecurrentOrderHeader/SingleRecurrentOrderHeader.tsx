@@ -19,9 +19,23 @@ const SingleRecurrentOrderHeader: React.FC = () => {
   }, [data?.data.listItems.length]);
 
   const allItemsValid = useMemo(() => {
-    //  || !!item.substitutes.length
+    return data?.data.listItems.every((item) => {
+      if (item.isAvailable) {
+        return (
+          !!item.price &&
+          (item.substitutes.length
+            ? item.substitutes.every((sub) => !!sub.price)
+            : true)
+        );
+      }
 
-    return data?.data.listItems.every((item) => !!item.price);
+      return (
+        !item.price &&
+        (item.substitutes.length
+          ? item.substitutes.every((sub) => !!sub.price)
+          : true)
+      );
+    });
   }, [data?.data.listItems]);
 
   const totalCostOfItems: string = useMemo(() => {
@@ -47,7 +61,7 @@ const SingleRecurrentOrderHeader: React.FC = () => {
         status={order.orderStatus}
         price={order.recurringPaymentAmount || 0}
         // TODO fix the date of this order
-        date={order.updatedAt}
+        date={new Date(order.recurringDeliveryDay).toISOString()}
       />
 
       <nav className='text-primary-black flex flex-row gap-2 text-sm font-semibold xl:text-base'>

@@ -84,7 +84,7 @@ const InputFile: React.FC<InputFileProps<HTMLInputElement>> = (props) => {
     if (typeof removeFile === 'string' && onDelete) {
       try {
         await onDelete(removeFile);
-        toast.success('image removed successfully');
+        toast.success('Image removed successfully');
         (
           onChange as (
             id: string,

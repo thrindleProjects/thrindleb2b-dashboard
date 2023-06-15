@@ -83,6 +83,7 @@ export type RecurrentOrderListItemType = {
   isSubstitute: boolean;
   price: null | number;
   recurrent: boolean;
+  substitutes: SubstituteItemType[];
   isAvailable: boolean;
   companyId: string;
   quantity: number;
@@ -90,6 +91,7 @@ export type RecurrentOrderListItemType = {
   volumeDiscountAmt: number;
   createdAt: string;
   updatedAt: string;
+  total: null | number;
 };
 
 export type SingleRecurrentOrder = {

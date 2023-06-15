@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import clsxm from '@/lib/clsxm';
 import { useDisclosure } from '@/hooks';
 
+import SingleOrderListItemAvailableSwitch from '@/components/lib/singleOrderListItemAvailableSwitch/SingleOrderListItemAvailableSwitch';
 import SingleRecurrentOrderListItemForm from '@/components/lib/singleRecurrentOrderListItemForm';
 import SingleRecurrentOrderSuggestedOptions from '@/components/lib/singleRecurrentOrderSuggestedOptions';
 import ImageComponent from '@/components/shared/ImageComponent';
@@ -81,7 +82,7 @@ const SingleRecurrentOrderControls: React.FC = () => {
         </p>
       </div>
       <SingleRecurrentOrderListItemForm {...item} />
-
+      <SingleOrderListItemAvailableSwitch {...item} />
       <SingleRecurrentOrderSuggestedOptions id={item.id} />
     </section>
   );

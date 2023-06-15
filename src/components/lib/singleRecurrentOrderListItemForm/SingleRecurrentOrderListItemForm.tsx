@@ -13,13 +13,14 @@ import { initialValues, validationSchema } from './validation';
 interface SingleRecurrentOrderListItemFormProps {
   price: null | number;
   id: string;
+  isAvailable: boolean;
 }
 
 type SingleRecurrentOrderListItemFormType =
   React.FC<SingleRecurrentOrderListItemFormProps>;
 
 const SingleRecurrentOrderListItemForm: SingleRecurrentOrderListItemFormType =
-  ({ price, id }) => {
+  ({ price, id, isAvailable }) => {
     const [addPrice, { isLoading }] = useAddPriceToRecurrentItemMutation();
 
     const formik = useFormik({
@@ -39,6 +40,10 @@ const SingleRecurrentOrderListItemForm: SingleRecurrentOrderListItemFormType =
       },
       enableReinitialize: true,
     });
+
+    if (!isAvailable) {
+      return <></>;
+    }
 
     return (
       <form onSubmit={formik.handleSubmit} className='flex flex-col gap-3'>

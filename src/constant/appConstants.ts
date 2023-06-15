@@ -48,6 +48,11 @@ export const UPDATE_SINGLE_SUBSTITUTE_ITEM_PATH =
 export const SEND_ORDER_PRICE_LIST_PATH =
   `${ORDERS_BASE_PATH}/sendPriceList` as const;
 
+export const DELETE_IMAGE_FOR_SUBSTITUTE_ITEM_PATH =
+  '/order/deleteSubstituteImage' as const;
+
+export const GET_SINGLE_ORDER_ITEM = '/order/item' as const;
+
 // ORDERS API ENDPOINTS END
 
 // CUSTOMERS ENDPOINTS START

@@ -9,7 +9,7 @@ interface OrderStatusInfoProps {
   /**
    * If order is scheduled, this field should be provided
    */
-  date: string | null;
+  date?: string | null;
 }
 
 type OrderStatusInfoType = React.FC<OrderStatusInfoProps>;
