@@ -1,25 +1,47 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
+import { toast } from 'react-hot-toast';
 
-import OrderStatusInfo from '@/components/lib/orderStatusInfo/OrderStatusInfo';
+import logger from '@/lib/logger';
 
-import { useGetOrderByIdQuery } from '@/api/orders';
+import Button from '@/components/buttons/Button';
+import OrderStatusInfo from '@/components/lib/orderStatusInfo';
+
+import {
+  useGetOrderByIdQuery,
+  useSendOrderPriceListMutation,
+} from '@/api/orders';
 
 const SingleOrderHeader: React.FC = () => {
   const { query } = useRouter();
 
   const { orderId } = query;
   const { data } = useGetOrderByIdQuery(orderId as string, { skip: !orderId });
+  const [sendOrder, { isLoading }] = useSendOrderPriceListMutation();
 
   const numberOfItems = useMemo(() => {
     return data?.data.listItems.length;
   }, [data?.data.listItems.length]);
 
   const allItemsValid = useMemo(() => {
-    return data?.data.listItems.every(
-      (item) => !!item.price || !!item.substitutes.length
-    );
+    return data?.data.listItems.every((item) => {
+      if (item.isAvailable) {
+        return (
+          !!item.price &&
+          (item.substitutes.length
+            ? item.substitutes.every((sub) => !!sub.price)
+            : true)
+        );
+      }
+
+      return (
+        !item.price &&
+        (item.substitutes.length
+          ? item.substitutes.every((sub) => !!sub.price)
+          : true)
+      );
+    });
   }, [data?.data.listItems]);
 
   const totalCostOfItems: string = useMemo(() => {
@@ -39,6 +61,15 @@ const SingleOrderHeader: React.FC = () => {
 
   const { data: order } = data;
 
+  const handleSendOrder = async () => {
+    try {
+      await sendOrder(data.data.id).unwrap();
+      toast.success('Price list sent successfully');
+    } catch (error) {
+      logger(error);
+    }
+  };
+
   return (
     <>
       <OrderStatusInfo
@@ -47,7 +78,16 @@ const SingleOrderHeader: React.FC = () => {
         date={order.paymentDate}
       />
       <nav className='text-primary-black flex flex-row gap-2 text-sm font-semibold xl:text-base'>
-        <Link href='/orders' className='text-primary-black/60'>
+        <Link
+          href={`/orders${
+            order.orderStatus === 'pending'
+              ? ''
+              : order.orderStatus === 'owing'
+              ? '/vip'
+              : `/${order.orderStatus.toLowerCase()}`
+          }`}
+          className='text-primary-black/60'
+        >
           Orders
         </Link>
         {' / '}
@@ -82,10 +122,14 @@ const SingleOrderHeader: React.FC = () => {
           )}
         </div>
 
-        {allItemsValid && (
-          <button className='bg-primary-blue rounded-lg px-10 py-4 text-sm font-semibold text-white outline-none focus:ring xl:text-base'>
+        {allItemsValid && data.data.orderStatus === 'requested' && (
+          <Button
+            className='bg-primary-blue rounded-lg px-10 py-4 text-sm font-semibold text-white outline-none focus:ring xl:text-base'
+            onClick={handleSendOrder}
+            isLoading={isLoading}
+          >
             Send Price List
-          </button>
+          </Button>
         )}
       </section>
     </>

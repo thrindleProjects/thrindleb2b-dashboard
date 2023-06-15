@@ -12,7 +12,7 @@ import {
   useGetCompanyDetailsQuery,
   useMakeCompanyVipMutation,
 } from '@/api/customers';
-import { IMAGE_URL } from '@/constant';
+import { IMAGE_BASE_URL } from '@/constant';
 
 const CompanyDetailsCard = () => {
   const [makeVip, { isLoading }] = useMakeCompanyVipMutation();
@@ -44,7 +44,7 @@ const CompanyDetailsCard = () => {
           <div className='relative h-[80px] w-[80px]'>
             <Image
               className='rounded-full'
-              src={`${IMAGE_URL}/${data?.data.logo}`}
+              src={`${IMAGE_BASE_URL}/${data?.data.logo}`}
               alt='logo'
               fill={true}
             />

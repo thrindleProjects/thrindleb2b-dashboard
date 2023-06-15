@@ -27,15 +27,26 @@ export const ORDERS_BASE_PATH = '/admin/order' as const;
 
 export const GET_ALL_ORDERS_PATH = `${ORDERS_BASE_PATH}/getAllOrders` as const;
 
-export const GET_RECURRENT_ORDERS_BASE_PATH = '/admin/recurrent' as const;
+export const RECURRENT_ORDERS_BASE_PATH = '/admin/recurrent' as const;
 
 export const GET_ALL_RECURRENT_ORDERS_PATH =
-  `${GET_RECURRENT_ORDERS_BASE_PATH}/getAllOrders` as const;
+  `${RECURRENT_ORDERS_BASE_PATH}/getAllOrders` as const;
 
 export const ADD_PRICE_TO_ITEM_PATH =
   `${ORDERS_BASE_PATH}/addPriceToItem` as const;
 
 export const ADD_SUBSTITUTE_TO_ITEM_PATH = '/order/addSubstitute' as const;
+
+export const DELETE_SUBSTITUTE_ITEM_PATH = '/order/substitute' as const;
+
+export const UPDATE_ITEM_AVAILABILITY_PATH =
+  `${ORDERS_BASE_PATH}/updateItemAvailability` as const;
+
+export const UPDATE_SINGLE_SUBSTITUTE_ITEM_PATH =
+  '/admin/order/substitute' as const;
+
+export const SEND_ORDER_PRICE_LIST_PATH =
+  `${ORDERS_BASE_PATH}/sendPriceList` as const;
 
 // ORDERS API ENDPOINTS END
 
@@ -48,10 +59,38 @@ export const GET_COMPANY_DETAILS = '/admin/company';
 // CUSTOMERS ENDPOINTS END
 
 // IMAGE BASE URL START
-export const IMAGE_BASE_URL = `${process.env.NEXT_PUBLIC_DEV_URL}/images`;
+export const IMAGE_BASE_URL =
+  `${process.env.NEXT_PUBLIC_DEV_URL}/images` as const;
 // IMAGE BASE URL END
 
-// Images
-const IMAGES_SUB_LINK = '/images';
+// INPUT TYPES START
+export const PASSWORD = 'password';
+export const TEXT = 'text';
+export const EMAIL = 'email';
+export const DATE = 'date';
+export const FILE = 'file';
+// INPUT TYPES END
 
-export const IMAGE_URL = `${process.env.NEXT_PUBLIC_DEV_URL}${IMAGES_SUB_LINK}`;
+// ADD USER FORM KEYS START
+export const FULLNAME = 'fullName';
+export const EMAIL_ADDRESS = 'emailAddress';
+export const PHONE_NUMBER = 'phoneNumber';
+export const ROLE = 'role';
+// ADD USER FORM KEYS END
+
+// PASSWORD FORM KEYS START
+export const NEW_PASSWORD = 'newPassword';
+export const CONFIRM_PASSWORD = 'confirmPassword';
+// PASSWORD FORM KEYS END
+
+// PROFILE FORM KEYS START
+export const FIRST_NAME = 'firstName';
+export const LAST_NAME = 'lastName';
+export const PHONE = 'phone';
+// PROFILE FORM KEYS END
+
+// PROFILE LAYOUT TAB TYPES START
+export const GENERAL = 'General';
+export const SECURITY = 'Security';
+export const USERS = 'Users & Permission';
+// PROFILE LAYOUT TAB TYPES END

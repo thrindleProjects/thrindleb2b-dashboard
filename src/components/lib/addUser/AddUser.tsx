@@ -5,7 +5,7 @@ import Button from '@/components/buttons/Button';
 import Input from '@/components/shared/Input/Input';
 import Select from '@/components/shared/Select/Select';
 
-import * as CONSTANTS from '@/utils/constants';
+import * as CONSTANTS from '@/constant';
 
 import { initialValues, validationSchema } from './validation';
 

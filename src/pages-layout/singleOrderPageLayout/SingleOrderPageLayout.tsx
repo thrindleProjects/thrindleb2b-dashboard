@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { ImSpinner2 } from 'react-icons/im';
 
 import SingleOrderDetails from '@/components/lib/singleOrderDetails/SingleOrderDetails';
-import SingleOrderHeader from '@/components/lib/singleOrderHeader';
-import PaddedContainer from '@/components/shared/PaddedContainer/PaddedContainer';
+import SingleOrderHeader from '@/components/lib/singleOrderHeader/SingleOrderHeader';
+import PaddedContainer from '@/components/shared/PaddedContainer';
 
 import { useGetOrderByIdQuery } from '@/api/orders';
 
@@ -18,7 +18,7 @@ const SingleOrderPageLayout: React.FC = () => {
 
   return (
     <PaddedContainer>
-      {data && !isLoading && !error && (
+      {data && !isLoading && !error && data.data && (
         <>
           <SingleOrderHeader />
           <SingleOrderDetails />
@@ -29,7 +29,7 @@ const SingleOrderPageLayout: React.FC = () => {
           <ImSpinner2 className='text-primary-blue animate-spin text-3xl' />
         </div>
       )}
-      {!data && !isLoading && !!error && (
+      {!isLoading && (!!error || !data || !data.data) && (
         <div className='text-primary-red/80 grid h-full w-full place-items-center text-center text-3xl font-semibold'>
           Something went wrong
         </div>

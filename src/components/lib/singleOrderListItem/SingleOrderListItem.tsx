@@ -2,13 +2,13 @@ import { useRouter } from 'next/router';
 import { KeyboardEvent, useMemo } from 'react';
 
 import clsxm from '@/lib/clsxm';
+import { useDisclosure } from '@/hooks';
 
-import ImageComponent from '@/components/shared/ImageComponent/ImageComponent';
+import ImageComponent from '@/components/shared/ImageComponent';
 
 import { ListItemType } from '@/api/orders/types';
 import { IMAGE_BASE_URL } from '@/constant';
 import { formatDateWithYear, getQueryParams } from '@/utils/functions';
-import { useDisclosure } from '@/utils/hooks';
 
 interface SingleOrderListItemProps extends ListItemType {
   index: number;
@@ -26,6 +26,7 @@ const SingleOrderListItem: SingleOrderListItemType = ({
   price,
   substitutes,
   quantity,
+  isAvailable,
 }) => {
   const { toggle, isOpen: seeMore } = useDisclosure();
 
@@ -129,6 +130,12 @@ const SingleOrderListItem: SingleOrderListItemType = ({
           {substitutes && substitutes.length > 0 && (
             <span className='text-primary-green border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0'>
               Substitutes Added
+            </span>
+          )}
+
+          {!isAvailable && (
+            <span className='text-primary-red border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0'>
+              Unavailable
             </span>
           )}
         </span>

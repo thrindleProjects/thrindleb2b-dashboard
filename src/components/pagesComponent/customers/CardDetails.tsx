@@ -5,7 +5,7 @@ import React from 'react';
 import { WhiteCard } from '@/components/shared/whiteCard';
 
 import { useGetOrderByIdQuery } from '@/api/orders';
-import { IMAGE_URL } from '@/constant';
+import { IMAGE_BASE_URL } from '@/constant';
 
 export interface IListCard {
   active: string;
@@ -28,7 +28,7 @@ const CardDetails: React.FC<IListCard> = ({ active }) => {
         {singleItemToRender &&
           singleItemToRender[0]?.images.map((item, index) => (
             <Image
-              src={`${IMAGE_URL}/${item}`}
+              src={`${IMAGE_BASE_URL}/${item}`}
               alt=''
               key={index}
               fill={true}

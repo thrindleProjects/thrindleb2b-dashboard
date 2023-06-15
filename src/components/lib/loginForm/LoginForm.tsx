@@ -9,7 +9,7 @@ import logger from '@/lib/logger';
 import Button from '@/components/buttons/Button';
 import Input from '@/components/shared/Input';
 
-import { PASSWORD, TEXT } from '@/utils/constants';
+import { PASSWORD, TEXT } from '@/constant';
 
 import { initialValues, validationSchema } from './validation';
 

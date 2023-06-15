@@ -1,4 +1,4 @@
-import { orderStatus } from '@/@types/appTypes';
+import { orderStatus } from '@/@types';
 import { orderStatues } from '@/utils/productionData';
 
 import SingleStatusTab from './SingleStatusTab';

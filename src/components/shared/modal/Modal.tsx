@@ -30,7 +30,7 @@ const GenModal: React.FC<ModalProps> = ({
       shouldCloseOnOverlayClick={true}
       shouldReturnFocusAfterClose={true}
       ariaHideApp={false}
-      className={`ml-auto  h-max flex-shrink-0 bg-transparent  drop-shadow-2xl md:h-max lg:w-[485px] ${className}`}
+      className={`ml-auto h-max flex-shrink-0 bg-transparent drop-shadow-2xl md:h-max lg:w-[485px] ${className}`}
     >
       <motion.div
         animate={{ x: 0 }}
@@ -40,7 +40,7 @@ const GenModal: React.FC<ModalProps> = ({
           duration: 1,
           ease: [0.6, 0.05, -0.01, 0.9],
         }}
-        className='ml-auto  h-screen overflow-y-auto bg-white px-10 py-10'
+        className='ml-auto h-screen overflow-y-auto bg-white px-10 py-10'
       >
         {!hideCloseIcon && (
           <div className='flex w-full flex-row justify-end'>
