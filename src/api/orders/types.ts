@@ -1,4 +1,4 @@
-import { Company, GeneralOrderStatus } from '@/@types/appTypes';
+import { Company, GeneralOrderStatus } from '@/@types';
 
 export type OrdersType = {
   id: string;

@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import * as CONSTANTS from '@/utils/constants';
+import * as CONSTANTS from '@/constant';
 
 export const SUPPORTED_FORMATS = ['jpg', 'jpeg', 'gif', 'png', 'doc', 'docx'];
 

@@ -1,9 +1,9 @@
 import { PropsWithChildren } from 'react';
 
+import { useMediaQuery } from '@/hooks';
+
 import Sidebar from '@/components/lib/sidebar';
 import TopNav from '@/components/lib/topNav';
-
-import { useMediaQuery } from '@/utils/hooks';
 
 type AuthenticatedLayoutType = React.FC<PropsWithChildren>;
 

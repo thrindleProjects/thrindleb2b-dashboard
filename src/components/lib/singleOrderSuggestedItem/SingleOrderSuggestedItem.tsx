@@ -4,6 +4,7 @@ import { ImSpinner2 } from 'react-icons/im';
 
 import clsxm from '@/lib/clsxm';
 import logger from '@/lib/logger';
+import { useDisclosure } from '@/hooks';
 
 import SingleOrderEditSuggestedItemModal from '@/components/lib/singleOrderEditSuggestedItemModal';
 import ImageComponent from '@/components/shared/ImageComponent/ImageComponent';
@@ -11,7 +12,6 @@ import ImageComponent from '@/components/shared/ImageComponent/ImageComponent';
 import { useDeleteSubstituteMutation } from '@/api/orders';
 import { SubstituteItemType } from '@/api/orders/types';
 import { IMAGE_BASE_URL } from '@/constant';
-import { useDisclosure } from '@/utils/hooks';
 
 type SingleOrderSuggestedItemProps = SubstituteItemType;
 

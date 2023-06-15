@@ -9,12 +9,12 @@ import TableHeader from '@/components/shared/Table/TableHeader';
 import TableRow from '@/components/shared/Table/TableRow';
 import { WhiteCard } from '@/components/shared/whiteCard';
 
-import { ICompanyOrderData } from '@/api/customers/type';
+import { SingleOrder } from '@/api/orders/types';
 
 import { formatDate } from '../../../utils/functions/formatDate';
 
 export interface IOrderTable {
-  data: ICompanyOrderData[] | undefined;
+  data: SingleOrder[] | undefined;
 }
 
 const OrderTable: React.FC<IOrderTable> = ({ data }) => {

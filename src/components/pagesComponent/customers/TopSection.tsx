@@ -2,12 +2,12 @@ import React from 'react';
 
 import { WhiteCard } from '@/components/shared/whiteCard';
 
+import { Company } from '@/@types';
 import { useGetGraphDataQuery } from '@/api/customers';
-import { ICompanyData } from '@/api/customers/type';
 import { GetOrdersResponse } from '@/api/orders/types';
 
 export interface ICustomers {
-  data: GetOrdersResponse<ICompanyData> | undefined;
+  data: GetOrdersResponse<Company> | undefined;
   loading?: boolean;
   error?: boolean;
 }

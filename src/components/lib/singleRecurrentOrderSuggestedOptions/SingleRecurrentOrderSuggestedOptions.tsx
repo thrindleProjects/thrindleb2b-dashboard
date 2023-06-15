@@ -3,7 +3,7 @@
 // import { useGetRecurrentOrderByIdQuery } from '@/api/orders';
 // import { RecurrentOrderListItemType } from '@/api/orders/types';
 // import { getQueryParams } from '@/utils/functions';
-// import { useDisclosure } from '@/utils/hooks';
+// import { useDisclosure } from '@/hooks';
 
 interface SingleRecurrentOrderSuggestOptionsProps {
   id: string;

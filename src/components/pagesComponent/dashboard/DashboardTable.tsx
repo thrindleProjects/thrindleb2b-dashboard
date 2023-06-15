@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import useOrderStatusHook from '@/hooks/useStatusHook';
+import { useOrderStatusHook } from '@/hooks';
 
 import { TabContainer } from '@/components/shared/statusTab';
 import Table from '@/components/shared/Table';
@@ -10,7 +10,7 @@ import TableHeader from '@/components/shared/Table/TableHeader';
 import TableRow from '@/components/shared/Table/TableRow';
 import { WhiteCard } from '@/components/shared/whiteCard';
 
-import { orderStatus } from '@/@types/appTypes';
+import { orderStatus } from '@/@types';
 import { dashboardData } from '@/utils/devData';
 import { dashboardTableHeaderData } from '@/utils/productionData';
 

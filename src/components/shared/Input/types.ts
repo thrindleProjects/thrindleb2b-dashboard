@@ -3,7 +3,7 @@ import {
   InputEmailType,
   InputPasswordType,
   InputTextType,
-} from '@/utils/appTypes';
+} from '@/@types';
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

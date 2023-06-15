@@ -1,4 +1,4 @@
-import { GeneralOrderStatus } from '@/@types/appTypes';
+import { GeneralOrderStatus, INetworkSuccessResponse } from '@/@types';
 import { globalApi } from '@/api/globalApi';
 import type {
   GetOrdersResponse,
@@ -24,7 +24,7 @@ import {
   UPDATE_ITEM_AVAILABILITY_PATH,
   UPDATE_SINGLE_SUBSTITUTE_ITEM_PATH,
 } from '@/constant';
-import { INetworkSuccessResponse } from '@/utils/appTypes';
+
 const OrdersApi = globalApi.injectEndpoints({
   endpoints: (build) => ({
     getOrders: build.query<

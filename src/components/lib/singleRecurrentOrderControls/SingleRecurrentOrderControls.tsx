@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 
 import clsxm from '@/lib/clsxm';
+import { useDisclosure } from '@/hooks';
 
 import SingleRecurrentOrderListItemForm from '@/components/lib/singleRecurrentOrderListItemForm';
 import SingleRecurrentOrderSuggestedOptions from '@/components/lib/singleRecurrentOrderSuggestedOptions';
@@ -10,7 +11,6 @@ import ImageComponent from '@/components/shared/ImageComponent';
 import { useGetRecurrentOrderByIdQuery } from '@/api/orders';
 import { RecurrentOrderListItemType } from '@/api/orders/types';
 import { IMAGE_BASE_URL } from '@/constant';
-import { useDisclosure } from '@/utils/hooks';
 
 const SingleRecurrentOrderControls: React.FC = () => {
   const { toggle, isOpen: seeMore } = useDisclosure();
