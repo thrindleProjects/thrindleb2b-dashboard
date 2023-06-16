@@ -51,7 +51,8 @@ export const SEND_ORDER_PRICE_LIST_PATH =
 export const DELETE_IMAGE_FOR_SUBSTITUTE_ITEM_PATH =
   '/order/deleteSubstituteImage' as const;
 
-export const GET_SINGLE_ORDER_ITEM = '/order/item' as const;
+export const SEND_RECURRENT_ORDER_PRICE_LIST_PATH =
+  `/admin/order/sendRecurrentPriceList` as const;
 
 // ORDERS API ENDPOINTS END
 

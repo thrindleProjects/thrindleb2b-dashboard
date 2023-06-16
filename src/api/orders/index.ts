@@ -22,6 +22,7 @@ import {
   PUT_METHOD,
   RECURRENT_ORDERS_BASE_PATH,
   SEND_ORDER_PRICE_LIST_PATH,
+  SEND_RECURRENT_ORDER_PRICE_LIST_PATH,
   UPDATE_ITEM_AVAILABILITY_PATH,
   UPDATE_SINGLE_SUBSTITUTE_ITEM_PATH,
 } from '@/constant';
@@ -158,6 +159,17 @@ const OrdersApi = globalApi.injectEndpoints({
       invalidatesTags: ['SingleOrder'],
     }),
 
+    sendRecurrentOrderPriceList: build.mutation<
+      INetworkSuccessResponse<unknown>,
+      string
+    >({
+      query: (id) => ({
+        url: `${SEND_RECURRENT_ORDER_PRICE_LIST_PATH}/${id}`,
+        method: GET_METHOD,
+      }),
+      invalidatesTags: ['SingleRecurrentOrder'],
+    }),
+
     deleteImageForSubstituteItem: build.mutation<
       INetworkSuccessResponse<unknown>,
       { id: string; payload: { imageKey: string } }
@@ -185,4 +197,5 @@ export const {
   useUpdateSingleSubstituteMutation,
   useSendOrderPriceListMutation,
   useDeleteImageForSubstituteItemMutation,
+  useSendRecurrentOrderPriceListMutation,
 } = OrdersApi;

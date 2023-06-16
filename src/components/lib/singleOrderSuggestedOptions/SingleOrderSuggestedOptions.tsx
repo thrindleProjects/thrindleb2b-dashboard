@@ -94,7 +94,7 @@ const SingleOrderSuggestedOptions: SingleOrderSuggestedOptionsType = ({
 
   return (
     <div>
-      {!substitutes.length && (
+      {!substitutes.length && data?.data.orderStatus === 'requested' && (
         <button
           onClick={open}
           className='text-primary-blue before:bg-primary-blue relative py-px text-sm font-medium before:absolute before:left-0 before:top-full before:h-[2px] before:w-0 before:rounded-full before:transition-all before:duration-500 focus-within:outline-none focus-within:before:w-full hover:before:w-full xl:text-sm'
@@ -110,12 +110,14 @@ const SingleOrderSuggestedOptions: SingleOrderSuggestedOptionsType = ({
               Suggested Options
             </h5>
 
-            <button
-              onClick={open}
-              className='text-primary-blue before:bg-primary-blue relative py-px text-sm font-medium before:absolute before:left-0 before:top-full before:h-[2px] before:w-0 before:rounded-full before:transition-all before:duration-500 focus-within:outline-none focus-within:before:w-full hover:before:w-full xl:text-sm'
-            >
-              Edit Details
-            </button>
+            {data?.data.orderStatus === 'requested' && (
+              <button
+                onClick={open}
+                className='text-primary-blue before:bg-primary-blue relative py-px text-sm font-medium before:absolute before:left-0 before:top-full before:h-[2px] before:w-0 before:rounded-full before:transition-all before:duration-500 focus-within:outline-none focus-within:before:w-full hover:before:w-full xl:text-sm'
+              >
+                Edit Details
+              </button>
+            )}
           </section>
 
           <SingleOrderSuggestedItemList />

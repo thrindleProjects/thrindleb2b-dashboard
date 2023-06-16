@@ -9,16 +9,19 @@ import { useDisclosure } from '@/hooks';
 import SingleOrderEditSuggestedItemModal from '@/components/lib/singleOrderEditSuggestedItemModal';
 import ImageComponent from '@/components/shared/ImageComponent/ImageComponent';
 
+import { GeneralOrderStatus } from '@/@types';
 import { useDeleteSubstituteMutation } from '@/api/orders';
 import { SubstituteItemType } from '@/api/orders/types';
 import { IMAGE_BASE_URL } from '@/constant';
 
-type SingleOrderSuggestedItemProps = SubstituteItemType;
+type SingleOrderSuggestedItemProps = SubstituteItemType & {
+  status: GeneralOrderStatus;
+};
 
 type SingleOrderSuggestedItemType = React.FC<SingleOrderSuggestedItemProps>;
 
 const SingleOrderSuggestedItem: SingleOrderSuggestedItemType = (props) => {
-  const { id, name, images, description, price } = props;
+  const { id, name, images, description, price, status } = props;
 
   const { toggle, isOpen: seeMore } = useDisclosure();
 
@@ -73,24 +76,28 @@ const SingleOrderSuggestedItem: SingleOrderSuggestedItemType = (props) => {
         </p>
       </section>
       <div className='flex h-full flex-col items-center gap-8'>
-        <button
-          className='text-primary-red h-max text-lg'
-          type='button'
-          onClick={handleDelete}
-        >
-          {isLoading ? (
-            <ImSpinner2 className='animate-spin' />
-          ) : (
-            <Icon icon='ph:x' />
-          )}
-        </button>
+        {status === 'requested' && (
+          <>
+            <button
+              className='text-primary-red h-max text-lg'
+              type='button'
+              onClick={handleDelete}
+            >
+              {isLoading ? (
+                <ImSpinner2 className='animate-spin' />
+              ) : (
+                <Icon icon='ph:x' />
+              )}
+            </button>
 
-        <button
-          className='text-primary-blue text-base font-medium xl:text-lg'
-          onClick={openEditModal}
-        >
-          <Icon icon='ph:pencil' />
-        </button>
+            <button
+              className='text-primary-blue text-base font-medium xl:text-lg'
+              onClick={openEditModal}
+            >
+              <Icon icon='ph:pencil' />
+            </button>
+          </>
+        )}
       </div>
 
       <SingleOrderEditSuggestedItemModal

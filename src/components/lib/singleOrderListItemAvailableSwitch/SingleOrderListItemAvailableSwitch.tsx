@@ -3,19 +3,22 @@ import { Icon } from '@iconify/react';
 import clsxm from '@/lib/clsxm';
 import logger from '@/lib/logger';
 
+import { GeneralOrderStatus } from '@/@types';
 import { useUpdateItemAvailabilityMutation } from '@/api/orders';
 import { ListItemType } from '@/api/orders/types';
 
 type SingleOrderListItemAvalilableSwitchProps = Pick<
   ListItemType,
   'id' | 'isAvailable'
->;
+> & {
+  status: GeneralOrderStatus;
+};
 
 type SingleOrderListItemAvalilableSwitchType =
   React.FC<SingleOrderListItemAvalilableSwitchProps>;
 
 const SingleOrderListItemAvailableSwitch: SingleOrderListItemAvalilableSwitchType =
-  ({ id, isAvailable }) => {
+  ({ id, isAvailable, status }) => {
     const [updateItem, { isLoading }] = useUpdateItemAvailabilityMutation();
 
     async function handleUpdateItemAvailability() {
@@ -27,6 +30,10 @@ const SingleOrderListItemAvailableSwitch: SingleOrderListItemAvalilableSwitchTyp
       } catch (error) {
         logger(error);
       }
+    }
+
+    if (status !== 'requested') {
+      return <></>;
     }
 
     return (
