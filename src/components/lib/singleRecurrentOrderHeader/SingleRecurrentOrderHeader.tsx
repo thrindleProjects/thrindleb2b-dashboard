@@ -1,10 +1,17 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
+import { toast } from 'react-hot-toast';
 
+import logger from '@/lib/logger';
+
+import Button from '@/components/buttons/Button';
 import OrderStatusInfo from '@/components/lib/orderStatusInfo';
 
-import { useGetRecurrentOrderByIdQuery } from '@/api/orders';
+import {
+  useGetRecurrentOrderByIdQuery,
+  useSendRecurrentOrderPriceListMutation,
+} from '@/api/orders';
 
 const SingleRecurrentOrderHeader: React.FC = () => {
   const { query } = useRouter();
@@ -13,6 +20,7 @@ const SingleRecurrentOrderHeader: React.FC = () => {
   const { data } = useGetRecurrentOrderByIdQuery(recurrentId as string, {
     skip: !recurrentId,
   });
+  const [sendOrder, { isLoading }] = useSendRecurrentOrderPriceListMutation();
 
   const numberOfItems = useMemo(() => {
     return data?.data.listItems.length;
@@ -54,6 +62,15 @@ const SingleRecurrentOrderHeader: React.FC = () => {
   }
 
   const { data: order } = data;
+
+  const handleSendOrder = async () => {
+    try {
+      await sendOrder(data.data.id).unwrap();
+      toast.success('Price list sent successfully');
+    } catch (error) {
+      logger(error);
+    }
+  };
 
   return (
     <>
@@ -109,10 +126,14 @@ const SingleRecurrentOrderHeader: React.FC = () => {
           )}
         </div>
 
-        {allItemsValid && (
-          <button className='bg-primary-blue rounded-lg px-10 py-4 text-sm font-semibold text-white outline-none focus:ring xl:text-base'>
+        {allItemsValid && data.data.orderStatus === 'requested' && (
+          <Button
+            className='bg-primary-blue rounded-lg px-10 py-4 text-sm font-semibold text-white outline-none focus:ring xl:text-base'
+            onClick={handleSendOrder}
+            isLoading={isLoading}
+          >
             Send Price List
-          </button>
+          </Button>
         )}
       </section>
     </>

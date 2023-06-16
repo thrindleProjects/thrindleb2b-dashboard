@@ -6,6 +6,7 @@ import logger from '@/lib/logger';
 import Button from '@/components/buttons/Button';
 import Input from '@/components/shared/Input';
 
+import { GeneralOrderStatus } from '@/@types';
 import { useAddPriceToItemMutation } from '@/api/orders';
 
 import { initialValues, validationSchema } from './validation';
@@ -14,6 +15,7 @@ interface SingleOrderListItemFormProps {
   price: null | number;
   id: string;
   isAvailable: boolean;
+  status: GeneralOrderStatus;
 }
 
 type SingleOrderListItemFormType = React.FC<SingleOrderListItemFormProps>;
@@ -22,6 +24,7 @@ const SingleOrderListItemForm: SingleOrderListItemFormType = ({
   price,
   id,
   isAvailable,
+  status,
 }) => {
   const [addPrice, { isLoading }] = useAddPriceToItemMutation();
 
@@ -61,11 +64,17 @@ const SingleOrderListItemForm: SingleOrderListItemFormType = ({
         errorText={formik.errors.pricePerItem}
         required={true}
         autoComplete='dng'
+        disabled={status !== 'requested'}
       />
-
-      <Button className='w-full text-base' type='submit' isLoading={isLoading}>
-        {price ? 'Update' : 'Add'} Price
-      </Button>
+      {status === 'requested' && (
+        <Button
+          className='w-full text-base'
+          type='submit'
+          isLoading={isLoading}
+        >
+          {price ? 'Update' : 'Add'} Price
+        </Button>
+      )}
     </form>
   );
 };

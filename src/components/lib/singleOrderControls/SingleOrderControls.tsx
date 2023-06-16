@@ -36,7 +36,7 @@ const SingleOrderControls: React.FC = () => {
     return data.data.listItems.find((item) => item.id === itemId);
   }, [itemId, data]);
 
-  if (!item) {
+  if (!item || !data) {
     return (
       <div className='text-primary-blue grid h-full w-full place-items-center rounded-lg bg-white text-lg font-medium'>
         Nothing to see here
@@ -81,8 +81,11 @@ const SingleOrderControls: React.FC = () => {
           {item.quantity} {item.quantity > 1 ? 'Pieces' : 'Piece'}
         </p>
       </div>
-      <SingleOrderListItemForm {...item} />
-      <SingleOrderListItemAvailableSwitch {...item} />
+      <SingleOrderListItemForm {...item} status={data.data.orderStatus} />
+      <SingleOrderListItemAvailableSwitch
+        {...item}
+        status={data.data.orderStatus}
+      />
       <SingleOrderSuggestedOptions id={item.id} />
     </section>
   );

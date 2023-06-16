@@ -35,10 +35,18 @@ const SingleOrderSuggestedItemList: React.FC = () => {
     return listItem.substitutes;
   }, [data, itemId]);
 
+  if (!data || !substitutes.length) return <></>;
+
   return (
     <div className='flex flex-col gap-2'>
       {substitutes.map((subItem) => {
-        return <SingleOrderSuggestedItem {...subItem} key={subItem.id} />;
+        return (
+          <SingleOrderSuggestedItem
+            {...subItem}
+            key={subItem.id}
+            status={data.data.orderStatus}
+          />
+        );
       })}
     </div>
   );

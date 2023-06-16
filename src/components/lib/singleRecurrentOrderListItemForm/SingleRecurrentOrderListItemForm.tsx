@@ -6,6 +6,7 @@ import logger from '@/lib/logger';
 import Button from '@/components/buttons/Button';
 import Input from '@/components/shared/Input';
 
+import { GeneralOrderStatus } from '@/@types';
 import { useAddPriceToRecurrentItemMutation } from '@/api/orders';
 
 import { initialValues, validationSchema } from './validation';
@@ -14,13 +15,14 @@ interface SingleRecurrentOrderListItemFormProps {
   price: null | number;
   id: string;
   isAvailable: boolean;
+  status: GeneralOrderStatus;
 }
 
 type SingleRecurrentOrderListItemFormType =
   React.FC<SingleRecurrentOrderListItemFormProps>;
 
 const SingleRecurrentOrderListItemForm: SingleRecurrentOrderListItemFormType =
-  ({ price, id, isAvailable }) => {
+  ({ price, id, isAvailable, status }) => {
     const [addPrice, { isLoading }] = useAddPriceToRecurrentItemMutation();
 
     const formik = useFormik({
@@ -59,15 +61,18 @@ const SingleRecurrentOrderListItemForm: SingleRecurrentOrderListItemFormType =
           errorText={formik.errors.pricePerItem}
           required={true}
           autoComplete='dng'
+          disabled={status !== 'requested'}
         />
 
-        <Button
-          className='w-full text-base'
-          type='submit'
-          isLoading={isLoading}
-        >
-          {price ? 'Update' : 'Add'} Price
-        </Button>
+        {status === 'requested' && (
+          <Button
+            className='w-full text-base'
+            type='submit'
+            isLoading={isLoading}
+          >
+            {price ? 'Update' : 'Add'} Price
+          </Button>
+        )}
       </form>
     );
   };
