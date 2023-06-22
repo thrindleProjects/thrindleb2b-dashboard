@@ -29,7 +29,7 @@ const SingleOrderPageLayout: React.FC = () => {
           <ImSpinner2 className='text-primary-blue animate-spin text-3xl' />
         </div>
       )}
-      {!isLoading && (!!error || !data || !data.data) && (
+      {!data && !isLoading && !!error && (
         <div className='text-primary-red/80 grid h-full w-full place-items-center text-center text-3xl font-semibold'>
           Something went wrong
         </div>

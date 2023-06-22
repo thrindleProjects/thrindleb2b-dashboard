@@ -15,7 +15,7 @@ interface SingleOrderListItemFormProps {
   price: null | number;
   id: string;
   isAvailable: boolean;
-  status: GeneralOrderStatus;
+  status: Exclude<GeneralOrderStatus, 'all'>;
 }
 
 type SingleOrderListItemFormType = React.FC<SingleOrderListItemFormProps>;
