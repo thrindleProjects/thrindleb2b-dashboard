@@ -24,6 +24,8 @@ import {
   SEND_ORDER_PRICE_LIST_PATH,
   SEND_RECURRENT_ORDER_PRICE_LIST_PATH,
   UPDATE_ITEM_AVAILABILITY_PATH,
+  UPDATE_RECURRENT_SHIPPING_AND_SERVICE_CHARGE_PATH,
+  UPDATE_SHIPPING_AND_SERVICE_CHARGE_PATH,
   UPDATE_SINGLE_SUBSTITUTE_ITEM_PATH,
 } from '@/constant';
 
@@ -181,6 +183,29 @@ const OrdersApi = globalApi.injectEndpoints({
       }),
       invalidatesTags: ['SingleOrder'],
     }),
+
+    updateShippingAndServiceCharge: build.mutation<
+      INetworkSuccessResponse<null>,
+      { id: string; payload: { shippingFee: number; serviceCharge: number } }
+    >({
+      query: ({ id, payload }) => ({
+        url: `${UPDATE_SHIPPING_AND_SERVICE_CHARGE_PATH}/${id}`,
+        method: PUT_METHOD,
+        data: payload,
+      }),
+      invalidatesTags: ['SingleOrder'],
+    }),
+    updateRecurrentShippingAndServiceCharge: build.mutation<
+      INetworkSuccessResponse<null>,
+      { id: string; payload: { shippingFee: number; serviceCharge: number } }
+    >({
+      query: ({ id, payload }) => ({
+        url: `${UPDATE_RECURRENT_SHIPPING_AND_SERVICE_CHARGE_PATH}/${id}`,
+        method: PUT_METHOD,
+        data: payload,
+      }),
+      invalidatesTags: ['SingleRecurrentOrder'],
+    }),
   }),
 });
 
@@ -198,4 +223,6 @@ export const {
   useSendOrderPriceListMutation,
   useDeleteImageForSubstituteItemMutation,
   useSendRecurrentOrderPriceListMutation,
+  useUpdateShippingAndServiceChargeMutation,
+  useUpdateRecurrentShippingAndServiceChargeMutation,
 } = OrdersApi;
