@@ -2,11 +2,12 @@ import { Company, GeneralOrderStatus } from '@/@types';
 
 export type OrdersType = {
   id: string;
-  orderStatus: 'pending' | 'completed' | 'in-progress' | 'requested' | 'owing';
+  orderStatus: Exclude<GeneralOrderStatus, 'all'>;
   orderRefCode: string;
   company: Company;
   priceUpdated: boolean;
   deliveryConfirmation: boolean;
+  deliveryFee: null | number;
   paymentStatus: boolean;
   paymentTotal: number;
   listItems: string[];
@@ -29,7 +30,8 @@ export type GetOrdersResponse<T> = {
 
 export type RecurrentOrderType = {
   id: string;
-  orderStatus: GeneralOrderStatus;
+  deliveryFee: null | number;
+  orderStatus: Exclude<GeneralOrderStatus, 'all'>;
   orderRefCode: string;
   company: Company;
   priceUpdated: boolean;
@@ -38,6 +40,7 @@ export type RecurrentOrderType = {
   updatedAt: string;
   recurringPaymentAmount: null | number;
   recurringDeliveryDay: null | number;
+  serviceCharge: null | number;
 };
 
 export type SubstituteItemType = {
@@ -94,15 +97,6 @@ export type RecurrentOrderListItemType = {
   total: null | number;
 };
 
-export type SingleRecurrentOrder = {
-  id: string;
-  orderStatus: GeneralOrderStatus;
-  orderRefCode: string;
-  company: Company;
-  priceUpdated: boolean;
+export type SingleRecurrentOrder = Omit<RecurrentOrderType, 'listItems'> & {
   listItems: RecurrentOrderListItemType[];
-  createdAt: string;
-  updatedAt: string;
-  recurringPaymentAmount: null | number;
-  recurringDeliveryDay: number;
 };
