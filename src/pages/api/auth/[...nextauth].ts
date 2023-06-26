@@ -7,6 +7,7 @@ import logger from '@/lib/logger';
 
 import { INetworkSuccessResponse } from '@/@types';
 import { UserLoginResponse } from '@/api/auth/types';
+import { BASE_URL } from '@/api/globalApi';
 import { LOGIN_USER_PATH } from '@/constant';
 
 export const authOptions: NextAuthOptions = {
@@ -35,10 +36,7 @@ export const authOptions: NextAuthOptions = {
           };
           const user = await axios.post<
             INetworkSuccessResponse<UserLoginResponse>
-          >(
-            String(`${process.env.NEXT_PUBLIC_DEV_URL}${LOGIN_USER_PATH}`),
-            data
-          );
+          >(String(`${BASE_URL}${LOGIN_USER_PATH}`), data);
 
           if (user.data.data.type !== 'admin') {
             throw new Error('Not an admin');
