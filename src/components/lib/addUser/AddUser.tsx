@@ -1,20 +1,40 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import { toast } from 'react-hot-toast';
 
 import Button from '@/components/buttons/Button';
 import Input from '@/components/shared/Input/Input';
 import Select from '@/components/shared/Select/Select';
 
+import { useCreateNewAdminMutation } from '@/api/profile';
 import * as CONSTANTS from '@/constant';
 
 import { initialValues, validationSchema } from './validation';
 
-const AddUserForm = () => {
+interface IUserForm {
+  toggleModal: () => void;
+}
+const AddUserForm: React.FC<IUserForm> = ({ toggleModal }) => {
+  const [createUser, { isLoading }] = useCreateNewAdminMutation();
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: () => {
-      //
+    onSubmit: (values) => {
+      const words = values.name.split(' ');
+      createUser({
+        email: values.email,
+        lastName: words[1],
+        firstName: words[0],
+      })
+        .unwrap()
+        .then(() => {
+          toast.success('User created successfully');
+          formik.resetForm();
+          toggleModal();
+        })
+        .catch(() => {
+          toast.error('Error creating user, please try again');
+        });
     },
   });
   return (
@@ -96,7 +116,7 @@ const AddUserForm = () => {
         type='submit'
         className=' mt-8 h-[52px] w-full '
         variant='primary'
-        // isLoading={isLoading || addLoading}
+        isLoading={isLoading}
       >
         Add User
       </Button>
