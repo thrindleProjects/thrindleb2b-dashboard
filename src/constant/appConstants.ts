@@ -69,6 +69,12 @@ export const MAKE_COMPANY_VIP = '/admin/company/updateVIP';
 export const GET_COMPANY_DETAILS = '/admin/company';
 // CUSTOMERS ENDPOINTS END
 
+// PROFILE ENDPOINTS START
+export const UPDATE_PASSWORD_ENDPOINT = '/user/updatePassword';
+export const CREATE_NEW_ADMIN = '/admin/user/createAdmin';
+export const GET_ALL_ADMIN = '/admin/user/getAllAdmin';
+export const DELETE_ADMIN = '/admin/user/deleteAdmin';
+
 // IMAGE BASE URL START
 export const IMAGE_BASE_URL =
   `${process.env.NEXT_PUBLIC_DEV_URL}/images` as const;
@@ -90,8 +96,8 @@ export const FILE = 'file';
 // INPUT TYPES END
 
 // ADD USER FORM KEYS START
-export const FULLNAME = 'fullName';
-export const EMAIL_ADDRESS = 'emailAddress';
+export const FULLNAME = 'name';
+export const EMAIL_ADDRESS = 'email';
 export const PHONE_NUMBER = 'phoneNumber';
 export const ROLE = 'role';
 // ADD USER FORM KEYS END
