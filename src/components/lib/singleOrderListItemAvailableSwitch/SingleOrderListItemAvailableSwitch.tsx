@@ -11,7 +11,7 @@ type SingleOrderListItemAvalilableSwitchProps = Pick<
   ListItemType,
   'id' | 'isAvailable'
 > & {
-  status: GeneralOrderStatus;
+  status: Exclude<GeneralOrderStatus, 'all'>;
 };
 
 type SingleOrderListItemAvalilableSwitchType =

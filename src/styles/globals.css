@@ -139,3 +139,12 @@ body,
     ),
     #ffffff;
 }
+
+.red-gradient {
+  background: linear-gradient(
+      0deg,
+      rgba(233, 72, 72, 0.08),
+      rgba(233, 72, 72, 0.08)
+    ),
+    #ffffff;
+}

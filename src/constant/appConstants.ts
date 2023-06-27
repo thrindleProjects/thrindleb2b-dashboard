@@ -54,6 +54,11 @@ export const DELETE_IMAGE_FOR_SUBSTITUTE_ITEM_PATH =
 export const SEND_RECURRENT_ORDER_PRICE_LIST_PATH =
   `/admin/order/sendRecurrentPriceList` as const;
 
+export const UPDATE_SHIPPING_AND_SERVICE_CHARGE_PATH =
+  `${ORDERS_BASE_PATH}/updateShippingFee` as const;
+export const UPDATE_RECURRENT_SHIPPING_AND_SERVICE_CHARGE_PATH =
+  `${ORDERS_BASE_PATH}/updateRecurrentOrderShippingFee` as const;
+
 // ORDERS API ENDPOINTS END
 
 // CUSTOMERS ENDPOINTS START

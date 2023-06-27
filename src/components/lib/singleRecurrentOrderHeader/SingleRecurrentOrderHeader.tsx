@@ -1,26 +1,25 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import { toast } from 'react-hot-toast';
 
-import logger from '@/lib/logger';
+import { useDisclosure } from '@/hooks';
 
 import Button from '@/components/buttons/Button';
 import OrderStatusInfo from '@/components/lib/orderStatusInfo';
+import SingleRecurrentOrderConfirmListModal from '@/components/lib/singleRecurrentOrderConfirmListModal/SingleRecurrentOrderConfirmListModal';
 
-import {
-  useGetRecurrentOrderByIdQuery,
-  useSendRecurrentOrderPriceListMutation,
-} from '@/api/orders';
+import { useGetRecurrentOrderByIdQuery } from '@/api/orders';
 
 const SingleRecurrentOrderHeader: React.FC = () => {
   const { query } = useRouter();
 
   const { recurrentId } = query;
+
+  const { isOpen, close, open } = useDisclosure();
+
   const { data } = useGetRecurrentOrderByIdQuery(recurrentId as string, {
     skip: !recurrentId,
   });
-  const [sendOrder, { isLoading }] = useSendRecurrentOrderPriceListMutation();
 
   const numberOfItems = useMemo(() => {
     return data?.data.listItems.length;
@@ -46,16 +45,22 @@ const SingleRecurrentOrderHeader: React.FC = () => {
     });
   }, [data?.data.listItems]);
 
-  const totalCostOfItems: string = useMemo(() => {
+  const totalCostOfOrder: string = useMemo(() => {
     return (
-      data?.data.listItems
-        .reduce((acc, curr) => {
+      (
+        (data?.data.listItems.reduce((acc, curr) => {
           acc += (curr.price || 0) * curr.quantity;
           return acc;
-        }, 0)
-        .toLocaleString() || '0'
+        }, 0) || 0) +
+        (data?.data?.serviceCharge || 0) +
+        (data?.data?.deliveryFee || 0)
+      ).toLocaleString() || '0'
     );
-  }, [data?.data.listItems]);
+  }, [
+    data?.data.listItems,
+    data?.data?.serviceCharge,
+    data?.data?.deliveryFee,
+  ]);
 
   if (!data) {
     return <></>;
@@ -63,22 +68,13 @@ const SingleRecurrentOrderHeader: React.FC = () => {
 
   const { data: order } = data;
 
-  const handleSendOrder = async () => {
-    try {
-      await sendOrder(data.data.id).unwrap();
-      toast.success('Price list sent successfully');
-    } catch (error) {
-      logger(error);
-    }
-  };
-
   return (
     <>
       <OrderStatusInfo
         status={order.orderStatus}
         price={order.recurringPaymentAmount || 0}
         // TODO fix the date of this order
-        date={new Date(order.recurringDeliveryDay).toISOString()}
+        date={new Date(order.recurringDeliveryDay || '').toISOString()}
       />
 
       <nav className='text-primary-black flex flex-row gap-2 text-sm font-semibold xl:text-base'>
@@ -120,7 +116,7 @@ const SingleRecurrentOrderHeader: React.FC = () => {
                 Total Amount
               </p>
               <p className='text-primary-black/60 text-xl font-semibold xl:text-2xl'>
-                &#8358;{totalCostOfItems}
+                &#8358;{totalCostOfOrder}
               </p>
             </>
           )}
@@ -129,12 +125,13 @@ const SingleRecurrentOrderHeader: React.FC = () => {
         {allItemsValid && data.data.orderStatus === 'requested' && (
           <Button
             className='bg-primary-blue rounded-lg px-10 py-4 text-sm font-semibold text-white outline-none focus:ring xl:text-base'
-            onClick={handleSendOrder}
-            isLoading={isLoading}
+            onClick={open}
           >
             Send Price List
           </Button>
         )}
+
+        <SingleRecurrentOrderConfirmListModal onClose={close} isOpen={isOpen} />
       </section>
     </>
   );

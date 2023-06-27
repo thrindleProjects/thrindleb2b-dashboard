@@ -26,7 +26,10 @@ const OrdersTable: OrdersTableType = ({ title }) => {
   const status = useMemo(() => {
     if (title === 'VIP') return 'owing';
 
-    return title.toLowerCase().split(' ').join('-') as GeneralOrderStatus;
+    return title.toLowerCase().split(' ').join('-') as Exclude<
+      GeneralOrderStatus,
+      'all'
+    >;
   }, [title]);
 
   const {

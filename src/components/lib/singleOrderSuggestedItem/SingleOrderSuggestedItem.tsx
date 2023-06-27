@@ -15,7 +15,7 @@ import { SubstituteItemType } from '@/api/orders/types';
 import { IMAGE_BASE_URL } from '@/constant';
 
 type SingleOrderSuggestedItemProps = SubstituteItemType & {
-  status: GeneralOrderStatus;
+  status: Exclude<GeneralOrderStatus, 'all'>;
 };
 
 type SingleOrderSuggestedItemType = React.FC<SingleOrderSuggestedItemProps>;
