@@ -1,14 +1,12 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { ImSpinner2 } from 'react-icons/im';
 
+import RecurrentTableRow from '@/components/lib/recurrentTableRow/RecurrentTableRow';
 import Pagination from '@/components/shared/Pagination';
 
 import { GeneralOrderStatus } from '@/@types';
 import { useGetRecurrentOrdersQuery } from '@/api/orders';
-import { ORDERS_PER_PAGE } from '@/constant';
-import { getPositionSuffix } from '@/utils/functions';
 
 interface RecurrentTableProps {
   title: 'In Progress' | 'Completed' | 'Pending' | 'Requested' | 'VIP';
@@ -65,9 +63,9 @@ const RecurrentTable: RecurrentTableType = ({ title }) => {
               <th className='py-5 font-medium'>Customer Name</th>
               <th className='py-5 font-medium'>Items</th>
               <th className='py-5 font-medium'>Amount</th>
-              <th className='py-5 font-medium'>Phone Number</th>
+              <th className='py-5 font-medium'>Status</th>
               <th className='py-5 font-medium'>Order Day</th>
-              <th className='py-5 font-medium'></th>
+              <th className='py-5 font-medium'>Action</th>
             </tr>
           </thead>
 
@@ -77,43 +75,13 @@ const RecurrentTable: RecurrentTableType = ({ title }) => {
               !isLoading &&
               !error &&
               orders.data.data.map((order, index) => {
-                const serialNumber =
-                  ORDERS_PER_PAGE * (currentPage - 1) + (index + 1);
-
                 return (
-                  <tr
-                    className='text-primary-black/80 text-sm font-medium xl:text-base'
+                  <RecurrentTableRow
                     key={order.id}
-                  >
-                    <td>{serialNumber}</td>
-                    <td>{order.orderRefCode}</td>
-                    <td>{order.company.companyName || 'N/A'}</td>
-                    <td>{order.listItems.length}</td>
-                    <td>
-                      &#8358;
-                      {order.recurringPaymentAmount?.toLocaleString() || 0}
-                    </td>
-                    <td>
-                      {order.company.contactPhone ||
-                        order.company.alternateContactPhone ||
-                        'N/A'}
-                    </td>
-                    <td>
-                      {order.recurringDeliveryDay
-                        ? `${order.recurringDeliveryDay}${getPositionSuffix(
-                            order.recurringDeliveryDay
-                          )}`
-                        : 'N/A'}
-                    </td>
-                    <td className='flex'>
-                      <Link
-                        href={`/recurrent/${order.id}`}
-                        className='bg-primary-blue focus:ring-primary-blue/60 rounded-lg px-4 py-4 text-white focus:outline-none focus:ring'
-                      >
-                        View Order
-                      </Link>
-                    </td>
-                  </tr>
+                    {...order}
+                    index={index}
+                    currentPage={currentPage}
+                  />
                 );
               })}
           </tbody>

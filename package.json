@@ -22,6 +22,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.4",
     "@reduxjs/toolkit": "^1.9.5",
+    "@szhsin/react-menu": "^4.0.0",
     "@types/styled-components": "^5.1.26",
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
