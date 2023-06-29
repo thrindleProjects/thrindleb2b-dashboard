@@ -37,9 +37,7 @@ const OrderTable: React.FC<IOrderTable> = ({ data }) => {
           {data &&
             data.map((item, index) => (
               <TableRow
-                onClick={() =>
-                  router.push(`/customers/${router.query.companyId}/${item.id}`)
-                }
+                onClick={() => router.push(`/orders/${item.id}`)}
                 className='cursor-pointer'
                 key={index}
               >
