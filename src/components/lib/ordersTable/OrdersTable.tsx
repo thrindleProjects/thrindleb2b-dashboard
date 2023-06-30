@@ -1,14 +1,12 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { ImSpinner2 } from 'react-icons/im';
 
+import OrdersTableRow from '@/components/lib/ordersTableRow';
 import Pagination from '@/components/shared/Pagination';
 
 import { GeneralOrderStatus } from '@/@types';
 import { useGetOrdersQuery } from '@/api/orders';
-import { ORDERS_PER_PAGE } from '@/constant';
-import { formatDateWithYear } from '@/utils/functions';
 
 interface OrdersTableProps {
   title: 'In Progress' | 'Completed' | 'Pending' | 'Requested' | 'VIP';
@@ -76,34 +74,13 @@ const OrdersTable: OrdersTableType = ({ title }) => {
               !isLoading &&
               !error &&
               orders.data.data.map((order, index) => {
-                const serialNumber =
-                  ORDERS_PER_PAGE * (currentPage - 1) + (index + 1);
-
                 return (
-                  <tr
-                    className='text-primary-black/80 text-sm font-medium xl:text-base'
-                    key={order.id}
-                  >
-                    <td>{serialNumber}</td>
-                    <td>{order.orderRefCode}</td>
-                    <td>{order.company.companyName || 'N/A'}</td>
-                    <td>{order.listItems.length}</td>
-                    <td>&#8358;{order.paymentTotal?.toLocaleString()}</td>
-                    <td>
-                      {order.company.contactPhone ||
-                        order.company.alternateContactPhone ||
-                        'N/A'}
-                    </td>
-                    <td>{formatDateWithYear(order.createdAt)}</td>
-                    <td className='flex'>
-                      <Link
-                        href={`/orders/${order.id}`}
-                        className='bg-primary-blue focus:ring-primary-blue/60 rounded-lg px-4 py-4 text-white focus:outline-none focus:ring'
-                      >
-                        View Order
-                      </Link>
-                    </td>
-                  </tr>
+                  <OrdersTableRow
+                    key={index}
+                    index={index}
+                    currentPage={currentPage}
+                    {...order}
+                  />
                 );
               })}
           </tbody>
