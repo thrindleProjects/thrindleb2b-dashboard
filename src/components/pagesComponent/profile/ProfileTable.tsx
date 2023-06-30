@@ -26,8 +26,8 @@ const ProfileTable = () => {
       .then(() => {
         toast.success('Admin deleted successfully');
       })
-      .catch(() => {
-        toast.error('An error occurred');
+      .catch((err) => {
+        toast.error(err?.data?.message);
       });
   };
 
