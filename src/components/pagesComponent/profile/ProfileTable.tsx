@@ -27,7 +27,11 @@ const ProfileTable = () => {
         toast.success('Admin deleted successfully');
       })
       .catch((err) => {
-        toast.error(err?.data?.message);
+        toast.error(
+          err?.data?.message
+            ? err?.data?.message
+            : 'Something Went wrong, try again later'
+        );
       });
   };
 

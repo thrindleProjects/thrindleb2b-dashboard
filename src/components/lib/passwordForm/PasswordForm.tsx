@@ -27,7 +27,11 @@ const PasswordForm = () => {
           toast.success('Passwords updated successfully');
         })
         .catch((err) => {
-          toast.error(err?.data?.message);
+          toast.error(
+            err?.data?.message
+              ? err?.data?.message
+              : 'Something Went wrong, try again later'
+          );
         });
     },
   });
