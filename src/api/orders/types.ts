@@ -15,6 +15,8 @@ export type OrdersType = {
   updatedAt: string;
   paymentDate: string | null;
   serviceCharge: null | number;
+  total: number;
+  subtotal: number;
 };
 
 export type GetOrdersResponse<T> = {

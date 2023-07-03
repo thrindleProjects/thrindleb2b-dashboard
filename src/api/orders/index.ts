@@ -45,6 +45,7 @@ const OrdersApi = globalApi.injectEndpoints({
         }&status=${status}`,
         method: GET_METHOD,
       }),
+      providesTags: ['Order'],
     }),
 
     getRecurrentOrders: build.query<
@@ -91,7 +92,7 @@ const OrdersApi = globalApi.injectEndpoints({
         method: PUT_METHOD,
         data: payload,
       }),
-      invalidatesTags: ['SingleOrder'],
+      invalidatesTags: ['SingleOrder', 'Order'],
     }),
 
     addPriceToRecurrentItem: build.mutation<
@@ -158,7 +159,7 @@ const OrdersApi = globalApi.injectEndpoints({
         url: `${SEND_ORDER_PRICE_LIST_PATH}/${id}`,
         method: GET_METHOD,
       }),
-      invalidatesTags: ['SingleOrder'],
+      invalidatesTags: ['SingleOrder', 'Order'],
     }),
 
     sendRecurrentOrderPriceList: build.mutation<
