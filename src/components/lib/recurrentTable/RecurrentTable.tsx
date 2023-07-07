@@ -9,7 +9,13 @@ import { GeneralOrderStatus } from '@/@types';
 import { useGetRecurrentOrdersQuery } from '@/api/orders';
 
 interface RecurrentTableProps {
-  title: 'In Progress' | 'Completed' | 'Pending' | 'Requested' | 'VIP';
+  title:
+    | 'In Progress'
+    | 'Completed'
+    | 'Pending'
+    | 'Requested'
+    | 'VIP'
+    | 'Cancelled';
 }
 
 type RecurrentTableType = React.FC<RecurrentTableProps>;

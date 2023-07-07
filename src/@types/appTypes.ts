@@ -9,7 +9,8 @@ export type orderStatus =
   | 'pending'
   | 'in-progress'
   | 'completed'
-  | 'requested';
+  | 'requested'
+  | 'cancelled';
 
 export type Company = {
   id: string;
@@ -33,7 +34,8 @@ export type GeneralOrderStatus =
   | 'requested'
   | 'pending'
   | 'completed'
-  | 'owing';
+  | 'owing'
+  | 'cancelled';
 
 export interface IDashboardNumbers {
   recurrentOrders: number;

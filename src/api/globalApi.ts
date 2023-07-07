@@ -76,5 +76,7 @@ export const globalApi = createApi({
     'SingleRecurrentOrder',
     'SingleOrderItem',
     'Admin',
+    'Orders',
+    'RecurrentOrders',
   ],
 });
