@@ -6,9 +6,9 @@ import Modal from 'react-modal';
 import logger from '@/lib/logger';
 
 import { GeneralOrderStatus } from '@/@types';
-import { useDeleteOrderMutation } from '@/api/orders';
+import { useCancelRecurrentOrderMutation } from '@/api/orders';
 
-interface DeleteOrderModalProps {
+interface CancelRecurrentOrderModalProps {
   isOpen: boolean;
   close: () => void;
   id: string;
@@ -16,27 +16,26 @@ interface DeleteOrderModalProps {
   status: Exclude<GeneralOrderStatus, 'all'>;
 }
 
-type DeleteOrderModalType = React.FC<DeleteOrderModalProps>;
+type CancelRecurrentOrderModalType = React.FC<CancelRecurrentOrderModalProps>;
 
-const DeleteOrderModal: DeleteOrderModalType = ({
+const CancelRecurrentOrderModal: CancelRecurrentOrderModalType = ({
   isOpen,
   close,
-  refCode,
   id,
+  refCode,
   status,
 }) => {
-  const [deleteOrder, { isLoading }] = useDeleteOrderMutation();
+  const [cancelOrder, { isLoading }] = useCancelRecurrentOrderMutation();
 
-  const handleDeleteOrder = async () => {
+  const handleCancelOrder = async () => {
     try {
-      await deleteOrder(id).unwrap();
-      toast.success('Order deleted successfully');
+      await cancelOrder(id).unwrap();
+      toast.success('Order cancelled successfully');
       close();
     } catch (error) {
       logger(error);
     }
   };
-
   return (
     <Modal
       isOpen={isOpen}
@@ -71,30 +70,25 @@ const DeleteOrderModal: DeleteOrderModalType = ({
           </figure>
         </div>
         <h4 className='text-primary-black text-2xl font-semibold'>
-          Are you sure you want to delete this{' '}
+          Are you sure you want to cancel current{' '}
           <strong className='capitalize'>{status.split('-').join(' ')}</strong>{' '}
-          order?
+          recurring order?
         </h4>
 
         <p className='text-primary-black/80 text-lg font-medium'>{refCode}</p>
-
-        <p className='text-primary-black/80 text-sm font-medium'>
-          Once deleted you won't be able to retrieve order details again and the
-          client would be required to create a new recurrent order
-        </p>
 
         <div className='mt-4 grid w-full grid-cols-2 gap-4'>
           <button className='bg-primary-grey/95 border-primary-grey/95 text-primary-black rounded-lg border px-4 py-3 text-base font-semibold'>
             No - Go back
           </button>
           <button
-            onClick={handleDeleteOrder}
+            onClick={handleCancelOrder}
             className='bg-primary-blue border-primary-blue rounded-lg border px-4 py-3 text-base font-semibold text-white'
           >
             {isLoading ? (
               <ImSpinner2 className='mx-auto animate-spin' />
             ) : (
-              'Yes - Delete order'
+              'Yes - Cancel order'
             )}
           </button>
         </div>
@@ -103,4 +97,4 @@ const DeleteOrderModal: DeleteOrderModalType = ({
   );
 };
 
-export default DeleteOrderModal;
+export default CancelRecurrentOrderModal;

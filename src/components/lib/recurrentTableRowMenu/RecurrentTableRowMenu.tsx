@@ -6,18 +6,20 @@ import { ImSpinner2 } from 'react-icons/im';
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 
-import { useDisclosure, useDownloadOrder } from '@/hooks';
+import { useDisclosure, useDownloadRecurrentOrder } from '@/hooks';
 
-import CancelOrderModal from '@/components/lib/cancelOrderModal';
-import DeleteOrderModal from '@/components/lib/deleteOrderModal';
+import CancelRecurrentOrderModal from '@/components/lib/cancelRecurrentOrderModal';
+import DeleteRecurrentOrderModal from '@/components/lib/deleteRecurrentOrderModal/DeleteRecurrentOrderModal';
 
-import { OrdersType } from '@/api/orders/types';
+import { RecurrentOrderType } from '@/api/orders/types';
 
-type OrderTableMenuProps = OrdersType;
+type RecurrentOrderTableMenuProps = RecurrentOrderType;
 
-type OrderTableRowMenuType = React.FC<OrderTableMenuProps>;
+type RecurrentOrderTableRowMenuType = React.FC<RecurrentOrderTableMenuProps>;
 
-const OrderTableRowMenu: OrderTableRowMenuType = ({ ...order }) => {
+const RecurrentTableRowMenu: RecurrentOrderTableRowMenuType = ({
+  ...order
+}) => {
   const {
     isOpen: isCancelOrderModalOpen,
     open: openCancelOrderModal,
@@ -30,10 +32,10 @@ const OrderTableRowMenu: OrderTableRowMenuType = ({ ...order }) => {
     close: closeDeleteOrderModal,
   } = useDisclosure();
 
-  // const [downloadPdf] = useLazyDownloadOrderInvoiceQuery();
-  const [downloadPdf, { isLoading: isDownloadingPdf }] = useDownloadOrder({
-    id: order.id,
-  });
+  const [downloadPdf, { isLoading: isDownloadingPdf }] =
+    useDownloadRecurrentOrder({
+      id: order.id,
+    });
 
   const {
     isCancellable,
@@ -113,7 +115,7 @@ const OrderTableRowMenu: OrderTableRowMenuType = ({ ...order }) => {
         )}
       </Menu>
 
-      <CancelOrderModal
+      <CancelRecurrentOrderModal
         isOpen={isCancelOrderModalOpen}
         close={closeCancelOrderModal}
         id={order.id}
@@ -121,7 +123,7 @@ const OrderTableRowMenu: OrderTableRowMenuType = ({ ...order }) => {
         status={order.orderStatus}
       />
 
-      <DeleteOrderModal
+      <DeleteRecurrentOrderModal
         isOpen={isDeleteOrderModalOpen}
         close={closeDeleteOrderModal}
         id={order.id}
@@ -132,4 +134,4 @@ const OrderTableRowMenu: OrderTableRowMenuType = ({ ...order }) => {
   );
 };
 
-export default OrderTableRowMenu;
+export default RecurrentTableRowMenu;

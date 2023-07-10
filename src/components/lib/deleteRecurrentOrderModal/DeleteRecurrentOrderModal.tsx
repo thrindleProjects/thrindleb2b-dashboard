@@ -6,9 +6,9 @@ import Modal from 'react-modal';
 import logger from '@/lib/logger';
 
 import { GeneralOrderStatus } from '@/@types';
-import { useDeleteOrderMutation } from '@/api/orders';
+import { useDeleteRecurrentOrderMutation } from '@/api/orders';
 
-interface DeleteOrderModalProps {
+interface DeleteRecurrentOrderModalProps {
   isOpen: boolean;
   close: () => void;
   id: string;
@@ -16,16 +16,16 @@ interface DeleteOrderModalProps {
   status: Exclude<GeneralOrderStatus, 'all'>;
 }
 
-type DeleteOrderModalType = React.FC<DeleteOrderModalProps>;
+type DeleteRecurrentOrderModalType = React.FC<DeleteRecurrentOrderModalProps>;
 
-const DeleteOrderModal: DeleteOrderModalType = ({
+const DeleteRecurrentOrderModal: DeleteRecurrentOrderModalType = ({
   isOpen,
   close,
   refCode,
   id,
   status,
 }) => {
-  const [deleteOrder, { isLoading }] = useDeleteOrderMutation();
+  const [deleteOrder, { isLoading }] = useDeleteRecurrentOrderMutation();
 
   const handleDeleteOrder = async () => {
     try {
@@ -36,7 +36,6 @@ const DeleteOrderModal: DeleteOrderModalType = ({
       logger(error);
     }
   };
-
   return (
     <Modal
       isOpen={isOpen}
@@ -73,7 +72,7 @@ const DeleteOrderModal: DeleteOrderModalType = ({
         <h4 className='text-primary-black text-2xl font-semibold'>
           Are you sure you want to delete this{' '}
           <strong className='capitalize'>{status.split('-').join(' ')}</strong>{' '}
-          order?
+          recurrent order?
         </h4>
 
         <p className='text-primary-black/80 text-lg font-medium'>{refCode}</p>
@@ -103,4 +102,4 @@ const DeleteOrderModal: DeleteOrderModalType = ({
   );
 };
 
-export default DeleteOrderModal;
+export default DeleteRecurrentOrderModal;

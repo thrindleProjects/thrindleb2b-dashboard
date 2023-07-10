@@ -11,9 +11,11 @@ import {
   ADD_PRICE_TO_ITEM_PATH,
   ADD_SUBSTITUTE_TO_ITEM_PATH,
   CANCEL_ORDER_PATH,
+  CANCEl_RECURRENT_ORDER_PATH,
   DELETE_IMAGE_FOR_SUBSTITUTE_ITEM_PATH,
   DELETE_METHOD,
   DELETE_ORDER_PATH,
+  DELETE_RECURRENT_ORDER_PATH,
   DELETE_SUBSTITUTE_ITEM_PATH,
   GET_ALL_ORDERS_PATH,
   GET_ALL_RECURRENT_ORDERS_PATH,
@@ -217,13 +219,31 @@ const OrdersApi = globalApi.injectEndpoints({
       }),
       invalidatesTags: ['Orders', 'SingleOrder'],
     }),
+    cancelRecurrentOrder: build.mutation<INetworkSuccessResponse<null>, string>(
+      {
+        query: (id) => ({
+          url: `${CANCEl_RECURRENT_ORDER_PATH}/${id}`,
+          method: PUT_METHOD,
+        }),
+        invalidatesTags: ['RecurrentOrders', 'SingleRecurrentOrder'],
+      }
+    ),
     deleteOrder: build.mutation<INetworkSuccessResponse<null>, string>({
       query: (id) => ({
-        url: `${DELETE_ORDER_PATH}/${id}/`,
+        url: `${DELETE_ORDER_PATH}/${id}`,
         method: DELETE_METHOD,
       }),
       invalidatesTags: ['Orders', 'SingleOrder'],
     }),
+    deleteRecurrentOrder: build.mutation<INetworkSuccessResponse<null>, string>(
+      {
+        query: (id) => ({
+          url: `${DELETE_RECURRENT_ORDER_PATH}/${id}`,
+          method: DELETE_METHOD,
+        }),
+        invalidatesTags: ['RecurrentOrders', 'SingleRecurrentOrder'],
+      }
+    ),
   }),
 });
 
@@ -232,6 +252,7 @@ export const {
   useGetRecurrentOrdersQuery,
   useGetOrderByIdQuery,
   useLazyGetOrderByIdQuery,
+  useLazyGetRecurrentOrderByIdQuery,
   useAddPriceToItemMutation,
   useAddPriceToRecurrentItemMutation,
   useAddSubstitutesToItemMutation,
@@ -245,5 +266,7 @@ export const {
   useUpdateShippingAndServiceChargeMutation,
   useUpdateRecurrentShippingAndServiceChargeMutation,
   useCancelOrderMutation,
+  useCancelRecurrentOrderMutation,
   useDeleteOrderMutation,
+  useDeleteRecurrentOrderMutation,
 } = OrdersApi;

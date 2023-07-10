@@ -34,7 +34,7 @@ const OrdersTableRow: OrdersTableRowType = ({
         <td>{order.orderRefCode}</td>
         <td>{order.company.companyName || 'N/A'}</td>
         <td>{order.listItems.length}</td>
-        <td>&#8358;{order.paymentTotal?.toLocaleString()}</td>
+        <td>&#8358;{order.paymentTotal?.toLocaleString() || 0}</td>
         <td>
           {order.company.contactPhone ||
             order.company.alternateContactPhone ||

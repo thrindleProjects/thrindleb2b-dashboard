@@ -32,27 +32,27 @@ block content
               - var priceValid = !!val.price;
               td(class='px-8 py-2 text-base font-medium text-black/80')
                 if(priceValid)
-                  = val.price
+                  = val.price.toLocaleString('en-US')
                 if(!priceValid)
                   span 0.0
               td(class='px-8 py-2 text-base font-medium text-black/80')
                 if(priceValid)
                 - var totalPrice = val.price * val.quantity
-                = totalPrice
+                = totalPrice.toLocaleString('en-US')
                 if(!priceValid)
                   span 0.0
     div(class='mt-10 w-full')
       p(class='pt-2 text-base font-normal text-black/60') Sub Total: &nbsp;
-        span(class='font-medium text-black/80') &#8358; #{listTotalPrice | '0.0'}
+        span(class='font-medium text-black/80') &#8358; #{listTotalPrice}
       
       p(class='pt-2 text-base font-normal text-black/60') Delivery Fee: &nbsp;
-        span(class='font-medium text-black/80') &#8358; #{deliveryFee | '0.0'}
+        span(class='font-medium text-black/80') &#8358; #{deliveryFee}
 
       p(class='pt-2 text-base font-normal text-black/60') Service Charge: &nbsp;
-        span(class='font-medium text-black/80') &#8358; #{serviceCharge | '0.0'}
+        span(class='font-medium text-black/80') &#8358; #{serviceCharge}
 
       p(class='pt-4 text-base font-normal text-black/60') Total Amount: &nbsp;
-        strong(class='font-medium text-black/80') &#8358; #{totalAmount | '0.0'}
+        strong(class='font-medium text-black/80') &#8358; #{totalAmount}
       
       p(class='pt-5 font-medim text-black-80') Payment will be made using your in-app wallet, load up your wallet with funds so you can pay for the goods.
 

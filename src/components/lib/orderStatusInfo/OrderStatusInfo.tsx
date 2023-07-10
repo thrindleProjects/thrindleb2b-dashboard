@@ -1,7 +1,8 @@
+import { GeneralOrderStatus } from '@/@types';
 import { formatDate } from '@/utils/functions';
 
 interface OrderStatusInfoProps {
-  status: 'in-progress' | 'requested' | 'pending' | 'completed' | 'owing';
+  status: Exclude<GeneralOrderStatus, 'all'>;
   /**
    * Total price of order
    */
@@ -44,6 +45,14 @@ const OrderStatusInfo: OrderStatusInfoType = ({ price, date, status }) => {
     return (
       <h1 className='yellow-gradient absolute inset-x-0 top-0 px-[inherit] py-3 text-sm font-medium'>
         Price list has been sent to the user, awaiting payment
+      </h1>
+    );
+  }
+
+  if (status === 'cancelled') {
+    return (
+      <h1 className='yellow-gradient absolute inset-x-0 top-0 px-[inherit] py-3 text-sm font-medium'>
+        Order has been cancelled
       </h1>
     );
   }

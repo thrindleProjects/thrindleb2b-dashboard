@@ -5,10 +5,10 @@ import { toast } from 'react-hot-toast';
 import logger from '@/lib/logger';
 import useDisclosure from '@/hooks/useDisclosure';
 
-import { useLazyGetOrderByIdQuery } from '@/api/orders';
+import { useLazyGetRecurrentOrderByIdQuery } from '@/api/orders';
 import { formatDateWithYear } from '@/utils/functions';
 
-const useDownloadOrder = ({
+const useDownloadRecurrentOrder = ({
   id,
 }: {
   id: string;
@@ -19,7 +19,7 @@ const useDownloadOrder = ({
     close: setLoadingFalse,
   } = useDisclosure();
 
-  const [getOrderDetails] = useLazyGetOrderByIdQuery();
+  const [getOrderDetails] = useLazyGetRecurrentOrderByIdQuery();
 
   const downloadPDF = useCallback(async () => {
     try {
@@ -56,7 +56,7 @@ const useDownloadOrder = ({
             'en-us'
           ),
           totalAmount: (totalAmount || 0).toLocaleString('en-us'),
-          paymentDate: formatDateWithYear(order.data.paymentDate || ''),
+          paymentDate: order.data.recurringDeliveryDay,
         },
         { responseType: 'arraybuffer' }
       );
@@ -82,4 +82,4 @@ const useDownloadOrder = ({
   return [downloadPDF, { isLoading }];
 };
 
-export default useDownloadOrder;
+export default useDownloadRecurrentOrder;
