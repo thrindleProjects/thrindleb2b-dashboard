@@ -26,8 +26,8 @@ const PasswordForm = () => {
         .then(() => {
           toast.success('Passwords updated successfully');
         })
-        .catch(() => {
-          toast.error('An Error has occurred, please try again later');
+        .catch((err) => {
+          toast.error(err?.data?.message);
         });
     },
   });
