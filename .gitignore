@@ -42,3 +42,5 @@ sitemap.xml
 sitemap-*.xml
 
 .vscode
+
+.cache

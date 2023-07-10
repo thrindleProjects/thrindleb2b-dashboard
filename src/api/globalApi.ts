@@ -16,7 +16,7 @@ axios.defaults.timeoutErrorMessage = AXIOS_TIMEOUT_MSG;
 
 export const BASE_URL =
   process.env.NODE_ENV === 'production'
-    ? process.env.NEXT_PUBLIC_PROD_URL
+    ? process.env.NEXT_PUBLIC_DEV_URL
     : process.env.NEXT_PUBLIC_DEV_URL;
 
 const axiosBaseQuery =
