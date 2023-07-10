@@ -15,7 +15,7 @@ import TableRow from '@/components/shared/Table/TableRow';
 import { WhiteCard } from '@/components/shared/whiteCard';
 
 import { orderStatus } from '@/@types/appTypes';
-import { useGetOrdersQuery } from '@/api/orders';
+import { useGetRecurrentOrdersQuery } from '@/api/orders';
 import { ORDERS_PER_PAGE } from '@/constant';
 import { formatDateWithYear, getQueryParams } from '@/utils/functions';
 import { getErrorMessage } from '@/utils/networkHandler';
@@ -23,7 +23,7 @@ import { getErrorMessage } from '@/utils/networkHandler';
 // import { dashboardData } from '@/utils/devData';
 import { dashboardTableHeaderData } from '@/utils/productionData';
 
-const DashboardTable = () => {
+const DashboardRecurrentTable = () => {
   const [activeTab, setActiveTab] = useState<orderStatus>('all');
   const { query, push, asPath } = useRouter();
 
@@ -31,11 +31,24 @@ const DashboardTable = () => {
 
   const currentPage: number = useMemo(() => Number(page) || 1, [page]);
 
-  const { data, isLoading, refetch, isError, error } = useGetOrdersQuery({
-    page: currentPage,
-    limit: ORDERS_PER_PAGE,
-    status: activeTab,
-  });
+  const { data, isLoading, error, isError, refetch } =
+    useGetRecurrentOrdersQuery(
+      {
+        page: currentPage,
+        limit: ORDERS_PER_PAGE,
+        status: activeTab,
+      },
+      {
+        refetchOnMountOrArgChange: true,
+        refetchOnFocus: true,
+      }
+    );
+
+  //   const { data, isLoading, refetch, isError, error } = useGetOrdersQuery({
+  //     page: currentPage,
+  //     limit: ORDERS_PER_PAGE,
+  //     status: activeTab,
+  //   });
 
   const changeTab = (val: orderStatus) => {
     const [asPathUrl, asPathQuery] = asPath.split('?');
@@ -60,7 +73,7 @@ const DashboardTable = () => {
         {/* Header */}
         <div className='flex w-full flex-col justify-between lg:flex-row lg:items-center'>
           <h6 className='font-clash-grotesk text-base font-medium text-black '>
-            Recent Orders
+            Recurrent Orders
           </h6>
           <div className='mt-4 md:w-[100%] lg:mt-0 lg:w-[80%] xl:w-[80%]'>
             <TabContainer
@@ -136,4 +149,4 @@ const DashboardTable = () => {
   );
 };
 
-export default DashboardTable;
+export default DashboardRecurrentTable;

@@ -10,7 +10,10 @@ export type orderStatus =
   | 'in-progress'
   | 'completed'
   | 'requested'
-  | 'cancelled';
+  | 'cancelled'
+  | 'owing';
+
+export type orderHeaderType = 'recent' | 'recurrent';
 
 export type Company = {
   id: string;

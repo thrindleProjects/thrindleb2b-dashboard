@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { orderStatus } from '@/@types';
+import { orderHeaderType } from '@/@types';
 
-const SingleStatusTab = ({
-  status,
+const SingleDashboardHeaderType = ({
   slug,
   activeTab,
   changeTab,
+  status,
 }: {
   status: string;
   slug: string;
-  activeTab: orderStatus;
+  activeTab: orderHeaderType;
   changeTab: () => void;
 }) => {
   return (
@@ -26,4 +26,4 @@ const SingleStatusTab = ({
   );
 };
 
-export default SingleStatusTab;
+export default SingleDashboardHeaderType;

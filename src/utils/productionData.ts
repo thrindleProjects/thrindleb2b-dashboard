@@ -6,6 +6,12 @@ export const orderStatues = [
   { status: 'In-Progress', slug: 'in-progress' },
   { status: 'Pending', slug: 'pending' },
   { status: 'Completed', slug: 'completed' },
+  { status: 'VIP', slug: 'owing' },
+  { status: 'Cancelled', slug: 'cancelled' },
+];
+export const dashboardOrderHeader = [
+  { status: 'Recent Orders', slug: 'recent' },
+  { status: 'Recurrent Orders', slug: 'recurrent' },
 ];
 export const dashboardTableHeaderData = [
   '#',

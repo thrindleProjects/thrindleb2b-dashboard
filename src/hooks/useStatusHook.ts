@@ -32,6 +32,18 @@ const useOrderStatusHook = ({
       textColor: 'text-orange-500',
       text: 'Requested',
     };
+  } else if (orderStatus === 'cancelled') {
+    orderStyle = {
+      bgColor: 'bg-red-50',
+      textColor: 'text-red-500',
+      text: 'Cancelled',
+    };
+  } else if (orderStatus === 'owing') {
+    orderStyle = {
+      bgColor: 'bg-red-50',
+      textColor: 'text-red-500',
+      text: 'Owing',
+    };
   } else {
     orderStyle = {
       bgColor: 'bg-yellow-50',
