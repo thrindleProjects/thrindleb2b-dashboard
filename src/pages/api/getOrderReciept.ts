@@ -29,9 +29,17 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
 
       // simulate a chrome browser with puppeteer and navigate to a new page
 
+      // browser = await chromium.puppeteer.launch({
+      //   args: chromium.args,
+      //   defaultViewport: chromium.defaultViewport,
+      //   executablePath: await chromium.executablePath,
+      //   headless: chromium.headless,
+      //   ignoreHTTPSErrors: true,
+      // });
+
       const browser = await puppeteer.launch({
         headless: 'new',
-        args: ['--no-sandbox'],
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
       });
 
       const page = await browser.newPage();
