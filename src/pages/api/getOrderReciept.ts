@@ -30,6 +30,7 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
       // simulate a chrome browser with puppeteer and navigate to a new page
       const browser = await puppeteer.launch({
         headless: 'new',
+        args: ['--no-sandbox', '--disable-dev-shm-usage'],
       });
       const page = await browser.newPage();
 
@@ -59,7 +60,7 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
     res
       .status(400)
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
+      // @ts-expect-errora
       .json({ message: 'Something went wrong', err: err?.message, new: err });
   }
 };
