@@ -11,9 +11,9 @@ import { useDisclosure, useDownloadRecurrentOrder } from '@/hooks';
 import CancelRecurrentOrderModal from '@/components/lib/cancelRecurrentOrderModal';
 import DeleteRecurrentOrderModal from '@/components/lib/deleteRecurrentOrderModal/DeleteRecurrentOrderModal';
 
-import { RecurrentOrderType } from '@/api/orders/types';
+import { RecurrentOrderType, SingleRecurrentOrder } from '@/api/orders/types';
 
-type RecurrentOrderTableMenuProps = RecurrentOrderType;
+type RecurrentOrderTableMenuProps = RecurrentOrderType | SingleRecurrentOrder;
 
 type RecurrentOrderTableRowMenuType = React.FC<RecurrentOrderTableMenuProps>;
 
@@ -86,6 +86,7 @@ const RecurrentTableRowMenu: RecurrentOrderTableRowMenuType = ({
         align='end'
         role='tooltip'
         viewScroll='auto'
+        className='font-medium'
       >
         {isDownloadable && (
           <MenuItem className='text-primary-blue' onClick={downloadPdf}>

@@ -82,8 +82,8 @@ const SingleRecurrentOrderListItem: SingleRecurrentOrderListItemType = ({
       role='button'
       tabIndex={0}
     >
-      <div className='flex justify-between text-left'>
-        <div className='flex flex-col gap-2'>
+      <div className='flex justify-between gap-1 text-left'>
+        <div className='flex max-w-[65%] flex-col gap-2 xl:max-w-[75%]'>
           <section className='flex items-center gap-4'>
             <figure className='relative block aspect-square w-14'>
               <ImageComponent src={`${IMAGE_BASE_URL}/${image}`} alt={name} />
@@ -99,7 +99,7 @@ const SingleRecurrentOrderListItem: SingleRecurrentOrderListItemType = ({
             </div>
           </section>
 
-          <span className='text-primary-black/60 text-xs font-medium'>
+          <div className='text-primary-black/60 break-words text-xs font-medium'>
             {seeMore || description.length < 150
               ? description
               : `${description.substring(0, 150)}...`}{' '}
@@ -114,9 +114,9 @@ const SingleRecurrentOrderListItem: SingleRecurrentOrderListItemType = ({
                 {seeMore ? 'See less' : 'See more'}
               </button>
             )}
-          </span>
+          </div>
 
-          <div className='flex gap-2 text-xs font-medium xl:text-sm'>
+          <div className='flex flex-wrap gap-2 text-xs font-medium xl:text-sm'>
             <div className='text-primary-blue blue-gradient rounded-lg px-3 py-2'>
               {quantity} {quantity > 1 ? 'Pieces' : 'Piece'}
             </div>

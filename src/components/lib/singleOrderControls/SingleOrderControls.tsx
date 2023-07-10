@@ -60,7 +60,7 @@ const SingleOrderControls: React.FC = () => {
         <p className='text-primary-black text-base font-semibold xl:text-lg'>
           {item.name}
         </p>
-        <p className='text-primary-black/60 text-xs font-medium xl:text-sm'>
+        <p className='text-primary-black/60 break-words text-xs font-medium xl:text-sm'>
           {seeMore || item.description.length < 300
             ? item.description
             : `${item.description.substring(0, 300)}...`}{' '}

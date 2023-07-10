@@ -11,9 +11,9 @@ import { useDisclosure, useDownloadOrder } from '@/hooks';
 import CancelOrderModal from '@/components/lib/cancelOrderModal';
 import DeleteOrderModal from '@/components/lib/deleteOrderModal';
 
-import { OrdersType } from '@/api/orders/types';
+import { OrdersType, SingleOrder } from '@/api/orders/types';
 
-type OrderTableMenuProps = OrdersType;
+type OrderTableMenuProps = OrdersType | SingleOrder;
 
 type OrderTableRowMenuType = React.FC<OrderTableMenuProps>;
 
@@ -84,6 +84,7 @@ const OrderTableRowMenu: OrderTableRowMenuType = ({ ...order }) => {
         align='end'
         role='tooltip'
         viewScroll='auto'
+        className='font-medium'
       >
         {isDownloadable && (
           <MenuItem className='text-primary-blue' onClick={downloadPdf}>
