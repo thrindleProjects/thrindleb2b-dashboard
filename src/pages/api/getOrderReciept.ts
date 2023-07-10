@@ -55,7 +55,11 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
     throw new Error('method not implemented');
   } catch (err) {
     logger(err);
-    res.status(400).json({ message: 'Something went wrong' });
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    res
+      .status(400)
+      .json({ message: 'Something went wrong', err: err?.message, new: err });
   }
 };
 
