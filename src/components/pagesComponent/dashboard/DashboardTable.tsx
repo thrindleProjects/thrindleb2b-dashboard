@@ -55,14 +55,14 @@ const DashboardTable = () => {
   };
 
   return (
-    <section className='mt-10 w-full'>
+    <section className=' w-full'>
       <WhiteCard>
         {/* Header */}
-        <div className='flex w-full flex-row items-center justify-between'>
+        <div className='flex w-full flex-col justify-between lg:flex-row lg:items-center'>
           <h6 className='font-clash-grotesk text-base font-medium text-black '>
             Recent Orders
           </h6>
-          <div className='w-[60%] '>
+          <div className='mt-4 md:w-[100%] lg:mt-0 lg:w-[80%] xl:w-[80%]'>
             <TabContainer
               className='w-full bg-[#F9F9F9]'
               activeTab={activeTab}
@@ -94,7 +94,7 @@ const DashboardTable = () => {
                     <TableCell>{item?.listItems?.length}</TableCell>
                     <TableCell>{formatDateWithYear(item?.createdAt)}</TableCell>
                     <TableCell>
-                      ₦{item?.paymentTotal?.toLocaleString()}
+                      ₦{item?.subtotal?.toLocaleString() ?? 0.0}
                     </TableCell>
                     <TableCell>
                       <p

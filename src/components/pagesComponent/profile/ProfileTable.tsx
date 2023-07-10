@@ -1,6 +1,6 @@
 import { Icon } from '@iconify/react';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 import Button from '@/components/buttons/Button';
 import AddUserForm from '@/components/lib/addUser/AddUser';
@@ -11,16 +11,37 @@ import TableCell from '@/components/shared/Table/TableCell';
 import TableHeader from '@/components/shared/Table/TableHeader';
 import TableRow from '@/components/shared/Table/TableRow';
 import { WhiteCard } from '@/components/shared/whiteCard';
+import Skeleton from '@/components/Skeleton';
 
-import { profileTableData } from '@/utils/devData';
+import { useDeleteAdminMutation, useGetAllAdminQuery } from '@/api/profile';
 
 const ProfileTable = () => {
-  const router = useRouter();
   const [addUserModal, setAddUserModal] = useState(false);
+  const { data, isLoading } = useGetAllAdminQuery();
+  const [deleteAdmin] = useDeleteAdminMutation();
+
+  const deleteAdminHandler = (id: string) => {
+    deleteAdmin(id)
+      .unwrap()
+      .then(() => {
+        toast.success('Admin deleted successfully');
+      })
+      .catch((err) => {
+        toast.error(err?.data?.message);
+      });
+  };
 
   const toggleModal = () => {
     setAddUserModal((prev) => !prev);
   };
+
+  if (isLoading) {
+    return (
+      <div>
+        <Skeleton className='h-full w-full' />
+      </div>
+    );
+  }
   return (
     <WhiteCard className='mt-6 px-10  py-8'>
       <div className='mb-6 flex items-center justify-between'>
@@ -32,54 +53,39 @@ const ProfileTable = () => {
         </Button>
       </div>
       <Table>
-        <TableHeader
-          items={[
-            '#',
-            'Name',
-            'Role',
-            'Email Address',
-            ' Phone Number',
-            'Action',
-          ]}
-        />
+        <TableHeader items={['#', 'Name', 'Email Address', 'Role', 'Action']} />
         <TableBody>
-          {profileTableData.map((item, index) => (
-            <TableRow
-              onClick={() => router.push(`/customers/${index + 1}`)}
-              className='cursor-pointer'
-              key={index}
-            >
-              <TableCell>{index + 1}</TableCell>
+          {data &&
+            data.data.map((item, index) => (
+              <TableRow className='cursor-pointer' key={index}>
+                <TableCell>{index + 1}</TableCell>
 
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.role}</TableCell>
-              <TableCell>{item.email}</TableCell>
-              <TableCell>{item.phone}</TableCell>
-              <TableCell>
-                <div className='flex items-center gap-3 text-black/60'>
-                  <div className='flex items-center gap-1'>
-                    <Icon
-                      icon='wpf:edit'
-                      className='text-primary-blue text-sm'
-                    />
-                    <p>Edit</p>
+                <TableCell>
+                  {item.firstName} {item.firstName}
+                </TableCell>
+                <TableCell>{item.email}</TableCell>
+                <TableCell>{item.type}</TableCell>
+                <TableCell>
+                  <div
+                    onClick={() => deleteAdminHandler(item.id)}
+                    className='flex items-center gap-3 text-black/60'
+                  >
+                    <div className='flex items-center gap-1'>
+                      <Icon
+                        icon='clarity:remove-solid'
+                        className='text-primary-red text-sm'
+                      />
+                      <p>Remove</p>
+                    </div>
                   </div>
-                  <div className='flex items-center gap-1'>
-                    <Icon
-                      icon='clarity:remove-solid'
-                      className='text-primary-red text-sm'
-                    />
-                    <p>Remove</p>
-                  </div>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
       <p className='mt-6 text-right'>Pagination</p>
       <GenModal handleCloseModal={toggleModal} isOpen={addUserModal}>
-        <AddUserForm />
+        <AddUserForm toggleModal={toggleModal} />
       </GenModal>
     </WhiteCard>
   );

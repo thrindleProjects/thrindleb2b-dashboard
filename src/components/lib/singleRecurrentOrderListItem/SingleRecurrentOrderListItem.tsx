@@ -82,24 +82,24 @@ const SingleRecurrentOrderListItem: SingleRecurrentOrderListItemType = ({
       role='button'
       tabIndex={0}
     >
-      <span className='flex justify-between text-left'>
-        <span className='flex flex-col gap-2'>
-          <span className='flex items-center gap-4'>
-            <span className='relative block aspect-square w-14'>
+      <div className='flex justify-between gap-1 text-left'>
+        <div className='flex max-w-[65%] flex-col gap-2 xl:max-w-[75%]'>
+          <section className='flex items-center gap-4'>
+            <figure className='relative block aspect-square w-14'>
               <ImageComponent src={`${IMAGE_BASE_URL}/${image}`} alt={name} />
-            </span>
+            </figure>
 
-            <span className='flex flex-col text-left'>
-              <span className='text-primary-black text-sm font-semibold xl:text-base'>
+            <div className='flex flex-col text-left'>
+              <h5 className='text-primary-black text-sm font-semibold xl:text-base'>
                 {name}
-              </span>
-              <span className='text-primary-black/60 text-xs font-medium xl:text-sm'>
+              </h5>
+              <p className='text-primary-black/60 text-xs font-medium xl:text-sm'>
                 Order Created {formatDateWithYear(createdAt)}
-              </span>
-            </span>
-          </span>
+              </p>
+            </div>
+          </section>
 
-          <span className='text-primary-black/60 text-xs font-medium'>
+          <div className='text-primary-black/60 break-words text-xs font-medium'>
             {seeMore || description.length < 150
               ? description
               : `${description.substring(0, 150)}...`}{' '}
@@ -114,33 +114,34 @@ const SingleRecurrentOrderListItem: SingleRecurrentOrderListItemType = ({
                 {seeMore ? 'See less' : 'See more'}
               </button>
             )}
-          </span>
+          </div>
 
-          <span className='text-primary-blue blue-gradient h-max w-max rounded-lg px-3 py-2 text-sm font-semibold xl:text-base'>
-            {quantity} {quantity > 1 ? 'Pieces' : 'Piece'}
-          </span>
-        </span>
+          <div className='flex flex-wrap gap-2 text-xs font-medium xl:text-sm'>
+            <div className='text-primary-blue blue-gradient rounded-lg px-3 py-2'>
+              {quantity} {quantity > 1 ? 'Pieces' : 'Piece'}
+            </div>
+            {substitutes && !!substitutes.length && (
+              <div className='yellow-gradient text-primary-yellow rounded-lg px-3 py-2'>
+                Options Added
+              </div>
+            )}
 
-        <span className='flex flex-col items-end gap-1'>
+            {!isAvailable && (
+              <div className='red-gradient text-primary-red rounded-lg px-3 py-2'>
+                Unavailable
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className='flex flex-col items-end gap-1'>
           {!!price && (
-            <span className='text-primary-green border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0'>
+            <div className='text-primary-green border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0'>
               Price Added
-            </span>
+            </div>
           )}
-
-          {substitutes && !!substitutes.length && (
-            <span className='text-primary-green border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0'>
-              Substitutes Added
-            </span>
-          )}
-
-          {!isAvailable && (
-            <span className='text-primary-red border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0'>
-              Unavailable
-            </span>
-          )}
-        </span>
-      </span>
+        </div>
+      </div>
     </div>
   );
 };

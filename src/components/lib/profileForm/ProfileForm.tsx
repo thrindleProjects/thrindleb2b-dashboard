@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import { useFormik } from 'formik';
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 import Button from '@/components/buttons/Button';
@@ -10,8 +13,15 @@ import * as CONSTANTS from '@/constant';
 import { initialValues, validationSchema } from './validation';
 
 const ProfileForm = () => {
+  const session = useSession();
+  const values = {
+    email: session.data && session.data.user.email,
+    firstName: session.data && session.data.user.firstName,
+    lastName: session.data && session.data.user.lastName,
+    phone: session.data && session.data.user.phone,
+  };
   const formik = useFormik({
-    initialValues,
+    initialValues: { ...initialValues, ...values },
     validationSchema,
     onSubmit: () => {
       //

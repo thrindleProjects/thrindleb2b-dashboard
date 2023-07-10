@@ -6,6 +6,7 @@ import { useDisclosure } from '@/hooks';
 
 import Button from '@/components/buttons/Button';
 import OrderStatusInfo from '@/components/lib/orderStatusInfo';
+import OrderTableRowMenu from '@/components/lib/orderTableRowMenu/OrderTableRowMenu';
 import SingleOrderConfirmListModal from '@/components/lib/singleOrderConfirmListModal';
 
 import { useGetOrderByIdQuery } from '@/api/orders';
@@ -117,15 +118,17 @@ const SingleOrderHeader: React.FC = () => {
             </>
           )}
         </div>
-
-        {allItemsValid && data.data.orderStatus === 'requested' && (
-          <Button
-            className='bg-primary-blue rounded-lg px-10 py-4 text-sm font-semibold text-white outline-none focus:ring xl:text-base'
-            onClick={open}
-          >
-            Send Price List
-          </Button>
-        )}
+        <div className='flex items-center gap-2'>
+          {allItemsValid && data.data.orderStatus === 'requested' && (
+            <Button
+              className='bg-primary-blue rounded-lg px-10 py-4 text-sm font-semibold text-white outline-none focus:ring xl:text-base'
+              onClick={open}
+            >
+              Send Price List
+            </Button>
+          )}
+          <OrderTableRowMenu {...order} />
+        </div>
       </section>
 
       <SingleOrderConfirmListModal onClose={close} isOpen={isOpen} />

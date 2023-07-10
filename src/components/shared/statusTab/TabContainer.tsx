@@ -14,7 +14,7 @@ const TabContainer = ({
 }) => {
   return (
     <div
-      className={`h-[50px] rounded-md bg-blue-50 ${className} flex flex-row items-center justify-between px-5`}
+      className={`h-[50px] rounded-md bg-blue-50 ${className} flex flex-row items-center justify-between px-3`}
     >
       {orderStatues.map((item, index) => (
         <SingleStatusTab
