@@ -14,7 +14,7 @@
     "test": "jest",
     "format": "prettier -w .",
     "format:check": "prettier -c .",
-    "postbuild": "next-sitemap --config next-sitemap.config.js",
+    "postbuild": "next-sitemap --config next-sitemap.config.js && node node_modules/puppeteer/install.js",
     "prepare": "husky install",
     "watch:pug": "npx tailwindcss -i ./src/styles/globals.css -o ./src/templates/pug.css --watch"
   },
@@ -36,6 +36,7 @@
     "node-sass": "^7.0.3",
     "pug": "^3.0.2",
     "puppeteer": "^20.8.0",
+    "puppeteer-core": "^20.8.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",

@@ -31,7 +31,7 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const browser = await puppeteer.launch({
         headless: 'new',
-        args: ['--no-sandbox', '--disable-dev-shm-usage'],
+        args: ['--no-sandbox'],
       });
 
       const page = await browser.newPage();
