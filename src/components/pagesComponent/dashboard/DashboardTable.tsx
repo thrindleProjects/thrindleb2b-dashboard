@@ -62,7 +62,7 @@ const DashboardTable = () => {
           <h6 className='font-clash-grotesk text-base font-medium text-black '>
             Recent Orders
           </h6>
-          <div className='w-[60%] '>
+          <div className='md:w-[60%] lg:w-[80%] xl:w-[60%]'>
             <TabContainer
               className='w-full bg-[#F9F9F9]'
               activeTab={activeTab}
@@ -94,7 +94,7 @@ const DashboardTable = () => {
                     <TableCell>{item?.listItems?.length}</TableCell>
                     <TableCell>{formatDateWithYear(item?.createdAt)}</TableCell>
                     <TableCell>
-                      ₦{item?.paymentTotal?.toLocaleString()}
+                      ₦{item?.subtotal?.toLocaleString() ?? 0.0}
                     </TableCell>
                     <TableCell>
                       <p

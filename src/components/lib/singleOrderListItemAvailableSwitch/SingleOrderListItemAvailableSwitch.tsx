@@ -37,17 +37,11 @@ const SingleOrderListItemAvailableSwitch: SingleOrderListItemAvalilableSwitchTyp
     }
 
     return (
-      <div className='flex flex-row items-center justify-between gap-2'>
-        <span className='text-primary-black/80 text-xs font-medium xl:text-sm'>
-          Is this item available?
-        </span>
+      <div className='flex flex-row items-center gap-2'>
         <button
           className={clsxm(
             'block aspect-video h-4 rounded-full p-[2px] transition-all duration-500 disabled:bg-opacity-40 lg:h-7 lg:p-1',
-            [
-              isAvailable && 'bg-primary-blue',
-              !isAvailable && 'bg-primary-yellow',
-            ]
+            [isAvailable && 'bg-primary-blue', !isAvailable && 'bg-primary-red']
           )}
           onClick={handleUpdateItemAvailability}
           type='button'
@@ -66,13 +60,16 @@ const SingleOrderListItemAvailableSwitch: SingleOrderListItemAvalilableSwitchTyp
             <span
               className={clsxm('transition-all duration-500', [
                 isAvailable && 'text-primary-blue rotate-0',
-                !isAvailable && 'text-primary-yellow -rotate-180',
+                !isAvailable && 'text-primary-red -rotate-180',
               ])}
             >
               <Icon icon='ph:thumbs-up' />
             </span>
           </span>
         </button>
+        <span className='text-primary-black/80 text-xs font-medium xl:text-sm'>
+          {isAvailable ? 'Available' : 'Unavailable'}
+        </span>
       </div>
     );
   };

@@ -1,20 +1,34 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import { toast } from 'react-hot-toast';
 
 import Button from '@/components/buttons/Button';
 import Input from '@/components/shared/Input/Input';
 import { WhiteCard } from '@/components/shared/whiteCard';
 
+import { useChangePasswordMutation } from '@/api/profile';
 import * as CONSTANTS from '@/constant';
 
 import { initialValues, validationSchema } from './validation';
 
 const PasswordForm = () => {
+  const [changePassword, { isLoading }] = useChangePasswordMutation();
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: () => {
-      //
+    onSubmit: (values) => {
+      changePassword({
+        confirmPassword: values.confirmPassword,
+        currentPassword: values.password,
+        password: values.newPassword,
+      })
+        .unwrap()
+        .then(() => {
+          toast.success('Passwords updated successfully');
+        })
+        .catch((err) => {
+          toast.error(err?.data?.message);
+        });
     },
   });
   return (
@@ -69,7 +83,7 @@ const PasswordForm = () => {
             required={true}
           />
         </div>
-        <Button type='submit' className='mt-10 w-[184px]'>
+        <Button isLoading={isLoading} type='submit' className='mt-10 w-[184px]'>
           Save Changes
         </Button>
       </form>

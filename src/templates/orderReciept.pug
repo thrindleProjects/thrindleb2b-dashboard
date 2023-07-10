@@ -1,0 +1,62 @@
+extends baseTemplate
+
+block content
+  section(class='mt-10 w-full')
+    h5(class='font-semibold text-xl text-primary-black/60') Dear #{companyName}
+    p(class="mt-4 text-base font-normal text-primary-black/80") Thank you for choosing Thrindle! We are pleased to provide you with the invoice for your recent order.
+
+  div(class='mt-5 w-full')
+    p(class='font-medium text-base')
+    p(class='mt-5 text-base font-normal') Order Number:&nbsp;&nbsp;
+      span(class='font-medium') #{orderRefCode}
+    p(class='mt-5 text-base font-normal') Order Date:&nbsp;&nbsp;
+      span(class='font-medium') #{dateCreated}
+    
+  section(class='mt-5 w-full') 
+    h6(class='text-primary-black/80 text-base font-medium') Itemized Invoice
+
+    table(class='mt-6 w-full')
+      thead(class='w-full bg-[#065DA7]/80')
+        tr(class='w-full bg-[#065DA7]/80')  
+          th(class='px-8 py-2 text-left text-sm font-medium text-white') Product Name
+          th(class='px-8 py-2 text-left text-sm font-medium text-white') Quantity
+          th(class='px-8 py-2 text-left text-sm font-medium text-white') &#8358; Price Per Unit
+          th(class='px-8 py-2 text-left text-sm font-medium text-white') &#8358; Total
+
+      if listItems && listItems.length
+        tbody(class='w-full')
+          each val, key in listItems
+            tr
+              td(class='px-8 py-2 text-base font-medium text-black/80')= val.name
+              td(class='px-8 py-2 text-base font-medium text-black/80')= val.quantity
+              - var priceValid = !!val.price;
+              td(class='px-8 py-2 text-base font-medium text-black/80')
+                if(priceValid)
+                  = val.price.toLocaleString('en-US')
+                if(!priceValid)
+                  span 0.0
+              td(class='px-8 py-2 text-base font-medium text-black/80')
+                if(priceValid)
+                - var totalPrice = val.price * val.quantity
+                = totalPrice.toLocaleString('en-US')
+                if(!priceValid)
+                  span 0.0
+    div(class='mt-10 w-full')
+      p(class='pt-2 text-base font-normal text-black/60') Sub Total: &nbsp;
+        span(class='font-medium text-black/80') &#8358; #{listTotalPrice}
+      
+      p(class='pt-2 text-base font-normal text-black/60') Delivery Fee: &nbsp;
+        span(class='font-medium text-black/80') &#8358; #{deliveryFee}
+
+      p(class='pt-2 text-base font-normal text-black/60') Service Charge: &nbsp;
+        span(class='font-medium text-black/80') &#8358; #{serviceCharge}
+
+      p(class='pt-4 text-base font-normal text-black/60') Total Amount: &nbsp;
+        strong(class='font-medium text-black/80') &#8358; #{totalAmount}
+      
+      p(class='pt-5 font-medim text-black-80') Payment will be made using your in-app wallet, load up your wallet with funds so you can pay for the goods.
+
+      if(paymentDate)
+        p(class='mt-2 font-normal text-black/80') Please ensure that the total amount is paid on/before the due date mentioned below:
+
+        p(className='font-normal text-black/60') Due Date: #{paymentDate}

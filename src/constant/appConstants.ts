@@ -56,9 +56,19 @@ export const SEND_RECURRENT_ORDER_PRICE_LIST_PATH =
 
 export const UPDATE_SHIPPING_AND_SERVICE_CHARGE_PATH =
   `${ORDERS_BASE_PATH}/updateShippingFee` as const;
+
 export const UPDATE_RECURRENT_SHIPPING_AND_SERVICE_CHARGE_PATH =
   `${ORDERS_BASE_PATH}/updateRecurrentOrderShippingFee` as const;
 
+export const CANCEL_ORDER_PATH = `${ORDERS_BASE_PATH}/cancelOrder` as const;
+
+export const CANCEl_RECURRENT_ORDER_PATH =
+  `${ORDERS_BASE_PATH}/cancelRecurrentOrder` as const;
+
+export const DELETE_ORDER_PATH = `${ORDERS_BASE_PATH}/deleteOrder`;
+
+export const DELETE_RECURRENT_ORDER_PATH =
+  `${ORDERS_BASE_PATH}/deleteRecurrentOrder` as const;
 // ORDERS API ENDPOINTS END
 
 // CUSTOMERS ENDPOINTS START
@@ -68,6 +78,12 @@ export const GET_COMPANY_ORDERS = '/admin/order/getCompanyOrders';
 export const MAKE_COMPANY_VIP = '/admin/company/updateVIP';
 export const GET_COMPANY_DETAILS = '/admin/company';
 // CUSTOMERS ENDPOINTS END
+
+// PROFILE ENDPOINTS START
+export const UPDATE_PASSWORD_ENDPOINT = '/user/updatePassword';
+export const CREATE_NEW_ADMIN = '/admin/user/createAdmin';
+export const GET_ALL_ADMIN = '/admin/user/getAllAdmin';
+export const DELETE_ADMIN = '/admin/user/deleteAdmin';
 
 // IMAGE BASE URL START
 export const IMAGE_BASE_URL =
@@ -90,8 +106,8 @@ export const FILE = 'file';
 // INPUT TYPES END
 
 // ADD USER FORM KEYS START
-export const FULLNAME = 'fullName';
-export const EMAIL_ADDRESS = 'emailAddress';
+export const FULLNAME = 'name';
+export const EMAIL_ADDRESS = 'email';
 export const PHONE_NUMBER = 'phoneNumber';
 export const ROLE = 'role';
 // ADD USER FORM KEYS END

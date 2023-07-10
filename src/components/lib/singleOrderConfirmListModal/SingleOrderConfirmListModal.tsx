@@ -119,6 +119,12 @@ const SingleOrderConfirmListModal: SingleOrderConfirmListModalType = ({
           <p className='text-primary-black/80 text-xs font-medium xl:text-xs'>
             {order.company.companyName || 'N/A'}
           </p>
+          <p className='text-primary-black/80 text-xs font-medium xl:text-xs'>
+            {order.company.address || 'N/A'}
+          </p>
+          <p className='text-primary-black/80 text-xs font-medium xl:text-xs'>
+            {order.company.state}
+          </p>
           <p className='text-primary-black/80 text-sm font-semibold xl:text-base'>
             {numberOfItems}
             {!!numberOfItems && numberOfItems > 1 ? ' Items' : ' Item'}
