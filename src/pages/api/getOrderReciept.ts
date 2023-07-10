@@ -28,12 +28,11 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
       // const html = template({ customerName });
 
       // simulate a chrome browser with puppeteer and navigate to a new page
-      // console.log("before launch")
+
       const browser = await puppeteer.launch({
         headless: 'new',
         args: ['--no-sandbox', '--disable-dev-shm-usage'],
       });
-      // console.log("after launch")
 
       const page = await browser.newPage();
 
