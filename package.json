@@ -14,7 +14,8 @@
     "test": "jest",
     "format": "prettier -w .",
     "format:check": "prettier -c .",
-    "postbuild": "next-sitemap --config next-sitemap.config.js && node node_modules/puppeteer/install.js",
+    "postbuild": "next-sitemap --config next-sitemap.config.js",
+    "postinstall": "node node_modules/puppeteer/install.js",
     "prepare": "husky install",
     "watch:pug": "npx tailwindcss -i ./src/styles/globals.css -o ./src/templates/pug.css --watch"
   },
