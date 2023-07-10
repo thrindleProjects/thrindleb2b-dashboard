@@ -47,6 +47,12 @@ const ordersNav: RecurrentOrderNavType[] = [
     link: '/recurrent/vip',
     label: 'Delivery made, but payment expected on a later date',
   },
+  {
+    id: 6,
+    title: 'Cancelled',
+    link: '/recurrent/cancelled',
+    label: 'Cancelled Orders',
+  },
 ];
 
 const RecurrentOrdersLayout: RecurrentLayoutType = ({ children }) => {

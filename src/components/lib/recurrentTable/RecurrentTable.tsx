@@ -9,7 +9,13 @@ import { GeneralOrderStatus } from '@/@types';
 import { useGetRecurrentOrdersQuery } from '@/api/orders';
 
 interface RecurrentTableProps {
-  title: 'In Progress' | 'Completed' | 'Pending' | 'Requested' | 'VIP';
+  title:
+    | 'In Progress'
+    | 'Completed'
+    | 'Pending'
+    | 'Requested'
+    | 'VIP'
+    | 'Cancelled';
 }
 
 type RecurrentTableType = React.FC<RecurrentTableProps>;
@@ -63,7 +69,7 @@ const RecurrentTable: RecurrentTableType = ({ title }) => {
               <th className='py-5 font-medium'>Customer Name</th>
               <th className='py-5 font-medium'>Items</th>
               <th className='py-5 font-medium'>Amount</th>
-              <th className='py-5 font-medium'>Status</th>
+              <th className='py-5 font-medium'>Phone Number</th>
               <th className='py-5 font-medium'>Order Day</th>
               <th className='py-5 font-medium'>Action</th>
             </tr>

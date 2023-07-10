@@ -32,7 +32,6 @@ export type GetOrdersResponse<T> = {
 
 export type RecurrentOrderType = {
   id: string;
-  deliveryFee: null | number;
   orderStatus: Exclude<GeneralOrderStatus, 'all'>;
   orderRefCode: string;
   company: Company;
@@ -43,6 +42,9 @@ export type RecurrentOrderType = {
   recurringPaymentAmount: null | number;
   recurringDeliveryDay: null | number;
   serviceCharge: null | number;
+  deliveryFee: null | number;
+  subtotal: number;
+  total: number;
 };
 
 export type SubstituteItemType = {

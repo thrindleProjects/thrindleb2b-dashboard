@@ -56,9 +56,19 @@ export const SEND_RECURRENT_ORDER_PRICE_LIST_PATH =
 
 export const UPDATE_SHIPPING_AND_SERVICE_CHARGE_PATH =
   `${ORDERS_BASE_PATH}/updateShippingFee` as const;
+
 export const UPDATE_RECURRENT_SHIPPING_AND_SERVICE_CHARGE_PATH =
   `${ORDERS_BASE_PATH}/updateRecurrentOrderShippingFee` as const;
 
+export const CANCEL_ORDER_PATH = `${ORDERS_BASE_PATH}/cancelOrder` as const;
+
+export const CANCEl_RECURRENT_ORDER_PATH =
+  `${ORDERS_BASE_PATH}/cancelRecurrentOrder` as const;
+
+export const DELETE_ORDER_PATH = `${ORDERS_BASE_PATH}/deleteOrder`;
+
+export const DELETE_RECURRENT_ORDER_PATH =
+  `${ORDERS_BASE_PATH}/deleteRecurrentOrder` as const;
 // ORDERS API ENDPOINTS END
 
 // CUSTOMERS ENDPOINTS START

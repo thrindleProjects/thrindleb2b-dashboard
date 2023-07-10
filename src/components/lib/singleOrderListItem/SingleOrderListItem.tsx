@@ -82,7 +82,7 @@ const SingleOrderListItem: SingleOrderListItemType = ({
       tabIndex={0}
     >
       <div className='flex justify-between text-left'>
-        <div className='flex flex-col gap-2'>
+        <div className='flex max-w-[60%] flex-col gap-2 xl:max-w-[75%]'>
           <section className='flex items-center gap-4'>
             <figure className='relative block aspect-square w-14'>
               <ImageComponent src={`${IMAGE_BASE_URL}/${image}`} alt={name} />
@@ -98,7 +98,7 @@ const SingleOrderListItem: SingleOrderListItemType = ({
             </div>
           </section>
 
-          <div className='text-primary-black/60 text-xs font-medium'>
+          <div className='text-primary-black/60 break-words text-xs font-medium'>
             {seeMore || description.length < 150
               ? description
               : `${description.substring(0, 150)}...`}{' '}
@@ -114,7 +114,7 @@ const SingleOrderListItem: SingleOrderListItemType = ({
               </button>
             )}
           </div>
-          <div className='flex gap-2 text-xs font-medium xl:text-sm'>
+          <div className='flex flex-wrap gap-2 text-xs font-medium xl:text-sm'>
             <div className='text-primary-blue blue-gradient rounded-lg px-3 py-2'>
               {quantity} {quantity > 1 ? 'Pieces' : 'Piece'}
             </div>
@@ -134,7 +134,7 @@ const SingleOrderListItem: SingleOrderListItemType = ({
 
         <div className='flex flex-col items-end gap-1'>
           {!!price && (
-            <div className='text-primary-green border-primary-black/10 h-max w-max rounded-lg border px-4 py-2 text-center text-xs font-medium lg:flex-shrink-0'>
+            <div className='text-primary-green border-primary-black/10 h-max w-max rounded-lg border p-2 text-center text-xs font-medium lg:flex-shrink-0 xl:px-4 xl:py-2'>
               Price Added
             </div>
           )}

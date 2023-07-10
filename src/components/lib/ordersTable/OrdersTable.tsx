@@ -9,7 +9,13 @@ import { GeneralOrderStatus } from '@/@types';
 import { useGetOrdersQuery } from '@/api/orders';
 
 interface OrdersTableProps {
-  title: 'In Progress' | 'Completed' | 'Pending' | 'Requested' | 'VIP';
+  title:
+    | 'In Progress'
+    | 'Completed'
+    | 'Pending'
+    | 'Requested'
+    | 'Cancelled'
+    | 'VIP';
 }
 
 type OrdersTableType = React.FC<OrdersTableProps>;

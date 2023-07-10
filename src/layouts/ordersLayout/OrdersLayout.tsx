@@ -47,6 +47,12 @@ const ordersNav: OrderNavType[] = [
     link: '/orders/vip',
     label: 'Delivery made, but payment expected on a later date',
   },
+  {
+    id: 6,
+    title: 'Cancelled',
+    link: '/orders/cancelled',
+    label: 'Cancelled Orders',
+  },
 ];
 
 const OrdersLayout: OrdersLayoutType = ({ children }) => {
