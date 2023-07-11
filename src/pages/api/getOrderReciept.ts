@@ -44,7 +44,7 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
       // console.log('before');
 
       const browser = await puppeteer.launch({
-        args: chromium.args,
+        args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
         executablePath:
           process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath),
 
