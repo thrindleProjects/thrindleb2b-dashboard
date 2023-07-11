@@ -4,12 +4,13 @@ import chromium from '@sparticuz/chromium';
 import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 import pug from 'pug';
+import { PuppeteerLaunchOptions } from 'puppeteer';
 // import path from 'path';
 import puppeteer from 'puppeteer-core';
 
 import logger from '@/lib/logger';
 
-import { POST_METHOD } from '@/constant';
+import { isLocal, isProd, POST_METHOD } from '@/constant';
 
 const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -47,14 +48,32 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
       //   executablePath:
       //     process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath),
 
-      const browser = await puppeteer.launch({
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-        executablePath:
-          process.env.CHROME_EXECUTABLE_PATH ||
-          (await chromium.executablePath()),
-        headless: chromium.headless,
-      });
+      let launchOptions: PuppeteerLaunchOptions = {};
+
+      if (isProd) {
+        launchOptions = {
+          args: chromium.args,
+          defaultViewport: chromium.defaultViewport,
+          executablePath:
+            process.env.CHROME_EXECUTABLE_PATH ||
+            (await chromium.executablePath()),
+          headless: chromium.headless,
+        };
+      }
+
+      if (isLocal) {
+        launchOptions = {
+          headless: 'new',
+          executablePath: process.env.CHROME_EXECUTABLE_PATH,
+        };
+        // {
+        //   args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
+        //   headless: 'new',
+        //   executablePath: process.env.CHROME_EXECUTABLE_PATH,
+        // };
+      }
+
+      const browser = await puppeteer.launch(launchOptions);
 
       //   // defaultViewport: chromium.defaultViewport,
       //   headless: true,
@@ -73,12 +92,12 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
       // then waitUntil the network is idle to make sure the content has been loaded
       // console.log('set content');
       await page.setContent(invoice, { waitUntil: 'networkidle0' });
-      // await page.goto('https://spacejelly.dev')
+
       // // console.log('set after content');
       // await page.emulateMediaType();
       // await page.emulateMediaFeatures();
 
-      // // convert the page to pdf with the .pdf() method
+      // convert the page to pdf with the .pdf() method
       const pdf = await page.pdf({ format: 'A4', printBackground: true });
       await browser.close();
 
@@ -95,11 +114,13 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
   } catch (err) {
     logger(err);
 
-    res
-      .status(400)
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-errora
-      .json({ message: 'Something went wrong', err: err?.message, new: err });
+    if (err instanceof Error) {
+      return res
+        .status(400)
+        .json({ message: 'Something went wrong', err: err.message });
+    }
+
+    return res.status(400).json({ message: 'Something went wrong' });
   }
 };
 
