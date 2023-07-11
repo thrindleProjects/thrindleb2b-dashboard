@@ -22,7 +22,7 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
 
       // const file = await fs.readFile(templatesBasePath + '/orderReciept.pug', 'utf8');
 
-      const invoice = pug.renderFile(templatesBasePath + '/orderReciept.pug', {
+      const _invoice = pug.renderFile(templatesBasePath + '/orderReciept.pug', {
         ...req.body,
       });
 
@@ -64,7 +64,8 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
       // set our compiled html template as the pages content
       // then waitUntil the network is idle to make sure the content has been loaded
       // console.log('set content');
-      await page.setContent(invoice, { waitUntil: 'networkidle0' });
+      // await page.setContent(invoice, { waitUntil: 'networkidle0' });
+      await page.goto('https://spacejelly.dev');
       // console.log('set after content');
       await page.emulateMediaType();
       await page.emulateMediaFeatures();
