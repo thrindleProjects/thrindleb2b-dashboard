@@ -1,11 +1,10 @@
 // import { promises as fs } from 'fs';
 // "postinstall": "node node_modules/puppeteer/install.js",
-// import chromium from '@sparticuz/chromium';
-import chromium from 'chrome-aws-lambda';
+import chromium from '@sparticuz/chromium';
 import { NextApiRequest, NextApiResponse } from 'next';
-// import path from 'path';
 import path from 'path';
 import pug from 'pug';
+// import path from 'path';
 import puppeteer from 'puppeteer-core';
 
 import logger from '@/lib/logger';
@@ -22,7 +21,7 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
 
       // const file = await fs.readFile(templatesBasePath + '/orderReciept.pug', 'utf8');
 
-      const _invoice = pug.renderFile(templatesBasePath + '/orderReciept.pug', {
+      const invoice = pug.renderFile(templatesBasePath + '/orderReciept.pug', {
         ...req.body,
       });
 
@@ -43,15 +42,24 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
       // console.log({ val: process.env.CHROME_EXECUTABLE_PATH });
       // console.log('before');
 
-      const browser = await puppeteer.launch({
-        args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
-        executablePath:
-          process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath),
+      // const browser = await puppeteer.launch({
+      //   args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
+      //   executablePath:
+      //     process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath),
 
-        // defaultViewport: chromium.defaultViewport,
-        headless: true,
-        ignoreHTTPSErrors: true,
+      const browser = await puppeteer.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath:
+          process.env.CHROME_EXECUTABLE_PATH ||
+          (await chromium.executablePath()),
+        headless: chromium.headless,
       });
+
+      //   // defaultViewport: chromium.defaultViewport,
+      //   headless: true,
+      //   ignoreHTTPSErrors: true,
+      // });
       // console.log('after');
       // const browser = await puppeteer.launch({
       //   headless: 'new',
@@ -59,22 +67,22 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
       // });
       // console.log('new');
       const page = await browser.newPage();
-      // console.log('after new');
+      // // console.log('after new');
 
       // set our compiled html template as the pages content
       // then waitUntil the network is idle to make sure the content has been loaded
       // console.log('set content');
-      // await page.setContent(invoice, { waitUntil: 'networkidle0' });
-      await page.goto('https://spacejelly.dev');
-      // console.log('set after content');
-      await page.emulateMediaType();
-      await page.emulateMediaFeatures();
+      await page.setContent(invoice, { waitUntil: 'networkidle0' });
+      // await page.goto('https://spacejelly.dev')
+      // // console.log('set after content');
+      // await page.emulateMediaType();
+      // await page.emulateMediaFeatures();
 
-      // convert the page to pdf with the .pdf() method
+      // // convert the page to pdf with the .pdf() method
       const pdf = await page.pdf({ format: 'A4', printBackground: true });
       await browser.close();
 
-      // send the result to the client
+      // // send the result to the client
       res.setHeader('Content-Length', Infinity);
       res.setHeader('Content-Type', 'application/pdf');
       res.statusCode = 200;
