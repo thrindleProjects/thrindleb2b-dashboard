@@ -1,9 +1,12 @@
 // import { promises as fs } from 'fs';
+// "postinstall": "node node_modules/puppeteer/install.js",
+// import chromium from '@sparticuz/chromium';
+import chromium from 'chrome-aws-lambda';
 import { NextApiRequest, NextApiResponse } from 'next';
 // import path from 'path';
 import path from 'path';
 import pug from 'pug';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 
 import logger from '@/lib/logger';
 
@@ -37,16 +40,32 @@ const getOrderReciept = async (req: NextApiRequest, res: NextApiResponse) => {
       //   ignoreHTTPSErrors: true,
       // });
 
-      const browser = await puppeteer.launch({
-        headless: 'new',
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      });
+      // console.log({ val: process.env.CHROME_EXECUTABLE_PATH });
+      // console.log('before');
 
+      const browser = await puppeteer.launch({
+        args: chromium.args,
+        executablePath:
+          process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath),
+
+        // defaultViewport: chromium.defaultViewport,
+        headless: true,
+        ignoreHTTPSErrors: true,
+      });
+      // console.log('after');
+      // const browser = await puppeteer.launch({
+      //   headless: 'new',
+      //   args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      // });
+      // console.log('new');
       const page = await browser.newPage();
+      // console.log('after new');
 
       // set our compiled html template as the pages content
       // then waitUntil the network is idle to make sure the content has been loaded
+      // console.log('set content');
       await page.setContent(invoice, { waitUntil: 'networkidle0' });
+      // console.log('set after content');
       await page.emulateMediaType();
       await page.emulateMediaFeatures();
 

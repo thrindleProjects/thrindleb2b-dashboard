@@ -56,7 +56,9 @@ const useDownloadOrder = ({
             'en-us'
           ),
           totalAmount: (totalAmount || 0).toLocaleString('en-us'),
-          paymentDate: formatDateWithYear(order.data.paymentDate || ''),
+          paymentDate: order.data.paymentDate
+            ? formatDateWithYear(order.data.paymentDate)
+            : 'Awaiting Payment',
         },
         { responseType: 'arraybuffer' }
       );
